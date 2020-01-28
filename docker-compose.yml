@@ -6,7 +6,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: admin
       MYSQL_DATABASE: madu
-      MYSQL_USER: root
+      MYSQL_USER: user
       MYSQL_PASSWORD: root
     ports:
       - 3306:3306
@@ -23,7 +23,7 @@ services:
       - database
     environment:
       PMA_HOST: database
-      PMA_USER: root
+      PMA_USER: user
       PMA_PASSWORD: root
 
   api:
@@ -34,10 +34,10 @@ services:
       - 3000:3000
     volumes:
       - ./:/home/app
-    command: npm run start
+    command: npm run start:dev
     environment:
       DB_HOST: database
-      DB_USER: 'root'
+      DB_USER: 'user'
       DB_PASSWORD: 'root'
       DB_NAME: 'madu'
       JWT_TOKEN: ':g9{72mHiX38dK[C-M@(d7aDp2'

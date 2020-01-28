@@ -6,9 +6,31 @@ import { UserModule } from './user/user.module';
 import { RoleModule } from './role/role.module';
 import { PoiModule } from './poi/poi.module';
 import { CompanyModule } from './company/company.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Role } from './role/roleEntity';
+import { User } from './user/userEntity';
 
 @Module({
-  imports: [AuthModule, UserModule, RoleModule, PoiModule, CompanyModule],
+  imports: [
+    TypeOrmModule.forRoot({
+      type: 'mysql',
+      host: process.env.DB_HOST || 'localhost',
+      port: 3306,
+      username: process.env.DB_USER || 'admin',
+      password: process.env.DB_PASSWORD || 'root',
+      database: process.env.DB_NAME || 'madu',
+      entities: [
+        Role,
+        User,
+      ],
+      synchronize: true,
+    }),
+    AuthModule,
+    UserModule,
+    RoleModule,
+    PoiModule,
+    CompanyModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
