@@ -27,7 +27,7 @@ services:
       PMA_PASSWORD: root
 
   api:
-    image: node:latest
+    image: node:12.14-buster
     restart: always
     working_dir: /home/app
     ports:

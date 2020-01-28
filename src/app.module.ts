@@ -9,6 +9,7 @@ import { CompanyModule } from './company/company.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Role } from './role/roleEntity';
 import { User } from './user/userEntity';
+import { Company } from './company/companyEntity';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { User } from './user/userEntity';
       entities: [
         Role,
         User,
+        Company,
       ],
       synchronize: true,
     }),
