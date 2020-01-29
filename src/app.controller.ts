@@ -11,4 +11,10 @@ export class AppController {
     // tslint:disable-next-line:no-console
     return await this.authService.login(req.user);
   }
+
+  @UseGuards(AuthGuard('jwt'))
+  @Get('profile')
+  async getProfile(@Request() req) {
+    return req.user;
+  }
 }

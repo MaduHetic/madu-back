@@ -11,7 +11,7 @@ export class Company {
   address: string;
 
   @Column()
-  postalCode: number;
+  postalCode: string;
 
   @Column({
     length: 40,
@@ -22,13 +22,20 @@ export class Company {
 
   @Column({
     length: 75,
+    nullable: true,
+    default: null,
   })
   domainMail: string;
 
   @Column({
+    length: 50,
+  })
+  type: string;
+
+  @Column({
     length: 100,
     nullable: true,
-    default: true,
+    default: null,
   })
   long: string;
 
@@ -38,4 +45,21 @@ export class Company {
     default: true,
   })
   lat: string;
+
+  @Column({
+    default: 1,
+  })
+  nbWorker: number;
+
+  @Column({
+    type: 'date',
+    default: '2020-10-10',
+  })
+  beginDeal: string;
+
+  @Column({
+     type: 'date',
+    default: '2020-10-10',
+  })
+  endDeal: string;
 }

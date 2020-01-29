@@ -34,4 +34,13 @@ export class UserService {
       throw new NotFoundException(`User ${eMail} not found`);
     });
   }
+
+  async getUser(userId: number) {
+    return await this.userRepository.findOneOrFail(userId, {
+      relations: ['role'],
+    })
+      .catch(() => {
+        throw new NotFoundException(`user with ${userId} not found`);
+      });
+  }
 }
