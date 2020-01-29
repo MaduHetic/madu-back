@@ -1,4 +1,4 @@
-import { Body, Controller, Post, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Get, Post, UsePipes, ValidationPipe } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserDto } from './userDto';
 
@@ -10,5 +10,12 @@ export class UserController {
   @UsePipes(new ValidationPipe({ transform: true }))
   async addUser(@Body() userDto: UserDto) {
     return this.userService.addUser(userDto);
+  }
+
+  @Get('test')
+  async toto() {
+    // tslint:disable-next-line:no-console
+    console.log('toto');
+    return 'TOTOT';
   }
 }

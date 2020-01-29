@@ -1,14 +1,14 @@
-import { Controller, Get, Post, Request, UseGuards } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
-import { AuthService } from './auth/auth.service';
-
+import {Controller, Post, UseGuards, Request, Get} from '@nestjs/common';
+import {AuthService} from './auth/auth.service';
+import {AuthGuard} from '@nestjs/passport';
 @Controller()
 export class AppController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(readonly authService: AuthService) {}
 
-  @Post('auth/login')
   @UseGuards(AuthGuard('local'))
-  async backOfficeLogin(@Request() req) {
-    return 'Login';
+  @Post('auth/login')
+  async login(@Request() req) {
+    // tslint:disable-next-line:no-console
+    return await this.authService.login(req.user);
   }
 }

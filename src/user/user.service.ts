@@ -31,7 +31,7 @@ export class UserService {
         mail: eMail,
       },
     }).catch(() => {
-      throw new NotFoundException(`User ${eMail} not fond`);
+      throw new NotFoundException(`User ${eMail} not found`);
     });
   }
 }
