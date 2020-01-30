@@ -1,5 +1,6 @@
 export interface CompanyInterface {
   readonly address: string;
+  readonly name: string;
   readonly postalCode: string;
   readonly city: string;
   readonly domainMail?: string;

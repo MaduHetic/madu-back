@@ -10,6 +10,10 @@ export class Company {
   })
   address: string;
 
+  @Column({
+    length: 50,
+  })
+  name: string;
   @Column()
   postalCode: string;
 
