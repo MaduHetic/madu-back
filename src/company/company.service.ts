@@ -15,7 +15,6 @@ export class CompanyService {
     if (id) {
       companyData.id = id;
     }
-    console.log('fdfs');
     return await this.companyRepository.save(companyData);
   }
 

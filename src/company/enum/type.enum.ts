@@ -1,6 +1,10 @@
 export enum TypeEnum {
-  'agence',
-  'école',
-  'co-working',
+  'Agence',
+  'Ecole',
+  'Co-working',
+  'Start-up',
+  'Grand compte',
+  'PME',
+  'Incubateur',
   'autre',
 }
