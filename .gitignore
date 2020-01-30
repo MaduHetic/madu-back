@@ -34,3 +34,33 @@ lerna-debug.log*
 !.vscode/extensions.json
 
 data
+
+
+*.dll
+*.exe
+.DS_Store
+example.tf
+terraform.tfplan
+terraform.tfstate
+bin/
+modules-dev/
+/pkg/
+website/.vagrant
+website/.bundle
+website/build
+website/node_modules
+.vagrant/
+*.backup
+./*.tfstate
+.terraform/
+*.log
+*.bak
+*~
+.*.swp
+.idea
+*.iml
+*.test
+
+# Test exclusions
+!command/testdata/**/*.tfstate
+!command/testdata/**/.terraform/
