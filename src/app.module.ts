@@ -14,6 +14,12 @@ import { TypeModule } from './type/type.module';
 import { TagsModule } from './tags/tags.module';
 import { Type } from './type/typeEntity';
 import { Tag } from './tags/tagEntity';
+import { Poi } from './poi/poiEntity';
+import { JoinTypePoiModule } from './join-type-poi/join-type-poi.module';
+import { JoinTagPoiModule } from './join-tag-poi/join-tag-poi.module';
+import { UserAppModule } from './user-app/user-app.module';
+import { JoinTagPoiEntity } from './join-tag-poi/joinTagPoiEntity';
+import { JoinTypePoi } from './join-type-poi/joinTypePoi';
 
 @Module({
   imports: [
@@ -30,6 +36,9 @@ import { Tag } from './tags/tagEntity';
         Company,
         Type,
         Tag,
+        Poi,
+        JoinTagPoiEntity,
+        JoinTypePoi,
       ],
       synchronize: true,
     }),
@@ -40,6 +49,9 @@ import { Tag } from './tags/tagEntity';
     CompanyModule,
     TypeModule,
     TagsModule,
+    JoinTypePoiModule,
+    JoinTagPoiModule,
+    UserAppModule,
   ],
   controllers: [AppController],
   providers: [AppService],
