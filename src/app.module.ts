@@ -10,6 +10,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Role } from './role/roleEntity';
 import { User } from './user/userEntity';
 import { Company } from './company/companyEntity';
+import { TypeModule } from './type/type.module';
+import { TagsModule } from './tags/tags.module';
+import { Type } from './type/typeEntity';
+import { Tag } from './tags/tagEntity';
 
 @Module({
   imports: [
@@ -24,6 +28,8 @@ import { Company } from './company/companyEntity';
         Role,
         User,
         Company,
+        Type,
+        Tag,
       ],
       synchronize: true,
     }),
@@ -32,6 +38,8 @@ import { Company } from './company/companyEntity';
     RoleModule,
     PoiModule,
     CompanyModule,
+    TypeModule,
+    TagsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
