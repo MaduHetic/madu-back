@@ -4,6 +4,7 @@ import * as helmet from 'helmet';
 import * as rateLimit from 'express-rate-limit';
 import * as compression from 'compression';
 import * as cookieParser from 'cookie-parser';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
@@ -19,6 +20,14 @@ async function bootstrap() {
       max: 100, // limit each IP to 100 requests per windowMs
     }),
   );
+  const options = new DocumentBuilder()
+    .setTitle('Madu')
+    .setDescription('The madu API description')
+    .setVersion('1.0')
+    .addTag('madu')
+    .build();
+  const document = SwaggerModule.createDocument(app, options);
+  SwaggerModule.setup('api', app, document);
   app.use(compression());
   await app.listen(3000);
 }
