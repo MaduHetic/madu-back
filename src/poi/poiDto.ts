@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { PoiInterface } from './interfaces/poi.interface';
-import { IsEnum, IsNumber, IsNumberString, IsOptional, IsString } from 'class-validator';
+import { IsArray, IsEnum, IsNumber, IsNumberString, IsOptional, IsString } from 'class-validator';
 import { PriceEnum } from './enum/price.enum';
 
 @Injectable()
-export class PoiDto implements PoiInterface{
+export class PoiDto implements PoiInterface {
   @IsString()
   readonly address: string;
 
@@ -32,6 +32,14 @@ export class PoiDto implements PoiInterface{
 
   @IsNumberString()
   readonly postalCode: string;
+
+  @IsOptional()
+  @IsArray()
+  readonly tags: number[];
+
+  @IsOptional()
+  @IsArray()
+  readonly type: number[];
 
   @IsEnum(PriceEnum)
   readonly price: string;

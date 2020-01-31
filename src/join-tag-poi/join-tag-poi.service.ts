@@ -26,6 +26,12 @@ export class JoinTagPoiService {
     });
   }
 
+  async serializeTagsData(tags: JoinTagPoiEntity[]) {
+    return tags.map((tag) => {
+      return tag.tag;
+    });
+  }
+
   async getAllCompanyTag(poiToFind: Poi): Promise<JoinTagPoiEntity[]> {
     return await this.joinTagPoiRepository.find({
       where: {

@@ -28,4 +28,8 @@ export class TagsService {
         throw new NotFoundException(`Tag with id ${idTag} not found`);
       });
   }
+
+  async getTags(idsTags: number[]) {
+    return await this.tagRepository.findByIds(idsTags)
+  }
 }

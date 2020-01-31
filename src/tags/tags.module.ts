@@ -10,5 +10,6 @@ import { TagsController } from './tags.controller';
   ],
   providers: [TagsService],
   controllers: [TagsController],
+  exports: [TagsService],
 })
 export class TagsModule {}

@@ -1,4 +1,4 @@
-import { Controller, Delete, Get, Param, ParseIntPipe, Post, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { TagsDto } from './tagsDto';
 import { TagsService } from './tags.service';
@@ -11,7 +11,7 @@ export class TagsController {
 
   @Post()
   @UsePipes(new ValidationPipe())
-  async addTag(tagDto: TagsDto) {
+  async addTag(@Body() tagDto: TagsDto) {
     return await this.tagsService.addTag(tagDto);
   }
 

@@ -8,5 +8,6 @@ import { JoinTagPoiEntity } from './joinTagPoiEntity';
     TypeOrmModule.forFeature([JoinTagPoiEntity]),
   ],
   providers: [JoinTagPoiService],
+  exports: [JoinTagPoiService],
 })
 export class JoinTagPoiModule {}

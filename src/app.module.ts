@@ -20,6 +20,7 @@ import { JoinTagPoiModule } from './join-tag-poi/join-tag-poi.module';
 import { UserAppModule } from './user-app/user-app.module';
 import { JoinTagPoiEntity } from './join-tag-poi/joinTagPoiEntity';
 import { JoinTypePoi } from './join-type-poi/joinTypePoi';
+import { GreenScoreModule } from './green-score/green-score.module';
 
 @Module({
   imports: [
@@ -52,6 +53,7 @@ import { JoinTypePoi } from './join-type-poi/joinTypePoi';
     JoinTypePoiModule,
     JoinTagPoiModule,
     UserAppModule,
+    GreenScoreModule,
   ],
   controllers: [AppController],
   providers: [AppService],
