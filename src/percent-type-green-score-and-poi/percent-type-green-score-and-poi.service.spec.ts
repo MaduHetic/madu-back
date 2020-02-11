@@ -1,15 +1,15 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { PourcentTypeGreenScoreAndPoiService } from './pourcent-type-green-score-and-poi.service';
+import { PercentTypeGreenScoreAndPoiService } from './percent-type-green-score-and-poi.service';
 
 describe('PourcentTypeGreenScoreAndPoiService', () => {
-  let service: PourcentTypeGreenScoreAndPoiService;
+  let service: PercentTypeGreenScoreAndPoiService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [PourcentTypeGreenScoreAndPoiService],
+      providers: [PercentTypeGreenScoreAndPoiService],
     }).compile();
 
-    service = module.get<PourcentTypeGreenScoreAndPoiService>(PourcentTypeGreenScoreAndPoiService);
+    service = module.get<PercentTypeGreenScoreAndPoiService>(PercentTypeGreenScoreAndPoiService);
   });
 
   it('should be defined', () => {

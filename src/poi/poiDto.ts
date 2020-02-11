@@ -60,26 +60,20 @@ export class PoiDto implements PoiInterface {
   readonly postalCode: string;
 
   @ApiPropertyOptional({
-    type: [Tag],
+    type: [Number],
     description: 'Array of id tags',
-    anyOf: [
-      { $ref: getSchemaPath(Tag) },
-    ],
   })
   @IsOptional()
   @IsArray()
   readonly tags: number[];
 
   @ApiPropertyOptional({
-    type: [Type],
-    description: 'Array of Poi type',
-    anyOf: [
-      { $ref: getSchemaPath(Type) },
-    ],
+    type: [Number],
+    description: 'Array of id Poi type',
   })
   @IsOptional()
   @IsArray()
-  readonly type: Type[];
+  readonly type: number[];
 
   @ApiProperty({
     description: 'Price range of the point of interest',

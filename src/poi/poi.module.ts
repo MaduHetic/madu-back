@@ -15,5 +15,6 @@ import { JoinTagPoiModule } from '../join-tag-poi/join-tag-poi.module';
   ],
   providers: [PoiService],
   controllers: [PoiController],
+  exports: [PoiService],
 })
 export class PoiModule {}
