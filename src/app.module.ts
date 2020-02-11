@@ -21,6 +21,8 @@ import { UserAppModule } from './user-app/user-app.module';
 import { JoinTagPoiEntity } from './join-tag-poi/joinTagPoiEntity';
 import { JoinTypePoi } from './join-type-poi/joinTypePoi';
 import { GreenScoreModule } from './green-score/green-score.module';
+import { TypeGreenScoreModule } from './type-green-score/type-green-score.module';
+import { PourcentTypeGreenScoreAndPoiModule } from './pourcent-type-green-score-and-poi/pourcent-type-green-score-and-poi.module';
 
 @Module({
   imports: [
@@ -54,6 +56,8 @@ import { GreenScoreModule } from './green-score/green-score.module';
     JoinTagPoiModule,
     UserAppModule,
     GreenScoreModule,
+    TypeGreenScoreModule,
+    PourcentTypeGreenScoreAndPoiModule,
   ],
   controllers: [AppController],
   providers: [AppService],
