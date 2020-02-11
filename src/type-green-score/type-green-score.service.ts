@@ -24,4 +24,9 @@ export class TypeGreenScoreService {
         throw new NotFoundException(`Type Green Score With id ${idType} Not Found`);
       });
   }
+
+  async deleteTypeGreenScore(idTypeGreenScore) {
+    const typeGreenScore = await this.getType(idTypeGreenScore);
+    return await this.typeGreenScoreRepository.delete(typeGreenScore);
+  }
 }

@@ -35,6 +35,6 @@ export class PercentTypeGreenScoreAndPoiService {
     return await this.percentTypeGreenScoreAndPoiRepository.findOneOrFail(idPercent)
       .catch(() => {
         throw new NotFoundException(`PercentTypeGreenScoreAndPoi with id ${idPercent} Not Found`);
-      })
+      });
   }
 }
