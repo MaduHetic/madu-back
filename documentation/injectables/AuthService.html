@@ -59,6 +59,13 @@
             <code>src/auth/auth.service.ts</code>
         </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Class contains some method for the authentication check <a href="https://docs.nestjs.com/techniques/authentication">https://docs.nestjs.com/techniques/authentication</a> for more informations</p>
+
+            </p>
 
 
 
@@ -106,12 +113,14 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="7" class="link-to-prism">src/auth/auth.service.ts:7</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/auth/auth.service.ts:11</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>set userService and jwtService</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -185,14 +194,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="22"
-                            class="link-to-prism">src/auth/auth.service.ts:22</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="42"
+                            class="link-to-prism">src/auth/auth.service.ts:42</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Method who create en send a jwt</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -219,7 +230,7 @@
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>    <code>Promise&lt;object&gt;</code>
+                        <b>Returns : </b>        <code><a href="../classes/AccessToken.html" target="_self" >Promise&lt;AccessToken&gt;</a></code>
 
                     </div>
                     <div class="io-description">
@@ -253,14 +264,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="13"
-                            class="link-to-prism">src/auth/auth.service.ts:13</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="28"
+                            class="link-to-prism">src/auth/auth.service.ts:28</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Method who check if the login password is correct and return the result without password return null if not</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -307,7 +320,8 @@
 
                     </div>
                     <div class="io-description">
-                        
+                        <p>|| null</p>
+
                     </div>
                 </td>
             </tr>
@@ -323,14 +337,29 @@
 import { UserService } from &#x27;../user/user.service&#x27;;
 import { JwtService } from &#x27;@nestjs/jwt&#x27;;
 import * as bcrypt from &#x27;bcrypt&#x27;;
+import { AccessToken } from &#x27;./access-token&#x27;;
 
+/**
+ * Class contains some method for the authentication check https://docs.nestjs.com/techniques/authentication for more informations
+ */
 @Injectable()
 export class AuthService {
+  /**
+   * set userService and jwtService
+   * @param userService {UserService}
+   * @param jwtService {JwtService}
+   */
   constructor(
     private readonly userService: UserService,
     private readonly jwtService: JwtService,
   ) {}
 
+  /**
+   *  Method who check if the login password is correct and return the result without password return null if not
+   * @param mail {string}
+   * @param pass {string}
+   * @returns {object} || null
+   */
   async validateUser(mail: string, pass: string) {
     const user &#x3D; await this.userService.getUserByMail(mail);
     if (user &amp;&amp;  await bcrypt.compare(pass, user.password)) {
@@ -340,12 +369,15 @@ export class AuthService {
     return null;
   }
 
-  async login(user): Promise&lt;object&gt; {
+  /**
+   * Method who create en send a jwt
+   * @param user
+   * @returns {AccessToken}
+   */
+  async login(user): Promise&lt;AccessToken&gt; {
     const payload &#x3D; { userId: user.id, mail: user.mail };
     const token &#x3D; await this.jwtService.signAsync(payload);
-    return {
-      access_token: token,
-    };
+    return new AccessToken(token);
   }
 }
 </code></pre>

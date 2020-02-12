@@ -58,6 +58,13 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>This controller contains the routes to connect and retrieve your profile</p>
+
+            </p>
 
 
 
@@ -131,14 +138,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="17"
-                            class="link-to-prism">src/app.controller.ts:17</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="31"
+                            class="link-to-prism">src/app.controller.ts:31</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>This method allows get account information from jwt token</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -206,14 +215,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="10"
-                            class="link-to-prism">src/app.controller.ts:10</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="20"
+                            class="link-to-prism">src/app.controller.ts:20</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>the call of this method allows to recover a jwt token</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -240,7 +251,7 @@
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>    <code>{}</code>
+                        <b>Returns : </b>        <code><a href="../classes/AccessToken.html" target="_self" >Promise&lt;AccessToken&gt;</a></code>
 
                     </div>
                     <div class="io-description">
@@ -257,17 +268,31 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {Controller, Post, UseGuards, Request, Get} from &#x27;@nestjs/common&#x27;;
 import {AuthService} from &#x27;./auth/auth.service&#x27;;
 import {AuthGuard} from &#x27;@nestjs/passport&#x27;;
+import { AccessToken } from &#x27;./auth/access-token&#x27;;
+
+/**
+ * This controller contains the routes to connect and retrieve your profile
+ */
 @Controller()
 export class AppController {
   constructor(readonly authService: AuthService) {}
 
+  /**
+   * the call of this method allows to recover a jwt token
+   * @param req {Request}
+   * @return {AccessToken}
+   */
   @UseGuards(AuthGuard(&#x27;local&#x27;))
   @Post(&#x27;auth/login&#x27;)
-  async login(@Request() req) {
+  async login(@Request() req): Promise&lt;AccessToken&gt; {
     // tslint:disable-next-line:no-console
     return await this.authService.login(req.user);
   }
 
+  /**
+   * This method allows get account information from jwt token
+   * @param req {Request}
+   */
   @UseGuards(AuthGuard(&#x27;jwt&#x27;))
   @Get(&#x27;profile&#x27;)
   async getProfile(@Request() req) {

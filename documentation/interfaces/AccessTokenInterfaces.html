@@ -27,7 +27,7 @@
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
-               <div class="content injectable">
+               <div class="content interface">
                    <div class="content-data">
 
 
@@ -36,9 +36,14 @@
 
 
 
+
+
+
+
+
 <ol class="breadcrumb">
-  <li>Injectables</li>
-  <li>AppService</li>
+  <li>Interfaces</li>
+  <li>AccessTokenInterfaces</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -56,129 +61,93 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app.service.ts</code>
+            <code>src/auth/interfaces/access-token.interfaces.ts</code>
         </p>
 
             <p class="comment">
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>Demo service nest</p>
+                <p>this interface define the value attempt in a jwt token</p>
 
             </p>
 
 
+        <section>
+            <h3 id="index">Index</h3>
+            <table class="table table-sm table-bordered index-table">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Properties</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                        <a href="#access_token">access_token</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
 
-            <section>
-    <h3 id="index">Index</h3>
-    <table class="table table-sm table-bordered index-table">
-        <tbody>
-
-                <tr>
-                    <td class="col-md-4">
-                        <h6><b>Methods</b></h6>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <ul class="index-list">
-                            <li>
-                                <a href="#getHello">getHello</a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
-
-
-
-
-
-        </tbody>
-    </table>
-</section>
 
 
             <section>
-    
-    <h3 id="methods">
-        Methods
-    </h3>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getHello"></a>
-                    <span class="name">
-                        <b>
-                            getHello
-                        </b>
-                        <a href="#getHello"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>getHello()</code>
-                </td>
-            </tr>
+                <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="access_token"></a>
+                                        <span class="name"><b>access_token</b><a href="#access_token"><span class="icon ion-ios-link"></span></a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>access_token:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="12"
-                            class="link-to-prism">src/app.service.ts:12</a></div>
-                </td>
-            </tr>
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>demo method nest</p>
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>this data allows to know who send the request and authorize or not the access to some route</p>
 </div>
-
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</section>
-
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+            </section>
     </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@nestjs/common&#x27;;
-
-/**
- * Demo service nest
- */
-@Injectable()
-export class AppService {
-  /**
-   * demo method nest
-   * @returns {string}
-   */
-  getHello(): string {
-    return &#x27;Hello World!&#x27;;
-  }
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">export interface AccessTokenInterfaces {
+   /**
+    * this data allows to know who send the request and authorize or not the access to some route
+    */
+   access_token: string;
 }
 </code></pre>
     </div>
-
 </div>
-
-
-
-
-
 
 
                    
@@ -202,8 +171,8 @@ export class AppService {
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
-            var COMPODOC_CURRENT_PAGE_URL = 'AppService.html';
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'AccessTokenInterfaces.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

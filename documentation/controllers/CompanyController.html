@@ -149,8 +149,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="13"
-                            class="link-to-prism">src/company/company.controller.ts:13</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="17"
+                            class="link-to-prism">src/company/company.controller.ts:17</a></div>
                 </td>
             </tr>
 
@@ -166,6 +166,7 @@
                                     <td>Name</td>
                                     <td>Type</td>
                                     <td>Optional</td>
+                                    <td>Description</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -180,6 +181,10 @@
                                     </td>
 
 
+                                    <td>
+                                        <p>information to add a new company</p>
+
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -191,7 +196,8 @@
 
                     </div>
                     <div class="io-description">
-                        
+                        <p>Data was added</p>
+
                     </div>
                 </td>
             </tr>
@@ -228,8 +234,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="36"
-                            class="link-to-prism">src/company/company.controller.ts:36</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="40"
+                            class="link-to-prism">src/company/company.controller.ts:40</a></div>
                 </td>
             </tr>
 
@@ -307,8 +313,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="24"
-                            class="link-to-prism">src/company/company.controller.ts:24</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="28"
+                            class="link-to-prism">src/company/company.controller.ts:28</a></div>
                 </td>
             </tr>
 
@@ -355,8 +361,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="19"
-                            class="link-to-prism">src/company/company.controller.ts:19</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="23"
+                            class="link-to-prism">src/company/company.controller.ts:23</a></div>
                 </td>
             </tr>
 
@@ -434,8 +440,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="30"
-                            class="link-to-prism">src/company/company.controller.ts:30</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="34"
+                            class="link-to-prism">src/company/company.controller.ts:34</a></div>
                 </td>
             </tr>
 
@@ -508,6 +514,10 @@ import { CompanyService } from &#x27;./company.service&#x27;;
 export class CompanyController {
   constructor(private readonly companyService: CompanyService) {}
 
+  /**
+   * @param {CompanyDto} companyDto information to add a new company
+   * @returns Data was added
+   */
   @Post()
   @UsePipes(new ValidationPipe({transform: true}))
   async addCompany(@Body() companyDto: CompanyDto) {

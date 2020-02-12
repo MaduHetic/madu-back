@@ -8,6 +8,10 @@ import { CompanyService } from './company.service';
 export class CompanyController {
   constructor(private readonly companyService: CompanyService) {}
 
+  /**
+   * @param {CompanyDto} companyDto information to add a new company
+   * @returns Data was added
+   */
   @Post()
   @UsePipes(new ValidationPipe({transform: true}))
   async addCompany(@Body() companyDto: CompanyDto) {
