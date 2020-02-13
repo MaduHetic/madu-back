@@ -64,6 +64,13 @@
                 <code>type-green-score</code>
             </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Type green score controller</p>
+
+            </p>
 
 
 
@@ -139,14 +146,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Post()<br />@UsePipes(new ValidationPipe())<br /></code>
+                    <code>@UseGuards(RoleGuard)<br />@Roles(&#x27;admin&#x27;)<br />@Post()<br />@UsePipes(new ValidationPipe())<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="14"
-                            class="link-to-prism">src/type-green-score/type-green-score.controller.ts:14</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="28"
+                            class="link-to-prism">src/type-green-score/type-green-score.controller.ts:28</a></div>
                 </td>
             </tr>
 
@@ -218,14 +225,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Delete(&#x27;:id&#x27;)<br /></code>
+                    <code>@UseGuards(RoleGuard)<br />@Roles(&#x27;admin&#x27;)<br />@Delete(&#x27;:id&#x27;)<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="29"
-                            class="link-to-prism">src/type-green-score/type-green-score.controller.ts:29</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="60"
+                            class="link-to-prism">src/type-green-score/type-green-score.controller.ts:60</a></div>
                 </td>
             </tr>
 
@@ -297,14 +304,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Get()<br /></code>
+                    <code>@UseGuards(RoleGuard)<br />@Roles(&#x27;admin&#x27;)<br />@Get()<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="24"
-                            class="link-to-prism">src/type-green-score/type-green-score.controller.ts:24</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="49"
+                            class="link-to-prism">src/type-green-score/type-green-score.controller.ts:49</a></div>
                 </td>
             </tr>
 
@@ -345,14 +352,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Get(&#x27;/one/:id&#x27;)<br /></code>
+                    <code>@UseGuards(RoleGuard)<br />@Roles(&#x27;admin&#x27;)<br />@Get(&#x27;/one/:id&#x27;)<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="19"
-                            class="link-to-prism">src/type-green-score/type-green-score.controller.ts:19</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="39"
+                            class="link-to-prism">src/type-green-score/type-green-score.controller.ts:39</a></div>
                 </td>
             </tr>
 
@@ -409,27 +416,58 @@ import { RoleGuard } from &#x27;../guard/role.guard&#x27;;
 import { Role } from &#x27;../role/roleEntity&#x27;;
 import { TypeGreenScoreDto } from &#x27;./typeGreenScoreDto&#x27;;
 import { TypeGreenScore } from &#x27;./typeGreenScoreEntity&#x27;;
+import { Roles } from &#x27;../decorator/role.decorator&#x27;;
 
+/**
+ * Type green score controller
+ */
 @Controller(&#x27;type-green-score&#x27;)
 export class TypeGreenScoreController {
+  /**
+   *
+   * @param typeGreenScoreService
+   */
   constructor(readonly typeGreenScoreService: TypeGreenScoreService) {}
 
+  /**
+   *
+   * @param typeGreenScoreAndPoiDto
+   */
+  @UseGuards(RoleGuard)
+  @Roles(&#x27;admin&#x27;)
   @Post()
   @UsePipes(new ValidationPipe({ transform: true }))
   async addTypeGreenScore(@Body() typeGreenScoreAndPoiDto: TypeGreenScoreDto) {
     return await this.typeGreenScoreService.addGreenScore(typeGreenScoreAndPoiDto);
   }
 
+  /**
+   *
+   * @param idTypeGreenScore
+   */
+  @UseGuards(RoleGuard)
+  @Roles(&#x27;admin&#x27;)
   @Get(&#x27;/one/:id&#x27;)
   async getOneTypeGreenScore(@Param(&#x27;id&#x27;, new ParseIntPipe()) idTypeGreenScore: number): Promise&lt;TypeGreenScore&gt; {
     return await this.typeGreenScoreService.getType(idTypeGreenScore);
   }
 
+  /**
+   *
+   */
+  @UseGuards(RoleGuard)
+  @Roles(&#x27;admin&#x27;)
   @Get()
   async getAllTypeGreenScore(): Promise&lt;TypeGreenScore[]&gt; {
     return await this.typeGreenScoreService.getAllType();
   }
 
+  /**
+   *
+   * @param idTypeGreenScore
+   */
+  @UseGuards(RoleGuard)
+  @Roles(&#x27;admin&#x27;)
   @Delete(&#x27;:id&#x27;)
   async deleteTypeGreenScore(@Param(&#x27;id&#x27;, new ParseIntPipe()) idTypeGreenScore: number) {
     return await this.typeGreenScoreService.deleteTypeGreenScore(idTypeGreenScore);

@@ -150,14 +150,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Post()<br />@UsePipes(new ValidationPipe())<br /></code>
+                    <code>@UseGuards(RoleGuard)<br />@Roles(&#x27;admin&#x27;)<br />@Post()<br />@UsePipes(new ValidationPipe())<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="22"
-                            class="link-to-prism">src/company/company.controller.ts:22</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="26"
+                            class="link-to-prism">src/company/company.controller.ts:26</a></div>
                 </td>
             </tr>
 
@@ -237,14 +237,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Delete(&#x27;:id&#x27;)<br />@UsePipes(new ValidationPipe())<br /></code>
+                    <code>@UseGuards(RoleGuard)<br />@Roles(&#x27;admin&#x27;)<br />@Delete(&#x27;:id&#x27;)<br />@UsePipes(new ValidationPipe())<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="64"
-                            class="link-to-prism">src/company/company.controller.ts:64</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="76"
+                            class="link-to-prism">src/company/company.controller.ts:76</a></div>
                 </td>
             </tr>
 
@@ -319,14 +319,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Get()<br /></code>
+                    <code>@Get()<br />@UseGuards(RoleGuard)<br />@Roles(&#x27;admin&#x27;)<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="42"
-                            class="link-to-prism">src/company/company.controller.ts:42</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="50"
+                            class="link-to-prism">src/company/company.controller.ts:50</a></div>
                 </td>
             </tr>
 
@@ -374,14 +374,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Get(&#x27;one/:id&#x27;)<br />@UsePipes(new ValidationPipe())<br /></code>
+                    <code>@UseGuards(RoleGuard)<br />@Roles(&#x27;admin&#x27;)<br />@Get(&#x27;one/:id&#x27;)<br />@UsePipes(new ValidationPipe())<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="33"
-                            class="link-to-prism">src/company/company.controller.ts:33</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="39"
+                            class="link-to-prism">src/company/company.controller.ts:39</a></div>
                 </td>
             </tr>
 
@@ -455,14 +455,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Put(&#x27;:id&#x27;)<br />@UsePipes(new ValidationPipe())<br /></code>
+                    <code>@UseGuards(RoleGuard)<br />@Roles(&#x27;admin&#x27;)<br />@Put(&#x27;:id&#x27;)<br />@UsePipes(new ValidationPipe())<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="53"
-                            class="link-to-prism">src/company/company.controller.ts:53</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="63"
+                            class="link-to-prism">src/company/company.controller.ts:63</a></div>
                 </td>
             </tr>
 
@@ -532,6 +532,8 @@ import { AuthGuard } from &#x27;@nestjs/passport&#x27;;
 import { CompanyDto } from &#x27;./companyDto&#x27;;
 import { CompanyService } from &#x27;./company.service&#x27;;
 import { Company } from &#x27;./companyEntity&#x27;;
+import { RoleGuard } from &#x27;../guard/role.guard&#x27;;
+import { Roles } from &#x27;../decorator/role.decorator&#x27;;
 
 /**
  * Controller to manage the companys data
@@ -546,6 +548,8 @@ export class CompanyController {
    * @param {CompanyDto} companyDto information to add a new company
    * @returns Data was added
    */
+  @UseGuards(RoleGuard)
+  @Roles(&#x27;admin&#x27;)
   @Post()
   @UsePipes(new ValidationPipe({transform: true}))
   async addCompany(@Body() companyDto: CompanyDto) {
@@ -557,6 +561,8 @@ export class CompanyController {
    * @param id {number}
    * @returns {Company}
    */
+  @UseGuards(RoleGuard)
+  @Roles(&#x27;admin&#x27;)
   @Get(&#x27;one/:id&#x27;)
   @UsePipes(new ValidationPipe({ transform: true }))
   async getOneCompany(@Param(&#x27;id&#x27;, new ParseIntPipe()) id: number): Promise&lt;Company&gt; {
@@ -568,6 +574,8 @@ export class CompanyController {
    * @returns {Company[]}
    */
   @Get()
+  @UseGuards(RoleGuard)
+  @Roles(&#x27;admin&#x27;)
   async getAllCompany(): Promise&lt;Company[]&gt; {
     return await this.companyService.getAllCompany();
   }
@@ -577,6 +585,8 @@ export class CompanyController {
    * @param id
    * @param companyDto
    */
+  @UseGuards(RoleGuard)
+  @Roles(&#x27;admin&#x27;)
   @Put(&#x27;:id&#x27;)
   @UsePipes(new ValidationPipe({transform: true}))
   async updateCompany(@Param(&#x27;id&#x27;, new ParseIntPipe()) id: number, @Body() companyDto: CompanyDto) {
@@ -588,6 +598,8 @@ export class CompanyController {
    * @param idCompany {number}
    * @returns string
    */
+  @UseGuards(RoleGuard)
+  @Roles(&#x27;admin&#x27;)
   @Delete(&#x27;:id&#x27;)
   @UsePipes(new ValidationPipe({  transform: true }))
   async deleteCompany(@Param(&#x27;id&#x27;, new ParseIntPipe()) idCompany: number): Promise&lt;string&gt; {

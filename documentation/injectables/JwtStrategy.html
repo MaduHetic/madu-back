@@ -104,12 +104,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(userService: <a href="../injectables/UserService.html">UserService</a>)</code>
+<code>constructor(userService: <a href="../injectables/UserService.html">UserService</a>, roleService: <a href="../injectables/RoleService.html">RoleService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/auth/jwt.strategy.ts:10</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/auth/jwt.strategy.ts:11</a></div>
                             </td>
                         </tr>
 
@@ -133,6 +133,18 @@
                                                   
                                                         <td>
                                                                         <code><a href="../injectables/UserService.html" target="_self" >UserService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>roleService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/RoleService.html" target="_self" >RoleService</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -178,15 +190,15 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="27"
-                            class="link-to-prism">src/auth/jwt.strategy.ts:27</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="32"
+                            class="link-to-prism">src/auth/jwt.strategy.ts:32</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Check the validity of data contains in jwt and return user info without password</p>
+                    <div class="io-description"><p>Check the validity of data contains in jwt and return  and set in req.user user info without password</p>
 </div>
 
                     <div class="io-description">
@@ -234,6 +246,7 @@
 import { PassportStrategy } from &#x27;@nestjs/passport&#x27;;
 import { ExtractJwt, Strategy } from &#x27;passport-jwt&#x27;;
 import { UserService } from &#x27;../user/user.service&#x27;;
+import { RoleService } from &#x27;../role/role.service&#x27;;
 
 /**
  * Class use when the client send request with a jwt in request header
@@ -243,8 +256,12 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   /**
    * set the option for jwt and set the jwt secret key,
    * @param userService {UserService}
+   * @param roleService {RoleService}
    */
-  constructor(private readonly userService: UserService) {
+  constructor(
+    private readonly userService: UserService,
+    private readonly roleService: RoleService,
+  ) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: false,
@@ -253,16 +270,21 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   /**
-   * Check the validity of data contains in jwt and return user info without password
+   * Check the validity of data contains in jwt and return  and set in req.user user info without password
    * @param payload
    */
   async validate(payload) {
     if (!payload.userId) {
       throw new UnauthorizedException();
     }
-    // tslint:disable-next-line:no-console
     const {password, ...result} &#x3D;  await this.userService.getUser(payload.userId);
-    return result;
+    // tslint:disable-next-line:no-console
+    const roles &#x3D; await this.roleService.getInfRole(result.role.id);
+   // return result;
+    return {
+      user: result,
+      roles: await this.roleService.getOnlyRole(roles),
+    };
   }
 }
 </code></pre>

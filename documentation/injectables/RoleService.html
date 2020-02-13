@@ -59,6 +59,13 @@
             <code>src/role/role.service.ts</code>
         </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Role service</p>
+
+            </p>
 
 
 
@@ -77,7 +84,15 @@
                         <ul class="index-list">
                             <li>
                                     <span class="modifier">Async</span>
+                                <a href="#getInfRole">getInfRole</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
                                 <a href="#getOneOrFailByRole">getOneOrFailByRole</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#getOnlyRole">getOnlyRole</a>
                             </li>
                         </ul>
                     </td>
@@ -102,7 +117,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="7" class="link-to-prism">src/role/role.service.ts:7</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/role/role.service.ts:10</a></div>
                             </td>
                         </tr>
 
@@ -149,6 +164,78 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="getInfRole"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Async</span>
+                            getInfRole
+                        </b>
+                        <a href="#getInfRole"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getInfRole(idRole: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="36"
+                            class="link-to-prism">src/role/role.service.ts:36</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>idRole</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../classes/Role.html" target="_self" >Promise&lt;Role[]&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="getOneOrFailByRole"></a>
                     <span class="name">
                         <b>
@@ -169,8 +256,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="13"
-                            class="link-to-prism">src/role/role.service.ts:13</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="23"
+                            class="link-to-prism">src/role/role.service.ts:23</a></div>
                 </td>
             </tr>
 
@@ -217,6 +304,74 @@
             </tr>
         </tbody>
     </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getOnlyRole"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Async</span>
+                            getOnlyRole
+                        </b>
+                        <a href="#getOnlyRole"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getOnlyRole(roles)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="44"
+                            class="link-to-prism">src/role/role.service.ts:44</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>roles</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Promise&lt;string[]&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </section>
 
     </div>
@@ -228,13 +383,23 @@ import { InjectRepository } from &#x27;@nestjs/typeorm&#x27;;
 import { Role } from &#x27;./roleEntity&#x27;;
 import { Repository } from &#x27;typeorm&#x27;;
 
+/**
+ * Role service
+ */
 @Injectable()
 export class RoleService {
+  /**
+   *
+   * @param roleRoleRepository {Repository&lt;Role&gt;}
+   */
   constructor(
     @InjectRepository(Role)
     private readonly roleRoleRepository: Repository&lt;Role&gt;,
   ) {}
 
+  /**
+   * @param roleType
+   */
   async getOneOrFailByRole(roleType: string) {
     return await this.roleRoleRepository.findOneOrFail({
       where: {
@@ -242,6 +407,23 @@ export class RoleService {
       },
     }).catch(() &#x3D;&gt; {
       throw new NotFoundException(&#x60;Role ${roleType} not found&#x60;);
+    });
+  }
+
+  /**
+   * @param idRole {number}
+   */
+  async getInfRole(idRole: number): Promise&lt;Role[]&gt; {
+    return await this.roleRoleRepository.createQueryBuilder()
+      .select(&#x27;role&#x27;)
+      .where(&#x60;id &#x3D; :id&#x60;, { id: idRole })
+      .orWhere(&#x27;id &gt; :idSup&#x27;, { idSup: idRole  })
+      .getRawMany();
+  }
+
+  async getOnlyRole(roles): Promise&lt;string[]&gt; {
+    return roles.map((role) &#x3D;&gt; {
+      return role.role;
     });
   }
 }

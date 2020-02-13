@@ -64,6 +64,13 @@
                 <code>type</code>
             </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>type controller</p>
+
+            </p>
 
 
 
@@ -139,14 +146,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Post()<br />@UsePipes(new ValidationPipe())<br /></code>
+                    <code>@UseGuards(RoleGuard)<br />@Roles(&#x27;admin&#x27;)<br />@Post()<br />@UsePipes(new ValidationPipe())<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="14"
-                            class="link-to-prism">src/type/type.controller.ts:14</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="29"
+                            class="link-to-prism">src/type/type.controller.ts:29</a></div>
                 </td>
             </tr>
 
@@ -218,14 +225,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Delete(&#x27;:id&#x27;)<br />@UsePipes(new ValidationPipe())<br /></code>
+                    <code>@UseGuards(RoleGuard)<br />@Roles(&#x27;admin&#x27;)<br />@Delete(&#x27;:id&#x27;)<br />@UsePipes(new ValidationPipe())<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="31"
-                            class="link-to-prism">src/type/type.controller.ts:31</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="63"
+                            class="link-to-prism">src/type/type.controller.ts:63</a></div>
                 </td>
             </tr>
 
@@ -297,14 +304,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Get(&#x27;one/:id&#x27;)<br />@UsePipes(new ValidationPipe())<br /></code>
+                    <code>@UseGuards(RoleGuard)<br />@Roles(&#x27;admin&#x27;)<br />@Get(&#x27;one/:id&#x27;)<br />@UsePipes(new ValidationPipe())<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="20"
-                            class="link-to-prism">src/type/type.controller.ts:20</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="41"
+                            class="link-to-prism">src/type/type.controller.ts:41</a></div>
                 </td>
             </tr>
 
@@ -376,14 +383,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Get()<br /></code>
+                    <code>@UseGuards(RoleGuard)<br />@Roles(&#x27;admin&#x27;)<br />@Get()<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="25"
-                            class="link-to-prism">src/type/type.controller.ts:25</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="51"
+                            class="link-to-prism">src/type/type.controller.ts:51</a></div>
                 </td>
             </tr>
 
@@ -408,29 +415,61 @@ import { TypeService } from &#x27;./type.service&#x27;;
 import { AuthGuard } from &#x27;@nestjs/passport&#x27;;
 import { TypeDto } from &#x27;./typeDto&#x27;;
 import { Type } from &#x27;./typeEntity&#x27;;
+import { RoleGuard } from &#x27;../guard/role.guard&#x27;;
+import { Roles } from &#x27;../decorator/role.decorator&#x27;;
 
+/**
+ * type controller
+ */
 @Controller(&#x27;type&#x27;)
 @UseGuards(AuthGuard(&#x27;jwt&#x27;))
 export class TypeController {
+  /**
+   *
+   * @param typeService
+   */
   constructor(private readonly typeService: TypeService) {}
 
+  /**
+   *
+   * @param typeDto
+   */
+  @UseGuards(RoleGuard)
+  @Roles(&#x27;admin&#x27;)
   @Post()
   @UsePipes(new ValidationPipe())
   async addType(@Body() typeDto: TypeDto) {
     return await this.typeService.addType(typeDto);
   }
 
+  /**
+   *
+   * @param idType
+   */
+  @UseGuards(RoleGuard)
+  @Roles(&#x27;admin&#x27;)
   @Get(&#x27;one/:id&#x27;)
   @UsePipes(new ValidationPipe({ transform: true }))
   async getOneType(@Param(&#x27;id&#x27;, new ParseIntPipe()) idType: number): Promise&lt;Type&gt; {
     return await this.typeService.getOneType(idType);
   }
 
+  /**
+   *
+   */
+  @UseGuards(RoleGuard)
+  @Roles(&#x27;admin&#x27;)
   @Get()
   async getTypes(): Promise&lt;Type[]&gt; {
     return await this.typeService.getAllType();
   }
 
+  /**
+   *
+   * @param idType
+   */
+  @UseGuards(RoleGuard)
+  @Roles(&#x27;admin&#x27;)
   @Delete(&#x27;:id&#x27;)
   @UsePipes(new ValidationPipe({transform: true}))
   async delteType(@Param(&#x27;id&#x27;, new ParseIntPipe()) idType: number) {

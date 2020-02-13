@@ -64,6 +64,13 @@
                 <code>poi</code>
             </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>point of interest controller</p>
+
+            </p>
 
 
 
@@ -131,14 +138,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Post()<br />@UsePipes(new ValidationPipe())<br />@UsePipes(PoiTransformationPipe)<br /></code>
+                    <code>@Post()<br />@UsePipes(new ValidationPipe())<br />@UsePipes(PoiTransformationPipe)<br />@UseGuards(RoleGuard)<br />@Roles(&#x27;admin&#x27;)<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="22"
-                            class="link-to-prism">src/poi/poi.controller.ts:22</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="33"
+                            class="link-to-prism">src/poi/poi.controller.ts:33</a></div>
                 </td>
             </tr>
 
@@ -210,14 +217,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Get(&#x27;:id&#x27;)<br />@UsePipes(new ValidationPipe())<br /></code>
+                    <code>@Get(&#x27;:id&#x27;)<br />@UsePipes(new ValidationPipe())<br />@UseGuards(RoleGuard)<br />@Roles(&#x27;admin&#x27;)<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="28"
-                            class="link-to-prism">src/poi/poi.controller.ts:28</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="45"
+                            class="link-to-prism">src/poi/poi.controller.ts:45</a></div>
                 </td>
             </tr>
 
@@ -277,7 +284,12 @@ import { getConnection } from &#x27;typeorm&#x27;;
 import { JoinTagPoiService } from &#x27;../join-tag-poi/join-tag-poi.service&#x27;;
 import { Tag } from &#x27;../tags/tagEntity&#x27;;
 import { JoinTagPoiEntity } from &#x27;../join-tag-poi/joinTagPoiEntity&#x27;;
+import { RoleGuard } from &#x27;../guard/role.guard&#x27;;
+import { Roles } from &#x27;../decorator/role.decorator&#x27;;
 
+/**
+ * point of interest controller
+ */
 @Controller(&#x27;poi&#x27;)
 @UseGuards(AuthGuard(&#x27;jwt&#x27;))
 export class PoiController {
@@ -286,20 +298,32 @@ export class PoiController {
     private readonly joinTagPoiService: JoinTagPoiService,
   ) {}
 
+  /**
+   *
+   * @param poiDto
+   */
   @Post()
   @UsePipes(new ValidationPipe())
   @UsePipes(PoiTransformationPipe)
+  @UseGuards(RoleGuard)
+  @Roles(&#x27;admin&#x27;)
   async addPoi(@Body() poiDto: PoiDto) {
     return await this.poiService.addPoi(poiDto);
   }
 
+  /**
+   *
+   * @param idPoi
+   */
   @Get(&#x27;:id&#x27;)
   @UsePipes(new ValidationPipe({ transform: true }))
+  @UseGuards(RoleGuard)
+  @Roles(&#x27;admin&#x27;)
   async getCompanyAndTags(@Param(&#x27;id&#x27;, new ParseIntPipe()) idPoi: number) {
     const poi &#x3D; await this.poiService.getPoi(idPoi);
     const tags: JoinTagPoiEntity[] &#x3D;  await this.joinTagPoiService.getAllCompanyTag(poi);
     return  {
-      poi: poi,
+      poi,
       tags: await this.joinTagPoiService.serializeTagsData(tags),
     };
   }

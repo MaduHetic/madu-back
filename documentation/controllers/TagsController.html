@@ -145,8 +145,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="14"
-                            class="link-to-prism">src/tags/tags.controller.ts:14</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="16"
+                            class="link-to-prism">src/tags/tags.controller.ts:16</a></div>
                 </td>
             </tr>
 
@@ -218,14 +218,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Delete(&#x27;:id&#x27;)<br />@UsePipes(new ValidationPipe())<br /></code>
+                    <code>@UseGuards(RoleGuard)<br />@Roles(&#x27;admin&#x27;)<br />@Delete(&#x27;:id&#x27;)<br />@UsePipes(new ValidationPipe())<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="20"
-                            class="link-to-prism">src/tags/tags.controller.ts:20</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="24"
+                            class="link-to-prism">src/tags/tags.controller.ts:24</a></div>
                 </td>
             </tr>
 
@@ -297,14 +297,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Get()<br /></code>
+                    <code>@UseGuards(RoleGuard)<br />@Roles(&#x27;admin&#x27;)<br />@Get()<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="32"
-                            class="link-to-prism">src/tags/tags.controller.ts:32</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="40"
+                            class="link-to-prism">src/tags/tags.controller.ts:40</a></div>
                 </td>
             </tr>
 
@@ -345,14 +345,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Get(&#x27;one/:id&#x27;)<br />@UsePipes(new ValidationPipe())<br /></code>
+                    <code>@UseGuards(RoleGuard)<br />@Roles(&#x27;admin&#x27;)<br />@Get(&#x27;one/:id&#x27;)<br />@UsePipes(new ValidationPipe())<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="27"
-                            class="link-to-prism">src/tags/tags.controller.ts:27</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="33"
+                            class="link-to-prism">src/tags/tags.controller.ts:33</a></div>
                 </td>
             </tr>
 
@@ -408,6 +408,8 @@ import { AuthGuard } from &#x27;@nestjs/passport&#x27;;
 import { TagsDto } from &#x27;./tagsDto&#x27;;
 import { TagsService } from &#x27;./tags.service&#x27;;
 import { Tag } from &#x27;./tagEntity&#x27;;
+import { RoleGuard } from &#x27;../guard/role.guard&#x27;;
+import { Roles } from &#x27;../decorator/role.decorator&#x27;;
 
 @Controller(&#x27;tags&#x27;)
 @UseGuards(AuthGuard(&#x27;jwt&#x27;))
@@ -420,6 +422,8 @@ export class TagsController {
     return await this.tagsService.addTag(tagDto);
   }
 
+  @UseGuards(RoleGuard)
+  @Roles(&#x27;admin&#x27;)
   @Delete(&#x27;:id&#x27;)
   @UsePipes(new ValidationPipe({ transform: true}))
   async deleteTag(@Param(&#x27;id&#x27;, new ParseIntPipe()) idTag: number) {
@@ -427,12 +431,16 @@ export class TagsController {
     return await this.tagsService.deleteTag(idTag);
   }
 
+  @UseGuards(RoleGuard)
+  @Roles(&#x27;admin&#x27;)
   @Get(&#x27;one/:id&#x27;)
   @UsePipes(new ValidationPipe({transform: true}))
   async getOneTag(@Param(&#x27;id&#x27;, new ParseIntPipe()) idTag: number): Promise&lt;Tag&gt; {
     return await this.tagsService.getOneTag(idTag);
   }
 
+  @UseGuards(RoleGuard)
+  @Roles(&#x27;admin&#x27;)
   @Get()
   async getAllTag(): Promise&lt;Tag[]&gt; {
     return await this.tagsService.getAllTag();

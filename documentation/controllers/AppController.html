@@ -132,14 +132,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@UseGuards(undefined)<br />@Get(&#x27;profile&#x27;)<br /></code>
+                    <code>@UseGuards(undefined)<br />@UseGuards(RoleGuard)<br />@Roles(&#x27;admin&#x27;)<br />@Get(&#x27;profile&#x27;)<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="31"
-                            class="link-to-prism">src/app.controller.ts:31</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="35"
+                            class="link-to-prism">src/app.controller.ts:35</a></div>
                 </td>
             </tr>
 
@@ -215,8 +215,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="20"
-                            class="link-to-prism">src/app.controller.ts:20</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="22"
+                            class="link-to-prism">src/app.controller.ts:22</a></div>
                 </td>
             </tr>
 
@@ -269,6 +269,8 @@
 import {AuthService} from &#x27;./auth/auth.service&#x27;;
 import {AuthGuard} from &#x27;@nestjs/passport&#x27;;
 import { AccessToken } from &#x27;./auth/access-token&#x27;;
+import { RoleGuard } from &#x27;./guard/role.guard&#x27;;
+import { Roles } from &#x27;./decorator/role.decorator&#x27;;
 
 /**
  * This controller contains the routes to connect and retrieve your profile
@@ -294,6 +296,8 @@ export class AppController {
    * @param req {Request}
    */
   @UseGuards(AuthGuard(&#x27;jwt&#x27;))
+  @UseGuards(RoleGuard)
+  @Roles(&#x27;admin&#x27;)
   @Get(&#x27;profile&#x27;)
   async getProfile(@Request() req) {
     return req.user;
