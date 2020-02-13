@@ -64,6 +64,13 @@
                 <code>company</code>
             </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Controller to manage the companys data</p>
+
+            </p>
 
 
 
@@ -149,14 +156,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="17"
-                            class="link-to-prism">src/company/company.controller.ts:17</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="22"
+                            class="link-to-prism">src/company/company.controller.ts:22</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>method call method to check and add a new company</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -234,14 +243,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="40"
-                            class="link-to-prism">src/company/company.controller.ts:40</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="64"
+                            class="link-to-prism">src/company/company.controller.ts:64</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>This method call method to delete a company from the database</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -272,11 +283,12 @@
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>    <code>{}</code>
+                        <b>Returns : </b>    <code>Promise&lt;string&gt;</code>
 
                     </div>
                     <div class="io-description">
-                        
+                        <p>string</p>
+
                     </div>
                 </td>
             </tr>
@@ -313,18 +325,25 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="28"
-                            class="link-to-prism">src/company/company.controller.ts:28</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="42"
+                            class="link-to-prism">src/company/company.controller.ts:42</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>This method return all company in database</p>
+</div>
 
+                    <div>
+                    </div>
                     <div class="io-description">
-                        <b>Returns : </b>    <code>{}</code>
+                        <b>Returns : </b>        <code><a href="../classes/Company.html" target="_self" >Promise&lt;Company[]&gt;</a></code>
 
+                    </div>
+                    <div class="io-description">
+                        
                     </div>
                 </td>
             </tr>
@@ -361,14 +380,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="23"
-                            class="link-to-prism">src/company/company.controller.ts:23</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="33"
+                            class="link-to-prism">src/company/company.controller.ts:33</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>this method return one company entity with an id</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -399,7 +420,7 @@
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>    <code>{}</code>
+                        <b>Returns : </b>        <code><a href="../classes/Company.html" target="_self" >Promise&lt;Company&gt;</a></code>
 
                     </div>
                     <div class="io-description">
@@ -440,14 +461,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="34"
-                            class="link-to-prism">src/company/company.controller.ts:34</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="53"
+                            class="link-to-prism">src/company/company.controller.ts:53</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>This method update one company data</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -508,13 +531,18 @@
 import { AuthGuard } from &#x27;@nestjs/passport&#x27;;
 import { CompanyDto } from &#x27;./companyDto&#x27;;
 import { CompanyService } from &#x27;./company.service&#x27;;
+import { Company } from &#x27;./companyEntity&#x27;;
 
+/**
+ * Controller to manage the companys data
+ */
 @Controller(&#x27;company&#x27;)
 @UseGuards(AuthGuard(&#x27;jwt&#x27;))
 export class CompanyController {
   constructor(private readonly companyService: CompanyService) {}
 
   /**
+   * method call method to check and add a new company
    * @param {CompanyDto} companyDto information to add a new company
    * @returns Data was added
    */
@@ -524,26 +552,45 @@ export class CompanyController {
     return await this.companyService.addCompany(companyDto);
   }
 
+  /**
+   * this method return one company entity with an id
+   * @param id {number}
+   * @returns {Company}
+   */
   @Get(&#x27;one/:id&#x27;)
   @UsePipes(new ValidationPipe({ transform: true }))
-  async getOneCompany(@Param(&#x27;id&#x27;, new ParseIntPipe()) id: number) {
+  async getOneCompany(@Param(&#x27;id&#x27;, new ParseIntPipe()) id: number): Promise&lt;Company&gt; {
     return await this.companyService.getOne(id);
   }
 
+  /**
+   * This method return all company in database
+   * @returns {Company[]}
+   */
   @Get()
-  async getAllCompany() {
+  async getAllCompany(): Promise&lt;Company[]&gt; {
     return await this.companyService.getAllCompany();
   }
 
+  /**
+   * This method update one company data
+   * @param id
+   * @param companyDto
+   */
   @Put(&#x27;:id&#x27;)
   @UsePipes(new ValidationPipe({transform: true}))
   async updateCompany(@Param(&#x27;id&#x27;, new ParseIntPipe()) id: number, @Body() companyDto: CompanyDto) {
     return await this.companyService.addCompany(companyDto, id);
   }
 
+  /**
+   * This method call method to delete a company from the database
+   * @param idCompany {number}
+   * @returns string
+   */
   @Delete(&#x27;:id&#x27;)
   @UsePipes(new ValidationPipe({  transform: true }))
-  async deleteCompany(@Param(&#x27;id&#x27;, new ParseIntPipe()) idCompany: number) {
+  async deleteCompany(@Param(&#x27;id&#x27;, new ParseIntPipe()) idCompany: number): Promise&lt;string&gt; {
     await this.companyService.getOne(idCompany);
     await this.companyService.deleteCompany(idCompany);
     return &#x27;delete success&#x27;;

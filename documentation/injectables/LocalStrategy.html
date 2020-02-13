@@ -59,6 +59,13 @@
             <code>src/auth/local.strategy.ts</code>
         </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Class use when client try to connect to their account</p>
+
+            </p>
 
 
 
@@ -102,12 +109,14 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="7" class="link-to-prism">src/auth/local.strategy.ts:7</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/auth/local.strategy.ts:10</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>set authService</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -169,14 +178,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="12"
-                            class="link-to-prism">src/auth/local.strategy.ts:12</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="24"
+                            class="link-to-prism">src/auth/local.strategy.ts:24</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>check if user exist and return them else send an exception</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -240,12 +251,24 @@ import {PassportStrategy} from &#x27;@nestjs/passport&#x27;;
 import {AuthService} from &#x27;./auth.service&#x27;;
 import {Strategy} from &#x27;passport-local&#x27;;
 
+/**
+ * Class use when client try to connect to their account
+ */
 @Injectable()
 export class LocalStrategy extends PassportStrategy(Strategy) {
+  /**
+   * set authService
+   * @param authService {AuthService}
+   */
   constructor(private readonly authService: AuthService) {
     super();
   }
 
+  /**
+   * check if user exist and return them else send an exception
+   * @param mail {string}
+   * @param password {string}
+   */
   async validate(mail: string, password: string) {
     const user &#x3D; await this.authService.validateUser(mail, password);
     if (!user) {

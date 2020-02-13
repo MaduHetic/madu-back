@@ -59,6 +59,13 @@
             <code>src/auth/jwt.strategy.ts</code>
         </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Class use when the client send request with a jwt in request header</p>
+
+            </p>
 
 
 
@@ -102,12 +109,14 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="7" class="link-to-prism">src/auth/jwt.strategy.ts:7</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/auth/jwt.strategy.ts:10</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>set the option for jwt and set the jwt secret key,</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -169,14 +178,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="16"
-                            class="link-to-prism">src/auth/jwt.strategy.ts:16</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="27"
+                            class="link-to-prism">src/auth/jwt.strategy.ts:27</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Check the validity of data contains in jwt and return user info without password</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -224,8 +235,15 @@ import { PassportStrategy } from &#x27;@nestjs/passport&#x27;;
 import { ExtractJwt, Strategy } from &#x27;passport-jwt&#x27;;
 import { UserService } from &#x27;../user/user.service&#x27;;
 
+/**
+ * Class use when the client send request with a jwt in request header
+ */
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
+  /**
+   * set the option for jwt and set the jwt secret key,
+   * @param userService {UserService}
+   */
   constructor(private readonly userService: UserService) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -234,12 +252,15 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     });
   }
 
+  /**
+   * Check the validity of data contains in jwt and return user info without password
+   * @param payload
+   */
   async validate(payload) {
     if (!payload.userId) {
       throw new UnauthorizedException();
     }
     // tslint:disable-next-line:no-console
-    console.log(&#x27;fdfdfdfdf&#x27;);
     const {password, ...result} &#x3D;  await this.userService.getUser(payload.userId);
     return result;
   }
