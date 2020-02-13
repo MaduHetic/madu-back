@@ -5,12 +5,14 @@ import { JwtModule } from '@nestjs/jwt';
 import { UserModule } from '../user/user.module';
 import { LocalStrategy } from './local.strategy';
 import { JwtStrategy } from './jwt.strategy';
+import { RoleModule } from '../role/role.module';
 
 @Module({
   imports: [
     UserModule,
     PassportModule,
     PassportModule.register({defaultStrategy: 'local'}),
+    RoleModule,
     JwtModule.register({
       secret: process.env.JWT_TOKEN || 'Helloo',
       signOptions: {expiresIn: '3600s'},

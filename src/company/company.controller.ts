@@ -3,6 +3,8 @@ import { AuthGuard } from '@nestjs/passport';
 import { CompanyDto } from './companyDto';
 import { CompanyService } from './company.service';
 import { Company } from './companyEntity';
+import { RoleGuard } from '../guard/role.guard';
+import { Roles } from '../decorator/role.decorator';
 
 /**
  * Controller to manage the companys data
@@ -17,6 +19,8 @@ export class CompanyController {
    * @param {CompanyDto} companyDto information to add a new company
    * @returns Data was added
    */
+  @UseGuards(RoleGuard)
+  @Roles('admin')
   @Post()
   @UsePipes(new ValidationPipe({transform: true}))
   async addCompany(@Body() companyDto: CompanyDto) {
@@ -28,6 +32,8 @@ export class CompanyController {
    * @param id {number}
    * @returns {Company}
    */
+  @UseGuards(RoleGuard)
+  @Roles('admin')
   @Get('one/:id')
   @UsePipes(new ValidationPipe({ transform: true }))
   async getOneCompany(@Param('id', new ParseIntPipe()) id: number): Promise<Company> {
@@ -39,6 +45,8 @@ export class CompanyController {
    * @returns {Company[]}
    */
   @Get()
+  @UseGuards(RoleGuard)
+  @Roles('admin')
   async getAllCompany(): Promise<Company[]> {
     return await this.companyService.getAllCompany();
   }
@@ -48,6 +56,8 @@ export class CompanyController {
    * @param id
    * @param companyDto
    */
+  @UseGuards(RoleGuard)
+  @Roles('admin')
   @Put(':id')
   @UsePipes(new ValidationPipe({transform: true}))
   async updateCompany(@Param('id', new ParseIntPipe()) id: number, @Body() companyDto: CompanyDto) {
@@ -59,6 +69,8 @@ export class CompanyController {
    * @param idCompany {number}
    * @returns string
    */
+  @UseGuards(RoleGuard)
+  @Roles('admin')
   @Delete(':id')
   @UsePipes(new ValidationPipe({  transform: true }))
   async deleteCompany(@Param('id', new ParseIntPipe()) idCompany: number): Promise<string> {

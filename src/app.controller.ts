@@ -2,6 +2,8 @@ import {Controller, Post, UseGuards, Request, Get} from '@nestjs/common';
 import {AuthService} from './auth/auth.service';
 import {AuthGuard} from '@nestjs/passport';
 import { AccessToken } from './auth/access-token';
+import { RoleGuard } from './guard/role.guard';
+import { Roles } from './decorator/role.decorator';
 
 /**
  * This controller contains the routes to connect and retrieve your profile
@@ -27,6 +29,8 @@ export class AppController {
    * @param req {Request}
    */
   @UseGuards(AuthGuard('jwt'))
+  @UseGuards(RoleGuard)
+  @Roles('admin')
   @Get('profile')
   async getProfile(@Request() req) {
     return req.user;
