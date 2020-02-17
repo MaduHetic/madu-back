@@ -37,4 +37,10 @@ export class PercentTypeGreenScoreAndPoiService {
         throw new NotFoundException(`PercentTypeGreenScoreAndPoi with id ${idPercent} Not Found`);
       });
   }
+
+  async deletePercentTypeGreenScore(idPercentGcAndPoi: number) {
+    const percentGc = await this.getOnePercentTypeGreenScoreAndPoi(idPercentGcAndPoi);
+    return await this.percentTypeGreenScoreAndPoiRepository.delete(percentGc);
+  }
+
 }
