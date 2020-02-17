@@ -6,6 +6,7 @@ import { PoiController } from './poi.controller';
 import { TagsModule } from '../tags/tags.module';
 import { JoinTagPoiModule } from '../join-tag-poi/join-tag-poi.module';
 import { JoinTypePoiModule } from '../join-type-poi/join-type-poi.module';
+import { TypeModule } from '../type/type.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { JoinTypePoiModule } from '../join-type-poi/join-type-poi.module';
     TagsModule,
     JoinTagPoiModule,
     JoinTypePoiModule,
+    TypeModule,
   ],
   providers: [PoiService],
   controllers: [PoiController],

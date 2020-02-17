@@ -58,7 +58,7 @@ export class PoiController {
   @Get()
   @UseGuards(RoleGuard)
   @Roles('admin')
-  async getAllPoi(): Promise<JoinTagPoiEntity[]> {
+  async getAllPoi() {
     return await this.poiService.getAllPoi();
   }
 }

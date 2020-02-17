@@ -32,6 +32,14 @@ export class JoinTagPoiService {
     });
   }
 
+  async getTagsCompany(poiToFind: Poi) {
+    return await this.joinTagPoiRepository.createQueryBuilder('g')
+      .select()
+      .innerJoinAndSelect('tag', 'tag.id = :idTag')
+      .where('idPoi = :idPoi', { idPoi: poiToFind.id })
+      .getRawMany();
+  }
+
   async getAllCompanyTag(poiToFind: Poi): Promise<JoinTagPoiEntity[]> {
     return await this.joinTagPoiRepository.find({
       where: {

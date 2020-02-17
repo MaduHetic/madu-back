@@ -10,5 +10,6 @@ import { TypeController } from './type.controller';
   ],
   providers: [TypeService],
   controllers: [TypeController],
+  exports: [TypeService],
 })
 export class TypeModule {}

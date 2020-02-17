@@ -28,4 +28,8 @@ export class TypeService {
   async deleteType(idType: number) {
     return await this.typeRepository.delete(idType);
   }
+
+  async getTypes(idsTypes: number[]): Promise<Type[]> {
+      return await this.typeRepository.findByIds(idsTypes);
+  }
 }

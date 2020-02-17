@@ -35,11 +35,18 @@ export class JoinTypePoiService {
     });
   }
 
+  async serializeType(types: JoinTypePoi[]) {
+    return types.map((type) => {
+      return type.type;
+    });
+  }
+
   async getTypeOfPoi(poi: Poi) {
     return await this.joinTypePoiRepository.find({
       where: {
         poi,
       },
+      relations: ['type'],
     });
   }
 }
