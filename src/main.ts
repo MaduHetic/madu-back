@@ -6,6 +6,11 @@ import * as compression from 'compression';
 import * as cookieParser from 'cookie-parser';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
+/**
+ * Main function who call the different router and middleware for the app to work properly
+ * Helmet helps you secure your Express apps by setting various HTTP headers
+ * Use to limit repeated requests to  APIs
+ */
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     cors: true,

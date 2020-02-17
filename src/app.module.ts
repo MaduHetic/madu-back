@@ -21,6 +21,10 @@ import { UserAppModule } from './user-app/user-app.module';
 import { JoinTagPoiEntity } from './join-tag-poi/joinTagPoiEntity';
 import { JoinTypePoi } from './join-type-poi/joinTypePoi';
 import { GreenScoreModule } from './green-score/green-score.module';
+import { TypeGreenScoreModule } from './type-green-score/type-green-score.module';
+import { PercentTypeGreenScoreAndPoiModule } from './percent-type-green-score-and-poi/percent-type-green-score-and-poi.module';
+import { TypeGreenScore } from './type-green-score/typeGreenScoreEntity';
+import { PercentTypeGreenScoreAndPoi } from './percent-type-green-score-and-poi/percentTypeGreenScoreAndPoiEntity';
 
 @Module({
   imports: [
@@ -40,6 +44,8 @@ import { GreenScoreModule } from './green-score/green-score.module';
         Poi,
         JoinTagPoiEntity,
         JoinTypePoi,
+        TypeGreenScore,
+        PercentTypeGreenScoreAndPoi,
       ],
       synchronize: true,
     }),
@@ -54,6 +60,8 @@ import { GreenScoreModule } from './green-score/green-score.module';
     JoinTagPoiModule,
     UserAppModule,
     GreenScoreModule,
+    TypeGreenScoreModule,
+    PercentTypeGreenScoreAndPoiModule,
   ],
   controllers: [AppController],
   providers: [AppService],

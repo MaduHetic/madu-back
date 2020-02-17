@@ -2,15 +2,14 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 
 @Entity()
-export class Type {
-
+export class TypeGreenScore {
   @ApiProperty()
   @PrimaryGeneratedColumn()
-  id: number;
+  readonly id: number;
 
   @ApiProperty()
   @Column({
-    length: 25,
+    length: 70,
   })
-  type: string;
+  readonly typeGreenScore: string;
 }
