@@ -17,4 +17,9 @@ export class AppController {
   async getProfile(@Request() req) {
     return req.user;
   }
+
+  @Get()
+  async toto(@Request() req) {
+    console.log(req);
+  }
 }
