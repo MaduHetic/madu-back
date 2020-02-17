@@ -30,7 +30,6 @@ export class AppController {
    */
   @UseGuards(AuthGuard('jwt'))
   @UseGuards(RoleGuard)
-  @Roles('admin')
   @Get('profile')
   async getProfile(@Request() req) {
     return req.user;
