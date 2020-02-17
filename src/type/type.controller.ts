@@ -64,5 +64,4 @@ export class TypeController {
     await this.typeService.getOneType(idType);
     return await this.typeService.deleteType(idType);
   }
-
 }
