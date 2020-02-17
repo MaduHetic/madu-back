@@ -5,6 +5,7 @@ import { Repository } from 'typeorm';
 import { PoiService } from '../poi/poi.service';
 import { TypeGreenScoreService } from '../type-green-score/type-green-score.service';
 import { PercentTypeGreenScoreAndPoiDto } from './PercentTypeGreenScoreAndPoiDto';
+import { Poi } from '../poi/poiEntity';
 
 @Injectable()
 export class PercentTypeGreenScoreAndPoiService {
@@ -19,7 +20,7 @@ export class PercentTypeGreenScoreAndPoiService {
     percentTypeGreenScoreAndPoiServiceDto: PercentTypeGreenScoreAndPoiDto) {
     const typeGreenScoreFind = await this.typeGreenScoreService.getType(percentTypeGreenScoreAndPoiServiceDto.idTypeGreenScore);
     const poiFind = await this.poiService.getPoi(percentTypeGreenScoreAndPoiServiceDto.idPoi);
-    const percentTypeGreenScoreAndPoi = {
+    const percentTypeGreenScoreAndPoi: PercentTypeGreenScoreAndPoi = {
       percent: percentTypeGreenScoreAndPoiServiceDto.percent,
       poi: poiFind,
       typeGreenScore: typeGreenScoreFind,
@@ -28,7 +29,18 @@ export class PercentTypeGreenScoreAndPoiService {
   }
 
   async getAllPercentTypeGreenScoreAndPoi(): Promise<PercentTypeGreenScoreAndPoi[]> {
-    return await this.percentTypeGreenScoreAndPoiRepository.find();
+    return await this.percentTypeGreenScoreAndPoiRepository.find({
+      relations: ['poi', 'typeGreenScore'],
+    });
+  }
+
+  async findByPoi(idPoi: number): Promise<PercentTypeGreenScoreAndPoi[]> {
+    const poi = await this.poiService.getPoi(idPoi);
+    return await this.percentTypeGreenScoreAndPoiRepository.find({
+      where: {
+        poi,
+      },
+    });
   }
 
   async getOnePercentTypeGreenScoreAndPoi(idPercent: number): Promise<PercentTypeGreenScoreAndPoi> {

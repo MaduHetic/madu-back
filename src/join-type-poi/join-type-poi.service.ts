@@ -34,4 +34,12 @@ export class JoinTypePoiService {
       relations: ['poi', 'tag'],
     });
   }
+
+  async getTypeOfPoi(poi: Poi) {
+    return await this.joinTypePoiRepository.find({
+      where: {
+        poi,
+      },
+    });
+  }
 }

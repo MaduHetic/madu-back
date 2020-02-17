@@ -7,7 +7,7 @@ import { ApiProperty } from '@nestjs/swagger';
 export class PercentTypeGreenScoreAndPoi {
   @ApiProperty()
   @PrimaryGeneratedColumn()
-  readonly id: number;
+  readonly id?: number;
 
   @ApiProperty()
   @Column()

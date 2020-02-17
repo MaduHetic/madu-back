@@ -10,6 +10,7 @@ import { JoinTagPoiEntity } from '../join-tag-poi/joinTagPoiEntity';
 import { RoleGuard } from '../guard/role.guard';
 import { Roles } from '../decorator/role.decorator';
 import { Poi } from './poiEntity';
+import { JoinTypePoiService } from '../join-type-poi/join-type-poi.service';
 
 /**
  * point of interest controller
@@ -20,6 +21,7 @@ export class PoiController {
   constructor(
     private readonly poiService: PoiService,
     private readonly joinTagPoiService: JoinTagPoiService,
+    private readonly joinTypePoi: JoinTypePoiService,
   ) {}
 
   /**
@@ -49,6 +51,7 @@ export class PoiController {
     return  {
       poi,
       tags: await this.joinTagPoiService.serializeTagsData(tags),
+      type: await this.joinTypePoi.getTypeOfPoi(poi),
     };
   }
 

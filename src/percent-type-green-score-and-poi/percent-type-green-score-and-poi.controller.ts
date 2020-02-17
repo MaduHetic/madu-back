@@ -5,6 +5,8 @@ import { PercentTypeGreenScoreAndPoiDto } from './PercentTypeGreenScoreAndPoiDto
 import { RoleGuard } from '../guard/role.guard';
 import { Roles } from '../decorator/role.decorator';
 import { PercentTypeGreenScoreAndPoi } from './percentTypeGreenScoreAndPoiEntity';
+import { PercentTypeGreenScoreAndPoiTransformationPipe } from './Pipe/percent-type-green-score-and-poi.transformation.pipe';
+import { Role } from '../role/roleEntity';
 
 /**
  * Percent green score controller // todo doc
@@ -26,6 +28,7 @@ export class PercentTypeGreenScoreAndPoiController {
   @Roles('admin')
   @Post()
   @UsePipes(new ValidationPipe({ transform: true }))
+  @UsePipes(PercentTypeGreenScoreAndPoiTransformationPipe)
   async addNewPercentTypeGCAndPoi(@Body() percentTypeGreenScoreAndPoiDto: PercentTypeGreenScoreAndPoiDto) {
     return await this.percentTypeGreenScoreAndPoiService.addPercentTypeGreenScoreAndPoiService(percentTypeGreenScoreAndPoiDto);
   }
@@ -47,10 +50,21 @@ export class PercentTypeGreenScoreAndPoiController {
   @UseGuards(RoleGuard)
   @Roles('admin')
   @UsePipes(new ValidationPipe({ transform: true }))
-  @Get(':id')
+  @Get('one/:id')
   async getOnePercentTypeAndPoi(@Param('id', new ParseIntPipe()) idPercent: number): Promise<PercentTypeGreenScoreAndPoi> {
     return await this.percentTypeGreenScoreAndPoiService.getOnePercentTypeGreenScoreAndPoi(idPercent);
   }
+
+  /*
+  @Get('percent/:id')
+  @UseGuards(RoleGuard)
+  @Roles('admin')
+  @UsePipes(new ValidationPipe({ transform: true }))
+  async getPercentOfPoi(@Param('id', new ParseIntPipe()) idPoi: number): Promise<PercentTypeGreenScoreAndPoi[]> {
+    return await this.percentTypeGreenScoreAndPoiService.findByPoi(idPoi);
+  }
+  */
+
 
   @UseGuards(RoleGuard)
   @Roles('admin')

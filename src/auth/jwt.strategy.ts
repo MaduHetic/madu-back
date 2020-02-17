@@ -30,7 +30,6 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
    * @param payload
    */
   async validate(payload) {
-    console.log('toto');
     if (!payload.userId) {
       throw new UnauthorizedException();
     }
