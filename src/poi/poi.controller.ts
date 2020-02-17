@@ -9,6 +9,7 @@ import { Tag } from '../tags/tagEntity';
 import { JoinTagPoiEntity } from '../join-tag-poi/joinTagPoiEntity';
 import { RoleGuard } from '../guard/role.guard';
 import { Roles } from '../decorator/role.decorator';
+import { Poi } from './poiEntity';
 
 /**
  * point of interest controller
@@ -49,5 +50,12 @@ export class PoiController {
       poi,
       tags: await this.joinTagPoiService.serializeTagsData(tags),
     };
+  }
+
+  @Get()
+  @UseGuards(RoleGuard)
+  @Roles('admin')
+  async getAllPoi(): Promise<JoinTagPoiEntity[]> {
+    return await this.poiService.getAllPoi();
   }
 }

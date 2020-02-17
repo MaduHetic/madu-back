@@ -5,10 +5,12 @@ import { Role } from '../role/roleEntity';
 import { TypeGreenScoreDto } from './typeGreenScoreDto';
 import { TypeGreenScore } from './typeGreenScoreEntity';
 import { Roles } from '../decorator/role.decorator';
+import { AuthGuard } from '@nestjs/passport';
 
 /**
  * Type green score controller
  */
+@UseGuards(AuthGuard('jwt'))
 @Controller('type-green-score')
 export class TypeGreenScoreController {
   /**
@@ -56,6 +58,7 @@ export class TypeGreenScoreController {
    */
   @UseGuards(RoleGuard)
   @Roles('admin')
+  @UsePipes(new ValidationPipe({ transform: true }))
   @Delete(':id')
   async deleteTypeGreenScore(@Param('id', new ParseIntPipe()) idTypeGreenScore: number) {
     return await this.typeGreenScoreService.deleteTypeGreenScore(idTypeGreenScore);

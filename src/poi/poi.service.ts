@@ -4,6 +4,8 @@ import { Poi } from './poiEntity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { TagsService } from '../tags/tags.service';
 import { JoinTagPoiService } from '../join-tag-poi/join-tag-poi.service';
+import { JoinTypePoi } from '../join-type-poi/joinTypePoi';
+import { JoinTagPoiEntity } from '../join-tag-poi/joinTagPoiEntity';
 
 @Injectable()
 export class PoiService {
@@ -33,5 +35,9 @@ export class PoiService {
       .catch(() => {
         throw new NotFoundException(`Poi with id ${idPoi} Not Found`);
       });
+  }
+
+  async getAllPoi(): Promise<JoinTagPoiEntity[]> {
+    return await this.joinTagPoiService.getAllPoiAndTag();
   }
 }
