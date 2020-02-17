@@ -1,7 +1,23 @@
 import { Module } from '@nestjs/common';
 import { PoiService } from './poi.service';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Poi } from './poiEntity';
+import { PoiController } from './poi.controller';
+import { TagsModule } from '../tags/tags.module';
+import { JoinTagPoiModule } from '../join-tag-poi/join-tag-poi.module';
+import { JoinTypePoiModule } from '../join-type-poi/join-type-poi.module';
+import { TypeModule } from '../type/type.module';
 
 @Module({
-  providers: [PoiService]
+  imports: [
+    TypeOrmModule.forFeature([Poi]),
+    TagsModule,
+    JoinTagPoiModule,
+    JoinTypePoiModule,
+    TypeModule,
+  ],
+  providers: [PoiService],
+  controllers: [PoiController],
+  exports: [PoiService],
 })
 export class PoiModule {}

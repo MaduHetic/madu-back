@@ -17,6 +17,8 @@ services:
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:4.9
+    depends_on:
+      - database
     ports:
       - 8090:80
     networks:
@@ -27,7 +29,9 @@ services:
       PMA_PASSWORD: root
 
   api:
-    image: node:latest
+    image: node:12.14-buster
+    depends_on:
+      - database
     restart: always
     working_dir: /home/app
     ports:
