@@ -1,0 +1,20 @@
+---
+
+- name: Install
+  hosts: all
+  gather_facts: no
+  become: true
+  pre_tasks:
+  - name: install python2
+    raw:  apt update && apt-get -y install python
+    tags: ["install"]
+
+
+- name: Install common libs and packages and docker
+  hosts: application
+  become: true
+  gather_facts: no
+  roles:
+  - { role: python, tags: ["python"] }
+  - { role: geerlingguy.docker, tags: ["docker"] }
+

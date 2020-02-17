@@ -28,7 +28,7 @@ resource "aws_security_group" "Madu" {
     protocol    = "tcp"
     # Please restrict your ingress to only necessary IPs and ports.
     # Opening to 0.0.0.0/0 can lead to security vulnerabilities.
-    cidr_blocks     = ["78.31.41.54/32"]
+    cidr_blocks     = ["0.0.0.0/0"]
   }
 
   egress {
