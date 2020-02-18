@@ -7,11 +7,6 @@ export class PoiTransformationPipe implements PipeTransform {
 
   async transform(value: any, metadata: ArgumentMetadata): Promise<PoiDto> {
     const newValue = value;
-    if (newValue.type) {
-      newValue.type = value.type.map((type) => {
-        return filterInt(type);
-      });
-    }
     if (newValue.tags) {
       newValue.tags = value.tags.map((idTags) => {
         return filterInt(idTags);

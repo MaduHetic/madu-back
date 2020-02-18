@@ -55,4 +55,19 @@ export class PercentTypeGreenScoreAndPoiService {
     return await this.percentTypeGreenScoreAndPoiRepository.delete(percentGc);
   }
 
+  async getGreenScorePassMark(poi: Poi) {
+    const allPercent = await this.percentTypeGreenScoreAndPoiRepository.find({
+      where: {
+        poi,
+      },
+    });
+    if (allPercent.length === 0) {
+      return 0;
+    }
+    let total: number = 0;
+    allPercent.forEach((percent) => {
+      total +=  percent.percent;
+    });
+    return total / allPercent.length;
+  }
 }

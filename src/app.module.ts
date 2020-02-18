@@ -15,11 +15,9 @@ import { TagsModule } from './tags/tags.module';
 import { Type } from './type/typeEntity';
 import { Tag } from './tags/tagEntity';
 import { Poi } from './poi/poiEntity';
-import { JoinTypePoiModule } from './join-type-poi/join-type-poi.module';
 import { JoinTagPoiModule } from './join-tag-poi/join-tag-poi.module';
 import { UserAppModule } from './user-app/user-app.module';
 import { JoinTagPoiEntity } from './join-tag-poi/joinTagPoiEntity';
-import { JoinTypePoi } from './join-type-poi/joinTypePoi';
 import { GreenScoreModule } from './green-score/green-score.module';
 import { TypeGreenScoreModule } from './type-green-score/type-green-score.module';
 import { PercentTypeGreenScoreAndPoiModule } from './percent-type-green-score-and-poi/percent-type-green-score-and-poi.module';
@@ -43,7 +41,6 @@ import { PercentTypeGreenScoreAndPoi } from './percent-type-green-score-and-poi/
         Tag,
         Poi,
         JoinTagPoiEntity,
-        JoinTypePoi,
         TypeGreenScore,
         PercentTypeGreenScoreAndPoi,
       ],
@@ -56,7 +53,6 @@ import { PercentTypeGreenScoreAndPoi } from './percent-type-green-score-and-poi/
     CompanyModule,
     TypeModule,
     TagsModule,
-    JoinTypePoiModule,
     JoinTagPoiModule,
     UserAppModule,
     GreenScoreModule,

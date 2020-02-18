@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserDto } from './userDto';
 import { RoleGuard } from '../guard/role.guard';
@@ -24,14 +24,14 @@ export class UserController {
   }
 
   /**
-   * test
+   * method to delete a user
+   * @param idUser
    */
+  @Delete(':id')
   @UseGuards(RoleGuard)
   @Roles('admin')
-  @Get('test')
-  async toto() {
-    // tslint:disable-next-line:no-console
-    console.log('toto');
-    return 'TOTOT';
+  @UsePipes(new ValidationPipe({ transform: true }))
+  async deleteUer(@Param('id', new ParseIntPipe()) idUser: number) {
+    return 'deletUser';
   }
 }

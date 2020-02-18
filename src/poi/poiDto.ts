@@ -67,6 +67,7 @@ export class PoiDto implements PoiInterface {
   @IsArray()
   readonly tags: number[];
 
+  /*
   @ApiPropertyOptional({
     type: [Number],
     description: 'Array of id Poi type',
@@ -74,6 +75,13 @@ export class PoiDto implements PoiInterface {
   @IsOptional()
   @IsArray()
   readonly type: number[];
+  */
+
+  @ApiProperty({
+    description: 'Type of poi ex (restaurant)',
+  })
+  @IsString()
+  readonly type: string;
 
   @ApiProperty({
     description: 'Price range of the point of interest',
