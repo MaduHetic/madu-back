@@ -10,7 +10,6 @@ import { JoinTagPoiEntity } from '../join-tag-poi/joinTagPoiEntity';
 import { RoleGuard } from '../guard/role.guard';
 import { Roles } from '../decorator/role.decorator';
 import { Poi } from './poiEntity';
-import { JoinTypePoiService } from '../join-type-poi/join-type-poi.service';
 // import { PercentTypeGreenScoreAndPoiService } from '../percent-type-green-score-and-poi/percent-type-green-score-and-poi.service';
 
 /**
