@@ -10,11 +10,18 @@
     tags: ["install"]
 
 
-- name: Install common libs and packages and docker
+- name: Install python and docker
   hosts: application
   become: true
   gather_facts: no
   roles:
   - { role: python, tags: ["python"] }
   - { role: geerlingguy.docker, tags: ["docker"] }
+
+- name: Docker-compose
+  hosts: application
+  become: true
+  gather_facts: no
+  roles:
+  - { role: back, tags: ["docker-compose"] }
 
