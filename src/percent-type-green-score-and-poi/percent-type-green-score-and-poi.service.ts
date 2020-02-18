@@ -12,49 +12,51 @@ export class PercentTypeGreenScoreAndPoiService {
   constructor(
     @InjectRepository(PercentTypeGreenScoreAndPoi)
     private readonly percentTypeGreenScoreAndPoiRepository: Repository<PercentTypeGreenScoreAndPoi>,
-    private readonly poiService: PoiService,
-    private readonly typeGreenScoreService: TypeGreenScoreService,
   ) {}
 
-  async addPercentTypeGreenScoreAndPoiService(
-    percentTypeGreenScoreAndPoiServiceDto: PercentTypeGreenScoreAndPoiDto) {
-    const typeGreenScoreFind = await this.typeGreenScoreService.getType(percentTypeGreenScoreAndPoiServiceDto.idTypeGreenScore);
-    const poiFind = await this.poiService.getPoi(percentTypeGreenScoreAndPoiServiceDto.idPoi);
-    const percentTypeGreenScoreAndPoi: PercentTypeGreenScoreAndPoi = {
-      percent: percentTypeGreenScoreAndPoiServiceDto.percent,
-      poi: poiFind,
-      typeGreenScore: typeGreenScoreFind,
-    };
-    return await this.percentTypeGreenScoreAndPoiRepository.save(percentTypeGreenScoreAndPoi);
+  async addPercentTypeGcAndPoi(percentTypeGcAndPoi: PercentTypeGreenScoreAndPoi) {
+    return await this.percentTypeGreenScoreAndPoiRepository.save(percentTypeGcAndPoi);
   }
-
-  async getAllPercentTypeGreenScoreAndPoi(): Promise<PercentTypeGreenScoreAndPoi[]> {
-    return await this.percentTypeGreenScoreAndPoiRepository.find({
-      relations: ['poi', 'typeGreenScore'],
-    });
-  }
-
-  async findByPoi(idPoi: number): Promise<PercentTypeGreenScoreAndPoi[]> {
-    const poi = await this.poiService.getPoi(idPoi);
-    return await this.percentTypeGreenScoreAndPoiRepository.find({
-      where: {
-        poi,
-      },
-    });
-  }
-
-  async getOnePercentTypeGreenScoreAndPoi(idPercent: number): Promise<PercentTypeGreenScoreAndPoi> {
-    return await this.percentTypeGreenScoreAndPoiRepository.findOneOrFail(idPercent)
-      .catch(() => {
-        throw new NotFoundException(`PercentTypeGreenScoreAndPoi with id ${idPercent} Not Found`);
-      });
-  }
-
-  async deletePercentTypeGreenScore(idPercentGcAndPoi: number) {
-    const percentGc = await this.getOnePercentTypeGreenScoreAndPoi(idPercentGcAndPoi);
-    return await this.percentTypeGreenScoreAndPoiRepository.delete(percentGc);
-  }
-
+  //
+  // async addPercentTypeGreenScoreAndPoiService(
+  //   percentTypeGreenScoreAndPoiServiceDto: PercentTypeGreenScoreAndPoiDto) {
+  //   const typeGreenScoreFind = await this.typeGreenScoreService.getType(percentTypeGreenScoreAndPoiServiceDto.idTypeGreenScore);
+  //   const poiFind = await this.poiService.getPoi(percentTypeGreenScoreAndPoiServiceDto.idPoi);
+  //   const percentTypeGreenScoreAndPoi: PercentTypeGreenScoreAndPoi = {
+  //     percent: percentTypeGreenScoreAndPoiServiceDto.percent,
+  //     poi: poiFind,
+  //     typeGreenScore: typeGreenScoreFind,
+  //   };
+  //   return await this.percentTypeGreenScoreAndPoiRepository.save(percentTypeGreenScoreAndPoi);
+  // }
+  //
+  // async getAllPercentTypeGreenScoreAndPoi(): Promise<PercentTypeGreenScoreAndPoi[]> {
+  //   return await this.percentTypeGreenScoreAndPoiRepository.find({
+  //     relations: ['poi', 'typeGreenScore'],
+  //   });
+  // }
+  //
+  // async findByPoi(idPoi: number): Promise<PercentTypeGreenScoreAndPoi[]> {
+  //   const poi = await this.poiService.getPoi(idPoi);
+  //   return await this.percentTypeGreenScoreAndPoiRepository.find({
+  //     where: {
+  //       poi,
+  //     },
+  //   });
+  // }
+  //
+  // async getOnePercentTypeGreenScoreAndPoi(idPercent: number): Promise<PercentTypeGreenScoreAndPoi> {
+  //   return await this.percentTypeGreenScoreAndPoiRepository.findOneOrFail(idPercent)
+  //     .catch(() => {
+  //       throw new NotFoundException(`PercentTypeGreenScoreAndPoi with id ${idPercent} Not Found`);
+  //     });
+  // }
+  //
+  // async deletePercentTypeGreenScore(idPercentGcAndPoi: number) {
+  //   const percentGc = await this.getOnePercentTypeGreenScoreAndPoi(idPercentGcAndPoi);
+  //   return await this.percentTypeGreenScoreAndPoiRepository.delete(percentGc);
+  // }
+  //
   async getGreenScorePassMark(poi: Poi) {
     const allPercent = await this.percentTypeGreenScoreAndPoiRepository.find({
       where: {

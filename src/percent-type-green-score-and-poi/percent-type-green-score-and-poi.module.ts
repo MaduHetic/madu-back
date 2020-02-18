@@ -10,8 +10,6 @@ import { TypeGreenScoreModule } from '../type-green-score/type-green-score.modul
 @Module({
   imports: [
     TypeOrmModule.forFeature([PercentTypeGreenScoreAndPoi]),
-    forwardRef(() => PoiModule),
-    TypeGreenScoreModule,
   ],
   providers: [PercentTypeGreenScoreAndPoiService],
   controllers: [PercentTypeGreenScoreAndPoiController],

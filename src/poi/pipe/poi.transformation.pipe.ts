@@ -1,4 +1,4 @@
-import { ArgumentMetadata, Injectable, PipeTransform } from '@nestjs/common';
+import { ArgumentMetadata, BadRequestException, Injectable, PipeTransform } from '@nestjs/common';
 import { filterInt } from '../../utils/function.utils';
 import { PoiDto } from '../poiDto';
 
@@ -10,6 +10,16 @@ export class PoiTransformationPipe implements PipeTransform {
     if (newValue.tags) {
       newValue.tags = value.tags.map((idTags) => {
         return filterInt(idTags);
+      });
+    }
+    if (newValue.typeGreenScore && Array.isArray(newValue.typeGreenScore)) {
+      newValue.typeGreenScore = value.typeGreenScore.map((percentAndTypeGc) => {
+         percentAndTypeGc.idType = filterInt(percentAndTypeGc.idType);
+         percentAndTypeGc.percent = filterInt(percentAndTypeGc.percent);
+         if (isNaN(percentAndTypeGc.idType) || isNaN(percentAndTypeGc.percent)) {
+           throw new BadRequestException('idGreen score or percent must be a number');
+         }
+         return percentAndTypeGc;
       });
     }
     return newValue;

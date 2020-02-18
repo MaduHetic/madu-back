@@ -6,6 +6,7 @@ import { ApiProperty, ApiPropertyOptional, getSchemaPath } from '@nestjs/swagger
 import { Type } from '../type/typeEntity';
 import { TypeDto } from '../type/typeDto';
 import { Tag } from '../tags/tagEntity';
+import { PercentAndIdTag } from './percentAndIdTag';
 
 @Injectable()
 export class PoiDto implements PoiInterface {
@@ -76,6 +77,14 @@ export class PoiDto implements PoiInterface {
   @IsArray()
   readonly type: number[];
   */
+
+  @ApiPropertyOptional({
+    type: [PercentAndIdTag],
+    description: 'Array of id type Green score',
+  })
+  @IsArray()
+  @IsOptional()
+  readonly typeGreenScore: PercentAndIdTag[];
 
   @ApiProperty({
     description: 'Type of poi ex (restaurant)',
