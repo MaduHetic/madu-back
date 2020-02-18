@@ -5,7 +5,6 @@ import { Poi } from './poiEntity';
 import { PoiController } from './poi.controller';
 import { TagsModule } from '../tags/tags.module';
 import { JoinTagPoiModule } from '../join-tag-poi/join-tag-poi.module';
-import { JoinTypePoiModule } from '../join-type-poi/join-type-poi.module';
 import { TypeModule } from '../type/type.module';
 import { PercentTypeGreenScoreAndPoiModule } from '../percent-type-green-score-and-poi/percent-type-green-score-and-poi.module';
 
@@ -14,7 +13,6 @@ import { PercentTypeGreenScoreAndPoiModule } from '../percent-type-green-score-a
     TypeOrmModule.forFeature([Poi]),
     TagsModule,
     JoinTagPoiModule,
-    JoinTypePoiModule,
     TypeModule,
     forwardRef(() => PercentTypeGreenScoreAndPoiModule),
   ],
