@@ -1,16 +1,12 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Post, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParseIntPipe, Post, Put, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { PoiService } from './poi.service';
 import { AuthGuard } from '@nestjs/passport';
 import { PoiDto } from './poiDto';
 import { PoiTransformationPipe } from './pipe/poi.transformation.pipe';
-import { getConnection } from 'typeorm';
 import { JoinTagPoiService } from '../join-tag-poi/join-tag-poi.service';
-import { Tag } from '../tags/tagEntity';
-import { JoinTagPoiEntity } from '../join-tag-poi/joinTagPoiEntity';
 import { RoleGuard } from '../guard/role.guard';
 import { Roles } from '../decorator/role.decorator';
-import { Poi } from './poiEntity';
-import { JoinTypePoiService } from '../join-type-poi/join-type-poi.service';
+// import { PercentTypeGreenScoreAndPoiService } from '../percent-type-green-score-and-poi/percent-type-green-score-and-poi.service';
 
 /**
  * point of interest controller
@@ -21,7 +17,7 @@ export class PoiController {
   constructor(
     private readonly poiService: PoiService,
     private readonly joinTagPoiService: JoinTagPoiService,
-    private readonly joinTypePoi: JoinTypePoiService,
+    // private readonly percentTypeGreenScoreAndPoiService: PercentTypeGreenScoreAndPoiService,
   ) {}
 
   /**
@@ -41,18 +37,12 @@ export class PoiController {
    *
    * @param idPoi
    */
-  @Get(':id')
+  @Get('one/:id')
   @UsePipes(new ValidationPipe({ transform: true }))
   @UseGuards(RoleGuard)
   @Roles('admin')
   async getCompanyAndTags(@Param('id', new ParseIntPipe()) idPoi: number) {
-    const poi = await this.poiService.getPoi(idPoi);
-    const tags: JoinTagPoiEntity[] =  await this.joinTagPoiService.getAllCompanyTag(poi);
-    return  {
-      poi,
-      tags: await this.joinTagPoiService.serializeTagsData(tags),
-      type: await this.joinTypePoi.getTypeOfPoi(poi),
-    };
+    return await this.poiService.getPoiAndTags(idPoi);
   }
 
   @Get()
@@ -61,4 +51,12 @@ export class PoiController {
   async getAllPoi() {
     return await this.poiService.getAllPoi();
   }
+
+  @Put(':id')
+  @UseGuards(RoleGuard)
+  @Roles('admin')
+  async updatePoi() {
+    return 'updatePoi';
+  }
+
 }

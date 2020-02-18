@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { PercentTypeGreenScoreAndPoiService } from './percent-type-green-score-and-poi.service';
 import { PercentTypeGreenScoreAndPoiController } from './percent-type-green-score-and-poi.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -10,10 +10,9 @@ import { TypeGreenScoreModule } from '../type-green-score/type-green-score.modul
 @Module({
   imports: [
     TypeOrmModule.forFeature([PercentTypeGreenScoreAndPoi]),
-    PoiModule,
-    TypeGreenScoreModule,
   ],
   providers: [PercentTypeGreenScoreAndPoiService],
   controllers: [PercentTypeGreenScoreAndPoiController],
+  exports: [PercentTypeGreenScoreAndPoiService],
 })
 export class PercentTypeGreenScoreAndPoiModule {}

@@ -1,3 +1,5 @@
+import { PercentAndIdTag } from '../percentAndIdTag';
+
 export interface PoiInterface {
   readonly name: string;
   readonly price: string;
@@ -9,4 +11,6 @@ export interface PoiInterface {
   readonly lat: string;
   readonly greenScore: string;
   readonly logo?: string;
+  readonly type: string;
+  readonly typeGreenScore: PercentAndIdTag[];
 }

@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { TypeGreenScore } from './typeGreenScoreEntity';
 import { Repository } from 'typeorm';
+import { PercentAndIdTag } from '../poi/percentAndIdTag';
 
 @Injectable()
 export class TypeGreenScoreService {
@@ -28,5 +29,9 @@ export class TypeGreenScoreService {
   async deleteTypeGreenScore(idTypeGreenScore) {
     const typeGreenScore = await this.getType(idTypeGreenScore);
     return await this.typeGreenScoreRepository.delete(typeGreenScore);
+  }
+
+  async getByIds(idTypes: number[]) {
+    return await this.typeGreenScoreRepository.findByIds(idTypes);
   }
 }

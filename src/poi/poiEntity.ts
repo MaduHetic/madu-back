@@ -36,6 +36,13 @@ export class Poi {
   postalCode: string;
 
   @Column({
+    length: 50,
+    nullable: true,
+    default: null,
+  })
+  type: string;
+
+  @Column({
     length: 100,
     nullable: true,
     default: null,
