@@ -5,7 +5,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { TagsService } from '../tags/tags.service';
 import { JoinTagPoiService } from '../join-tag-poi/join-tag-poi.service';
 import { TypeService } from '../type/type.service';
-import { JoinTypePoiService } from '../join-type-poi/join-type-poi.service';
 
 @Injectable()
 export class PoiService {
@@ -15,7 +14,6 @@ export class PoiService {
     private connection: Connection,
     private tagsService: TagsService,
     private typeService: TypeService,
-    private joinTypePoiService: JoinTypePoiService,
     private joinTagPoiService: JoinTagPoiService,
     // private percentTypeGreenScoreAndPoiService: PercentTypeGreenScoreAndPoiService,
   ) {}
