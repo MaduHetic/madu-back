@@ -64,3 +64,4 @@ website/node_modules
 # Test exclusions
 !command/testdata/**/*.tfstate
 !command/testdata/**/.terraform/
+/infra/ansible/inventory/group_vars/application.yml
