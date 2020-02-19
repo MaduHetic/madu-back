@@ -91,6 +91,18 @@ export class CompanyDto implements CompanyInterface {
   @IsString()
   readonly endDeal: string;
 
+  @ApiProperty({
+    description: 'longitude of company',
+  })
+  @IsString()
+  readonly long: string;
+
+  @ApiProperty({
+    description: 'latitude of company',
+  })
+  @IsString()
+  readonly lat: string;
+
   /**
    * number of worker who work in this company. This data is here to know how many users to expect
    */

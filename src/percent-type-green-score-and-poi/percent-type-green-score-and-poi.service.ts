@@ -57,7 +57,7 @@ export class PercentTypeGreenScoreAndPoiService {
   //   return await this.percentTypeGreenScoreAndPoiRepository.delete(percentGc);
   // }
   //
-  async getGreenScorePassMark(poi: Poi) {
+  async getGreenScorePassMark(poi: Poi): Promise<number> {
     const allPercent = await this.percentTypeGreenScoreAndPoiRepository.find({
       where: {
         poi,
