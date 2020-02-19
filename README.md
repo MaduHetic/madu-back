@@ -15,3 +15,7 @@
 ## Documentation
 * [Compodoc](http://localhost:8080)
 * [Swagger](http://35.180.228.155:3000/api/)
+
+## UML Base de donnée
+![alt text](./asset/madu.png)
+
