@@ -6,6 +6,11 @@ export class PoiAndTags {
   poi: Poi;
   tags: JoinTagPoiEntity[];
 
+  /**
+   *
+   * @param poi {Poi}
+   * @param tags {JoinTagPoiEntity[]}
+   */
   constructor(poi: Poi, tags: JoinTagPoiEntity[]) {
     this.poi = poi;
     this.tags = tags;

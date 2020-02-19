@@ -4,6 +4,11 @@ import { filterInt } from '../../utils/function.utils';
 
 @Injectable()
 export class PercentTypeGreenScoreAndPoiTransformationPipe implements PipeTransform<any, Promise<PercentTypeGreenScoreAndPoiDto>> {
+  /**
+   *
+   * @param value
+   * @param metadata
+   */
   transform(value: any, metadata: ArgumentMetadata): Promise<PercentTypeGreenScoreAndPoiDto> {
     const newValue = value;
     newValue.idPoi = filterInt(value.idPoi);

@@ -45,6 +45,9 @@ export class PoiController {
     return await this.poiService.getPoiAndTags(idPoi);
   }
 
+  /**
+   * Return all poi in database
+   */
   @Get()
   @UseGuards(RoleGuard)
   @Roles('admin')
@@ -52,10 +55,15 @@ export class PoiController {
     return await this.poiService.getAllPoi();
   }
 
+  /**
+   *
+   * @param idPoi
+   */
   @Put(':id')
   @UseGuards(RoleGuard)
+  @UsePipes(new ValidationPipe({ transform: true }))
   @Roles('admin')
-  async updatePoi() {
+  async updatePoi(@Param('id', new ParseIntPipe()) idPoi: number) {
     return 'updatePoi';
   }
 

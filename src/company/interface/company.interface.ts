@@ -1,3 +1,4 @@
+
 export interface CompanyInterface {
   readonly address: string;
   readonly name: string;
