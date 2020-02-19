@@ -30,7 +30,7 @@ export class PoiDto implements PoiInterface {
   readonly description: string;
 
   @ApiPropertyOptional()
-  @IsNumberString()
+  @IsNumber()
   @IsOptional()
   readonly greenScore: string;
 

@@ -6,14 +6,26 @@ import { PoiService } from '../poi/poi.service';
 import { TypeGreenScoreService } from '../type-green-score/type-green-score.service';
 import { PercentTypeGreenScoreAndPoiDto } from './PercentTypeGreenScoreAndPoiDto';
 import { Poi } from '../poi/poiEntity';
+import { TypeGreenScore } from '../type-green-score/typeGreenScoreEntity';
 
+/**
+ *
+ */
 @Injectable()
 export class PercentTypeGreenScoreAndPoiService {
+  /**
+   *
+   * @param percentTypeGreenScoreAndPoiRepository
+   */
   constructor(
     @InjectRepository(PercentTypeGreenScoreAndPoi)
     private readonly percentTypeGreenScoreAndPoiRepository: Repository<PercentTypeGreenScoreAndPoi>,
   ) {}
 
+  /**
+   *
+   * @param percentTypeGcAndPoi
+   */
   async addPercentTypeGcAndPoi(percentTypeGcAndPoi: PercentTypeGreenScoreAndPoi) {
     return await this.percentTypeGreenScoreAndPoiRepository.save(percentTypeGcAndPoi);
   }
@@ -57,7 +69,12 @@ export class PercentTypeGreenScoreAndPoiService {
   //   return await this.percentTypeGreenScoreAndPoiRepository.delete(percentGc);
   // }
   //
-  async getGreenScorePassMark(poi: Poi) {
+
+  /**
+   *
+   * @param poi
+   */
+  async getGreenScorePassMark(poi: Poi): Promise<number> {
     const allPercent = await this.percentTypeGreenScoreAndPoiRepository.find({
       where: {
         poi,
@@ -71,5 +88,19 @@ export class PercentTypeGreenScoreAndPoiService {
       total +=  percent.percent;
     });
     return total / allPercent.length;
+  }
+
+  /**
+   *
+   * @param poi
+   * @param typeGreenScore
+   */
+  async getByIdTypGcAndPoi(poi: Poi, typeGreenScore: TypeGreenScore) {
+    return await this.percentTypeGreenScoreAndPoiRepository.find({
+      where: {
+        poi,
+        typeGreenScore,
+      },
+    });
   }
 }

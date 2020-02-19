@@ -37,12 +37,14 @@ export class PoiService {
   // Todo refacto
   async addPoi(poiDto) {
     const tags = await this.tagsService.getTags(poiDto.tags);
-    const typeToCheck = await this.typeGreenScoreService.getByIds(
-      poiDto.typeGreenScore.map((type) => {
-        return type.idType;
-    }));
-    if (typeToCheck.length < poiDto.typeGreenScore.length) {
-      throw new NotFoundException('type green score not found');
+    if (poiDto.typeGreenScore) {
+      const typeToCheck = await this.typeGreenScoreService.getByIds(
+        poiDto.typeGreenScore.map((type) => {
+          return type.idType;
+        }));
+      if (typeToCheck.length < poiDto.typeGreenScore.length) {
+        throw new NotFoundException('type green score not found');
+      }
     }
     if (tags.length < poiDto.tags.length) {
       throw new NotFoundException('tag(s) not found(s)');
@@ -51,12 +53,14 @@ export class PoiService {
     const tagAddedPromise = tags.map(async (tag) => {
       return await this.joinTagPoiService.addJoinTagPoi(poiAdded, tag);
     });
-    const percentTypeGreenScoreAndPoiToAdd = await this.formatToPercentTGCAndPoi(poiAdded, poiDto.typeGreenScore);
-    const percentTypeGcAndPoiAddedPromise = percentTypeGreenScoreAndPoiToAdd.map(async (percentGcAndDto) => {
-      return await this.percentTypeGreenScoreAndPoiService.addPercentTypeGcAndPoi(percentGcAndDto);
-    });
+    if (poiDto.typeGreenScore) {
+      const percentTypeGreenScoreAndPoiToAdd = await this.formatToPercentTGCAndPoi(poiAdded, poiDto.typeGreenScore);
+      const percentTypeGcAndPoiAddedPromise = percentTypeGreenScoreAndPoiToAdd.map(async (percentGcAndDto) => {
+        return await this.percentTypeGreenScoreAndPoiService.addPercentTypeGcAndPoi(percentGcAndDto);
+      });
+      await Promise.all(percentTypeGcAndPoiAddedPromise);
+    }
     await Promise.all(tagAddedPromise);
-    await Promise.all(percentTypeGcAndPoiAddedPromise);
     return poiAdded;
   }
 
