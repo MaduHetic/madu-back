@@ -110,6 +110,6 @@ export class CompanyDto implements CompanyInterface {
     description: 'number of worker who work in this company. This data is here to know how many users to expect',
   })
   @IsOptional()
-  @IsNumberString()
+  @IsNumber()
   readonly nbWorker: number;
 }
