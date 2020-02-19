@@ -7,7 +7,7 @@ export class EntityTypeInterceptor implements NestInterceptor {
   intercept(context: ExecutionContext, next: CallHandler<any>): Observable<any> | Promise<Observable<any>> {
     return next.handle().pipe(map(data => {
       data = data.map((d) => {
-        d.isPoi = typeof d.domainMail === 'undefined';
+        d.isPoi = typeof d.domainMail === 'undefined' ? 1 : 0;
         return d;
       });
       return data;
