@@ -8,6 +8,7 @@ import { Repository } from 'typeorm';
  */
 @Injectable()
 export class RoleService {
+
   /**
    *
    * @param roleRoleRepository {Repository<Role>}
@@ -31,6 +32,7 @@ export class RoleService {
   }
 
   /**
+   *
    * @param idRole {number}
    */
   async getInfRole(idRole: number): Promise<Role[]> {
@@ -41,6 +43,10 @@ export class RoleService {
       .getRawMany();
   }
 
+  /**
+   *
+   * @param roles
+   */
   async getOnlyRole(roles): Promise<string[]> {
     return roles.map((role) => {
       return role.role;

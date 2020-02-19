@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PoiInterface } from './interfaces/poi.interface';
-import { IsArray, IsEnum, IsNumber, IsNumberString, IsOptional, IsString } from 'class-validator';
+import { IsArray, IsEnum, IsNumber, IsNumberString, IsOptional, IsString, ValidateNested } from 'class-validator';
 import { PriceEnum } from './enum/price.enum';
 import { ApiProperty, ApiPropertyOptional, getSchemaPath } from '@nestjs/swagger';
 import { PercentAndIdTag } from './percentAndIdTag';
@@ -95,7 +95,8 @@ export class PoiDto implements PoiInterface {
     type: [PercentAndIdTag],
     description: 'Array of id type Green score',
   })
-  @IsArray()
+  // @IsArray()
+  @ValidateNested()
   @IsOptional()
   readonly typeGreenScore: PercentAndIdTag[];
 
