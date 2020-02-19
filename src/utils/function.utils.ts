@@ -9,3 +9,7 @@ export const filterInt = (value) => {
   }
   return NaN;
 };
+
+export const generateRandExaDecimalColor = () =>  {
+  return Math.floor(Math.random() * 16777215 ).toString(16);
+};
