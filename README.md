@@ -5,8 +5,8 @@
     API REST du back office de madu
     
 ## Equipe
-* [Clément Haller](https://github.com/Telmalk)
-* [Guillaume Cornet](https://github.com/vinicel)
+* [Clément Haller](https://github.com/Telmalk) (dev back api)
+* [Guillaume Cornet](https://github.com/vinicel) (infra/server)
 
 ## Techno
 * NestJS
