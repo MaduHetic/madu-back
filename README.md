@@ -11,6 +11,7 @@
 ## Techno
 * NestJS
 * MySQL
+* TypeOrm
 
 ## Documentation
 * [Compodoc](http://localhost:8080)
