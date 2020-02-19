@@ -1,10 +1,11 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, UseGuards, UseInterceptors, UsePipes, ValidationPipe } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { CompanyDto } from './companyDto';
 import { CompanyService } from './company.service';
 import { Company } from './companyEntity';
 import { RoleGuard } from '../guard/role.guard';
 import { Roles } from '../decorator/role.decorator';
+import { EntityTypeInterceptor } from '../interceptor/entity-type.interceptor';
 
 /**
  * Controller to manage the companys data
@@ -45,6 +46,7 @@ export class CompanyController {
    * @returns {Company[]}
    */
   @Get()
+  @UseInterceptors(EntityTypeInterceptor)
   @UseGuards(RoleGuard)
   @Roles('admin')
   async getAllCompany(): Promise<Company[]> {

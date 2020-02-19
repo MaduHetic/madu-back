@@ -12,4 +12,9 @@ export class Tag {
     length: 25,
   })
   tag: string;
+
+  @Column({
+    default: '5EA565',
+  })
+  colorTag: string;
 }

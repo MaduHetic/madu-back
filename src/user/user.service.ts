@@ -8,17 +8,30 @@ import { Role } from '../role/roleEntity';
 
 @Injectable()
 export class UserService {
+  /**
+   *
+   * @param userRepository
+   * @param roleService
+   */
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
     private readonly roleService: RoleService,
   ) {}
 
+  /**
+   *
+   * @param password
+   */
   async hashPassword(password: string): Promise<string> {
     const saltRounds = 10;
     return await bcrypt.hash(password, saltRounds);
   }
 
+  /**
+   *
+   * @param userDto
+   */
   async addUser(userDto) {
     const user = userDto;
     user.password = await this.hashPassword(user.password);
@@ -26,6 +39,10 @@ export class UserService {
     return this.userRepository.save(user);
   }
 
+  /**
+   *
+   * @param eMail
+   */
   async getUserByMail(eMail: string) {
     return this.userRepository.findOneOrFail({
       where: {
@@ -36,6 +53,10 @@ export class UserService {
     });
   }
 
+  /**
+   *
+   * @param userId
+   */
   async getUser(userId: number) {
     return await this.userRepository.findOneOrFail(userId, {
       relations: ['role'],

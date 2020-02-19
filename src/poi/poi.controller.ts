@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Post, Put, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParseIntPipe, Post, Put, UseGuards, UseInterceptors, UsePipes, ValidationPipe } from '@nestjs/common';
 import { PoiService } from './poi.service';
 import { AuthGuard } from '@nestjs/passport';
 import { PoiDto } from './poiDto';
@@ -6,6 +6,7 @@ import { PoiTransformationPipe } from './pipe/poi.transformation.pipe';
 import { JoinTagPoiService } from '../join-tag-poi/join-tag-poi.service';
 import { RoleGuard } from '../guard/role.guard';
 import { Roles } from '../decorator/role.decorator';
+import { EntityTypeInterceptor } from '../interceptor/entity-type.interceptor';
 // import { PercentTypeGreenScoreAndPoiService } from '../percent-type-green-score-and-poi/percent-type-green-score-and-poi.service';
 
 /**
@@ -45,17 +46,26 @@ export class PoiController {
     return await this.poiService.getPoiAndTags(idPoi);
   }
 
+  /**
+   * Return all poi in database
+   */
   @Get()
+  @UseInterceptors(EntityTypeInterceptor)
   @UseGuards(RoleGuard)
   @Roles('admin')
   async getAllPoi() {
     return await this.poiService.getAllPoi();
   }
 
+  /**
+   *
+   * @param idPoi
+   */
   @Put(':id')
   @UseGuards(RoleGuard)
+  @UsePipes(new ValidationPipe({ transform: true }))
   @Roles('admin')
-  async updatePoi() {
+  async updatePoi(@Param('id', new ParseIntPipe()) idPoi: number) {
     return 'updatePoi';
   }
 

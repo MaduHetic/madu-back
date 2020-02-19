@@ -18,5 +18,5 @@
 * [Swagger](http://35.180.228.155:3000/api/)
 
 ## UML Base de donnée
-![alt text](./asset/madu.png)
+![Schema Base de donnée](./asset/madu.png)
 

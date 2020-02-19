@@ -5,6 +5,8 @@ import { TypeDto } from './typeDto';
 import { Type } from './typeEntity';
 import { RoleGuard } from '../guard/role.guard';
 import { Roles } from '../decorator/role.decorator';
+import { TypeEnum } from '../company/enum/type.enum';
+import { type } from 'os';
 
 /**
  * type controller
@@ -48,8 +50,15 @@ export class TypeController {
   @UseGuards(RoleGuard)
   @Roles('admin')
   @Get()
-  async getTypes(): Promise<Type[]> {
-    return await this.typeService.getAllType();
+  async getTypes() {
+    const types = TypeEnum;
+    const stringType: string[] = [];
+    for (const n in types) {
+      if (typeof types[n] === 'string') {
+        stringType.push(types[n]);
+      }
+    }
+    return stringType;
   }
 
   /**

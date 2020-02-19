@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Tag } from './tagEntity';
 import { Repository } from 'typeorm';
+import { generateRandExaDecimalColor } from '../utils/function.utils';
 
 @Injectable()
 export class TagsService {
@@ -11,6 +12,7 @@ export class TagsService {
   ) {}
 
   async addTag(tagDto) {
+    tagDto.colorTag = generateRandExaDecimalColor();
     return await this.tagRepository.save(tagDto);
   }
 

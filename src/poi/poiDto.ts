@@ -1,27 +1,37 @@
 import { Injectable } from '@nestjs/common';
 import { PoiInterface } from './interfaces/poi.interface';
-import { IsArray, IsEnum, IsNumber, IsNumberString, IsOptional, IsString } from 'class-validator';
+import { IsArray, IsEnum, IsNumber, IsNumberString, IsOptional, IsString, ValidateNested } from 'class-validator';
 import { PriceEnum } from './enum/price.enum';
 import { ApiProperty, ApiPropertyOptional, getSchemaPath } from '@nestjs/swagger';
-import { Type } from '../type/typeEntity';
-import { TypeDto } from '../type/typeDto';
-import { Tag } from '../tags/tagEntity';
 import { PercentAndIdTag } from './percentAndIdTag';
 
+/**
+ * Data attempt to add new poi
+ */
 @Injectable()
 export class PoiDto implements PoiInterface {
+
+  /**
+   * Address of Poi
+   */
   @ApiProperty({
     description: 'Address Of Poi',
   })
   @IsString()
   readonly address: string;
 
+  /**
+   * City of poi
+   */
   @ApiProperty({
     description: 'City of the Poi',
   })
   @IsString()
   readonly city: string;
 
+  /**
+   * Description of poi
+   */
   @ApiPropertyOptional({
     description: 'short description of the Poi',
   })
@@ -34,6 +44,9 @@ export class PoiDto implements PoiInterface {
   @IsOptional()
   readonly greenScore: string;
 
+  /**
+   * Latitude of poi
+   */
   @ApiPropertyOptional({
     description: 'Latitude of the Poi',
   })
@@ -82,7 +95,8 @@ export class PoiDto implements PoiInterface {
     type: [PercentAndIdTag],
     description: 'Array of id type Green score',
   })
-  @IsArray()
+  // @IsArray()
+  @ValidateNested()
   @IsOptional()
   readonly typeGreenScore: PercentAndIdTag[];
 
