@@ -3,6 +3,8 @@
  * @param value {number}
  * @returns Number || Nan
  */
+import hexToRgba = require('hex-to-rgba');
+
 export const filterInt = (value) => {
   if (/^(-|\+)?(\d+|Infinity)$/.test(value)) {
     return Number(value);
@@ -11,5 +13,5 @@ export const filterInt = (value) => {
 };
 
 export const generateRandExaDecimalColor = () =>  {
-  return Math.floor(Math.random() * 16777215 ).toString(16);
+  return '#' + Math.floor(Math.random() * 16777215 ).toString(16);
 };
