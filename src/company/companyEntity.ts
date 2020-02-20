@@ -23,6 +23,7 @@ export class Company {
    * name of company entity stock in db
    */
   @Column({
+    unique: true,
     length: 50,
   })
   name: string;
