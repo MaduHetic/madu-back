@@ -8,6 +8,7 @@ export class User {
 
   @Column({
     length: 255,
+    unique: true,
   })
   mail: string;
 
@@ -20,6 +21,11 @@ export class User {
     length: 50,
   })
   lastName: string;
+
+  @Column({
+    length: 200,
+  })
+  password: string;
 
   @ManyToOne(type => Role, (role) => role.id, {
     onDelete: 'CASCADE',
