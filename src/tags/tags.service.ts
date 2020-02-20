@@ -21,7 +21,11 @@ export class TagsService {
   }
 
   async getAllTag(): Promise<Tag[]> {
-    return await this.tagRepository.find();
+    const tags =  await this.tagRepository.find();
+    tags.forEach((tag) => {
+      exaToRgbaObject(tag.colorTag, tag);
+    });
+    return tags;
   }
 
   async getOneTag(idTag: number): Promise<Tag> {
@@ -32,11 +36,7 @@ export class TagsService {
   }
 
   async getTags(idsTags: number[]) {
-    const tags = await this.tagRepository.findByIds(idsTags);
-    tags.forEach((tag) => {
-      exaToRgbaObject(tag.colorTag, tag);
-    });
-    return tags;
+    return await this.tagRepository.findByIds(idsTags);
   }
 
   async getTagsName() {
