@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Tag } from './tagEntity';
 import { Repository } from 'typeorm';
-import { generateRandExaDecimalColor } from '../utils/function.utils';
+import { exaToRgbaObject, generateRandExaDecimalColor } from '../utils/function.utils';
 
 @Injectable()
 export class TagsService {
@@ -32,7 +32,11 @@ export class TagsService {
   }
 
   async getTags(idsTags: number[]) {
-    return await this.tagRepository.findByIds(idsTags);
+    const tags = await this.tagRepository.findByIds(idsTags);
+    tags.forEach((tag) => {
+      exaToRgbaObject(tag.colorTag, tag);
+    });
+    return tags;
   }
 
   async getTagsName() {
