@@ -33,7 +33,7 @@ async function bootstrap() {
     .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, options);
-  SwaggerModule.setup('api', app, document);
+  SwaggerModule.setup('documentation', app, document);
   app.use(compression());
   await app.listen(3000);
 }

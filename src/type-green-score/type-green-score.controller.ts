@@ -6,7 +6,7 @@ import { TypeGreenScoreDto } from './typeGreenScoreDto';
 import { TypeGreenScore } from './typeGreenScoreEntity';
 import { Roles } from '../decorator/role.decorator';
 import { AuthGuard } from '@nestjs/passport';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 /**
  * Type green score controller
@@ -15,6 +15,7 @@ import { ApiTags } from '@nestjs/swagger';
 @Controller('type-green-score')
 
 @ApiTags('type-green-score')
+@ApiBearerAuth()
 @Controller('type-green-score-controller')
 export class TypeGreenScoreController {
   /**
