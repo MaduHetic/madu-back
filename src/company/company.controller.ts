@@ -6,7 +6,7 @@ import { Company } from './companyEntity';
 import { RoleGuard } from '../guard/role.guard';
 import { Roles } from '../decorator/role.decorator';
 import { EntityTypeInterceptor } from '../interceptor/entity-type.interceptor';
-import { ApiCreatedResponse, ApiUnauthorizedResponse, ApiNotFoundResponse, ApiOkResponse, ApiUnauthorizedResponse } from '@nestjs/swagger';
+import { ApiCreatedResponse, ApiNotFoundResponse, ApiOkResponse, ApiUnauthorizedResponse } from '@nestjs/swagger';
 
 /**
  * Controller to manage the companys data
