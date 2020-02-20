@@ -51,14 +51,7 @@ export class TypeController {
   @Roles('admin')
   @Get()
   async getTypes() {
-    const types = TypeEnum;
-    const stringType: string[] = [];
-    for (const n in types) {
-      if (typeof types[n] === 'string') {
-        stringType.push(types[n]);
-      }
-    }
-    return stringType;
+    return await this.typeService.getType();
   }
 
   /**

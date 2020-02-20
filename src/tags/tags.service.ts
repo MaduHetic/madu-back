@@ -32,6 +32,13 @@ export class TagsService {
   }
 
   async getTags(idsTags: number[]) {
-    return await this.tagRepository.findByIds(idsTags)
+    return await this.tagRepository.findByIds(idsTags);
+  }
+
+  async getTagsName() {
+    const tags = await this.getAllTag();
+    return tags.map((tag) => {
+      return tag.tag;
+    });
   }
 }

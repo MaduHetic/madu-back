@@ -23,6 +23,7 @@ import { TypeGreenScoreModule } from './type-green-score/type-green-score.module
 import { PercentTypeGreenScoreAndPoiModule } from './percent-type-green-score-and-poi/percent-type-green-score-and-poi.module';
 import { TypeGreenScore } from './type-green-score/typeGreenScoreEntity';
 import { PercentTypeGreenScoreAndPoi } from './percent-type-green-score-and-poi/percentTypeGreenScoreAndPoiEntity';
+import { StatsModule } from './stats/stats.module';
 
 @Module({
   imports: [
@@ -58,6 +59,7 @@ import { PercentTypeGreenScoreAndPoi } from './percent-type-green-score-and-poi/
     GreenScoreModule,
     TypeGreenScoreModule,
     PercentTypeGreenScoreAndPoiModule,
+    StatsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

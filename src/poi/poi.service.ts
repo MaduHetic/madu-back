@@ -92,4 +92,8 @@ export class PoiService {
     });
     return  await Promise.all(allPoiWithTagsAndTypesPromise);
   }
+
+  async countPoi() {
+    return await this.poiRepository.count();
+  }
 }
