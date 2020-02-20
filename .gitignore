@@ -65,5 +65,3 @@ website/node_modules
 !command/testdata/**/.terraform/
 /infra/ansible/inventory/group_vars/application.yml
 
-documentation
-
