@@ -1,0 +1,16 @@
+application_client_image: "guillaudev/madu_back"
+application_client_tag: "2.0"
+
+application_server_image: "guillaudev/madu_front"
+application_server_tag: "2.0"
+
+application_db_host: database
+application_db_root_password: admin
+application_db_name: madu
+application_db_user: user
+application_db_password: root
+
+application_db_token: :g9{72mHiX38dK[C-M@(d7aDp2
+
+docker_username: 
+docker_password:

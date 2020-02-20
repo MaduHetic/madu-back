@@ -1,0 +1,51 @@
+version: "3.1"
+
+services:
+  database:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: {{ application_db_root_password }}
+      MYSQL_DATABASE: {{ application_db_name }}
+      MYSQL_USER: {{ application_db_user }}
+      MYSQL_PASSWORD: {{ application_db_password }}
+    ports:
+      - 3306:3306
+    volumes:
+      - ./data:/var/lib/mysql
+    networks:
+      - database
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:4.9
+    depends_on:
+      - database
+    ports:
+      - 8090:80
+    networks:
+      - database
+    environment:
+      PMA_HOST: {{ application_db_host }}
+      PMA_USER: {{ application_db_user }}
+      PMA_PASSWORD: {{ application_db_password }}
+
+  api:
+    image: guillaudev/madu_back:2.0
+    restart: always
+    ports:
+      - 3000:3000
+    environment:
+      DB_HOST: {{ application_db_host }}
+      DB_USER: {{ application_db_user }}
+      DB_PASSWORD: {{ application_db_password }}
+      DB_NAME: {{ application_db_name }}
+      JWT_TOKEN: {{ application_db_token }}
+    networks:
+      - database
+
+  front:
+    image: guillaudev/madu_front:2.0
+    ports:
+      - 80:80
+
+networks:
+  database:
