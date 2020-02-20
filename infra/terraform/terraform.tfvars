@@ -1,5 +1,5 @@
 region = "eu-west-2"
 key_name = "admin_madu"
-ami = "ami-087855b6c8b59a9e4"
+ami = "ami-006a0174c6c25ac06"
 instance_type = "t2.micro"
 admin_madu = "admin_madu"

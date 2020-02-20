@@ -10,6 +10,11 @@
     src: ../templates/docker-compose.yml
     dest: madu/docker-compose.yml
 
+- name: Docker login
+  docker_login:
+    username: "{{ docker_username }}"
+    password: "{{ docker_password }}"
+
 - name: Run docker-compose
   docker_compose:
     project_src: madu/
