@@ -30,6 +30,7 @@ async function bootstrap() {
     .setDescription('The madu API description')
     .setVersion('1.0')
     .addTag('madu')
+    .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api', app, document);

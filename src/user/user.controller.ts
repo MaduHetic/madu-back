@@ -3,10 +3,13 @@ import { UserService } from './user.service';
 import { UserDto } from './userDto';
 import { RoleGuard } from '../guard/role.guard';
 import { Roles } from '../decorator/role.decorator';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 /**
  * User controller
  */
+@ApiBearerAuth()
+@ApiTags('user')
 @Controller('user')
 export class UserController {
   constructor(readonly userService: UserService) {}

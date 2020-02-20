@@ -8,12 +8,14 @@ import { RoleGuard } from '../guard/role.guard';
 import { Roles } from '../decorator/role.decorator';
 import { EntityTypeInterceptor } from '../interceptor/entity-type.interceptor';
 import { Poi } from './poiEntity';
-import { ApiCreatedResponse, ApiForbiddenResponse, ApiGoneResponse, ApiOkResponse } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiCreatedResponse, ApiForbiddenResponse, ApiGoneResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 // import { PercentTypeGreenScoreAndPoiService } from '../percent-type-green-score-and-poi/percent-type-green-score-and-poi.service';
 
 /**
  * point of interest controller
  */
+@ApiTags('poi')
+@ApiBearerAuth()
 @Controller('poi')
 @UseGuards(AuthGuard('jwt'))
 export class PoiController {
