@@ -9,7 +9,7 @@ export class JoinTagPoiEntity {
 
   @ManyToOne(type => Tag, (tag) => tag.id, {
     onUpdate: 'CASCADE',
-    onDelete: 'SET NULL',
+    onDelete: 'CASCADE',
     nullable: true,
   })
   @JoinColumn({
