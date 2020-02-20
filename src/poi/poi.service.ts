@@ -102,10 +102,18 @@ export class PoiService {
     return await this.poiRepository.count();
   }
 
-  async orderByName() {
+  async orderByName(): Promise<Poi[]> {
     return await this.poiRepository.find({
       order: {
         name: 'ASC',
+      },
+    });
+  }
+
+  async orderByDate(): Promise<Poi[]> {
+    return await this.poiRepository.find({
+      order: {
+        dateCreate: 'ASC',
       },
     });
   }

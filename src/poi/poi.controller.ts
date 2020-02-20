@@ -7,6 +7,7 @@ import { JoinTagPoiService } from '../join-tag-poi/join-tag-poi.service';
 import { RoleGuard } from '../guard/role.guard';
 import { Roles } from '../decorator/role.decorator';
 import { EntityTypeInterceptor } from '../interceptor/entity-type.interceptor';
+import { Poi } from './poiEntity';
 // import { PercentTypeGreenScoreAndPoiService } from '../percent-type-green-score-and-poi/percent-type-green-score-and-poi.service';
 
 /**
@@ -69,8 +70,13 @@ export class PoiController {
     return 'updatePoi';
   }
 
-  @Get('order/name')
-  async getPoiOrderByName() {
+  @Get('oder/name')
+  async getPoiByName(): Promise<Poi[]> {
     return await this.poiService.orderByName();
+  }
+
+  @Get('order/date')
+  async getPoiOrderByDate(): Promise<Poi[]> {
+    return await this.poiService.orderByDate();
   }
 }
