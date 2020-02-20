@@ -4,6 +4,7 @@ import { IsArray, IsEnum, IsNumber, IsNumberString, IsOptional, IsString, Valida
 import { PriceEnum } from './enum/price.enum';
 import { ApiProperty, ApiPropertyOptional, getSchemaPath } from '@nestjs/swagger';
 import { PercentAndIdTag } from './percentAndIdTag';
+import { TypePoiEnum } from './enum/typePoiEnum';
 
 /**
  * Data attempt to add new poi
@@ -103,7 +104,7 @@ export class PoiDto implements PoiInterface {
   @ApiProperty({
     description: 'Type of poi ex (restaurant)',
   })
-  @IsString()
+  @IsEnum(TypePoiEnum)
   readonly type: string;
 
   @ApiProperty({

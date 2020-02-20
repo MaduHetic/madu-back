@@ -7,11 +7,20 @@ import { JoinTagPoiEntity } from './joinTagPoiEntity';
 
 @Injectable()
 export class JoinTagPoiService {
+  /**
+   *
+   * @param joinTagPoiRepository
+   */
   constructor(
     @InjectRepository(JoinTagPoiEntity)
     private readonly joinTagPoiRepository: Repository<JoinTagPoiEntity>,
   ) {}
 
+  /**
+   *
+   * @param poiToAdd
+   * @param tagToAdd
+   */
   async addJoinTagPoi(poiToAdd: Poi, tagToAdd: Tag) {
     const joinTagPoi = {
       poi: poiToAdd,
@@ -20,18 +29,29 @@ export class JoinTagPoiService {
     return await this.joinTagPoiRepository.save(joinTagPoi);
   }
 
+  /**
+   *
+   */
   async getAllPoiAndTag(): Promise<JoinTagPoiEntity[]> {
     return await this.joinTagPoiRepository.find({
       relations: ['poi', 'tag'],
     });
   }
 
+  /**
+   *
+   * @param tags
+   */
   async serializeTagsData(tags: JoinTagPoiEntity[]) {
     return tags.map((tag) => {
       return tag.tag;
     });
   }
 
+  /**
+   *
+   * @param poiToFind
+   */
   async getTagsCompany(poiToFind: Poi) {
     return await this.joinTagPoiRepository.createQueryBuilder('g')
       .select()
@@ -40,6 +60,10 @@ export class JoinTagPoiService {
       .getRawMany();
   }
 
+  /**
+   *
+   * @param poiToFind
+   */
   async getAllCompanyTag(poiToFind: Poi): Promise<JoinTagPoiEntity[]> {
     return await this.joinTagPoiRepository.find({
       where: {
@@ -48,4 +72,17 @@ export class JoinTagPoiService {
       relations: ['tag'],
     });
   }
+
+  /**
+   *
+   * @param tagId
+   */
+  async countTags(tag: Tag): Promise<number> {
+    return await this.joinTagPoiRepository.count({
+      where: {
+        tag,
+      },
+    });
+  }
+
 }

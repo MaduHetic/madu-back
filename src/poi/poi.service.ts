@@ -9,9 +9,21 @@ import { PercentTypeGreenScoreAndPoiService } from '../percent-type-green-score-
 import { TypeGreenScoreService } from '../type-green-score/type-green-score.service';
 import { PercentAndIdTag } from './percentAndIdTag';
 import { PercentTypeGreenScoreAndPoi } from '../percent-type-green-score-and-poi/percentTypeGreenScoreAndPoiEntity';
+import { exaToRgbaObject, getEnumKey } from '../utils/function.utils';
+import { TypePoiEnum } from './enum/typePoiEnum';
 
 @Injectable()
 export class PoiService {
+  /**
+   *
+   * @param poiRepository
+   * @param connection
+   * @param tagsService
+   * @param typeService
+   * @param typeGreenScoreService
+   * @param joinTagPoiService
+   * @param percentTypeGreenScoreAndPoiService
+   */
   constructor(
     @InjectRepository(Poi)
     private readonly poiRepository: Repository<Poi>,
@@ -75,9 +87,13 @@ export class PoiService {
     const poi = await this.getPoi(idPoi);
     const tags = await this.joinTagPoiService.getAllCompanyTag(poi);
     poi.greenScore = await this.percentTypeGreenScoreAndPoiService.getGreenScorePassMark(poi);
+    const serializeTags = await this.joinTagPoiService.serializeTagsData(tags);
+    serializeTags.forEach((tag) => {
+      exaToRgbaObject(tag.colorTag, tag);
+    });
     return {
       poi,
-      tags: await this.joinTagPoiService.serializeTagsData(tags),
+      tags:  serializeTags, // serializeTagsWithRgb,
     };
   }
 
@@ -91,5 +107,37 @@ export class PoiService {
       return poiWithType;
     });
     return  await Promise.all(allPoiWithTagsAndTypesPromise);
+  }
+
+  async countPoi() {
+    return await this.poiRepository.count();
+  }
+
+  async orderByName(): Promise<Poi[]> {
+    return await this.poiRepository.find({
+      order: {
+        name: 'ASC',
+      },
+    });
+  }
+
+  async orderByDate(): Promise<Poi[]> {
+    return await this.poiRepository.find({
+      order: {
+        dateCreate: 'ASC',
+      },
+    });
+  }
+
+  async countType(type: string): Promise<number> {
+    return await this.poiRepository.count({
+      where: {
+        type,
+      },
+    });
+  }
+
+  async getTypePoi() {
+    return await getEnumKey(TypePoiEnum);
   }
 }

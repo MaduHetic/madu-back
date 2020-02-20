@@ -59,4 +59,24 @@ export class CompanyService {
   async deleteCompany(idCompany: number) {
     return await this.companyRepository.delete(idCompany);
   }
+
+  async countCompany(): Promise<number> {
+    return await this.companyRepository.count();
+  }
+
+  async countNbType(type: string) {
+    return await this.companyRepository.count({
+      where: {
+        type,
+      },
+    });
+  }
+
+  async orderByDate(): Promise<Company[]> {
+    return await this.companyRepository.find({
+      order: {
+        createDate: 'ASC',
+      },
+    });
+  }
 }

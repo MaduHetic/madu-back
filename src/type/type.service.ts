@@ -2,6 +2,8 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Type } from './typeEntity';
 import { Repository } from 'typeorm';
+import { TypeEnum } from '../company/enum/type.enum';
+import { getEnumKey } from '../utils/function.utils';
 
 @Injectable()
 export class TypeService {
@@ -54,5 +56,17 @@ export class TypeService {
    */
   async getTypes(idsTypes: number[]): Promise<Type[]> {
       return await this.typeRepository.findByIds(idsTypes);
+  }
+
+  async getType() {
+    return await getEnumKey(TypeEnum);
+    // const types = TypeEnum;
+    // const stringType: string[] = [];
+    // for (const n in types) {
+    //   if (typeof types[n] === 'string') {
+    //     stringType.push(types[n]);
+    //   }
+    // }
+    // return stringType;
   }
 }
