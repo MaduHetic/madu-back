@@ -49,7 +49,7 @@ export class StatsService {
     return {
       poi: {
         nbPoi,
-        tags: await Promise.all(getTypePoiPromise),
+        type: await Promise.all(getTypePoiPromise),
       },
       company: {
         nbCompany,
