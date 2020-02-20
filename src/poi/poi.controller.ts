@@ -101,6 +101,9 @@ export class PoiController {
     return await this.poiService.orderByName();
   }
 
+  /**
+   *
+   */
   @ApiOkResponse()
   @ApiForbiddenResponse()
   @UseGuards(RoleGuard)
@@ -110,6 +113,10 @@ export class PoiController {
     return await this.poiService.orderByDate();
   }
 
+  /**
+   *
+   * @param idPoi
+   */
   @Delete(':id')
   @ApiForbiddenResponse()
   @ApiNotFoundResponse()

@@ -243,8 +243,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="120"
-                            class="link-to-prism">src/poi/poi.controller.ts:120</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="127"
+                            class="link-to-prism">src/poi/poi.controller.ts:127</a></div>
                 </td>
             </tr>
 
@@ -499,8 +499,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="109"
-                            class="link-to-prism">src/poi/poi.controller.ts:109</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="112"
+                            class="link-to-prism">src/poi/poi.controller.ts:112</a></div>
                 </td>
             </tr>
 
@@ -702,6 +702,9 @@ export class PoiController {
     return await this.poiService.orderByName();
   }
 
+  /**
+   *
+   */
   @ApiOkResponse()
   @ApiForbiddenResponse()
   @UseGuards(RoleGuard)
@@ -711,6 +714,10 @@ export class PoiController {
     return await this.poiService.orderByDate();
   }
 
+  /**
+   *
+   * @param idPoi
+   */
   @Delete(&#x27;:id&#x27;)
   @ApiForbiddenResponse()
   @ApiNotFoundResponse()

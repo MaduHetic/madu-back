@@ -118,8 +118,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="9"
-                            class="link-to-prism">src/interceptor/entity-type.interceptor.ts:9</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="14"
+                            class="link-to-prism">src/interceptor/entity-type.interceptor.ts:14</a></div>
                 </td>
             </tr>
 
@@ -192,18 +192,17 @@ import { exaToRgbaObject, filterInt } from &#x27;../utils/function.utils&#x27;;
 
 @Injectable()
 export class EntityTypeInterceptor implements NestInterceptor {
+  /**
+   *
+   * @param context
+   * @param next
+   */
   intercept(context: ExecutionContext, next: CallHandler&lt;any&gt;): Observable&lt;any&gt; | Promise&lt;Observable&lt;any&gt;&gt; {
     return next.handle().pipe(map(data &#x3D;&gt; {
       data &#x3D; data.map((d) &#x3D;&gt; {
         d.isPoi &#x3D; typeof d.domainMail &#x3D;&#x3D;&#x3D; &#x27;undefined&#x27; ? 1 : 0;
         if (d.isPoi) {
           d.tags &#x3D;  d.tags.map((tag) &#x3D;&gt; {
-            // const hexaToRgba &#x3D; hexToRgba(tag.colorTag);
-            // const getValueRba &#x3D; hexaToRgba.split(&#x27;(&#x27;)[1].split(&#x27;,&#x27;).filter((elem) &#x3D;&gt; typeof filterInt(elem) &#x3D;&#x3D;&#x3D; &#x27;number&#x27;);
-            // tag.r &#x3D; filterInt(getValueRba[0].trim());
-            // tag.g &#x3D; filterInt(getValueRba[1].trim());
-            // tag.b &#x3D; filterInt(getValueRba[2].trim());
-            // tag.a &#x3D; filterInt(getValueRba[3].replace(&#x27;)&#x27;, &#x27;&#x27;).trim());
             exaToRgbaObject(tag.colorTag, tag);
             return tag;
           });
