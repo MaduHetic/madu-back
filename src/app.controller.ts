@@ -4,6 +4,7 @@ import {AuthGuard} from '@nestjs/passport';
 import { AccessToken } from './auth/access-token';
 import { RoleGuard } from './guard/role.guard';
 import { Roles } from './decorator/role.decorator';
+import { ApiOkResponse, ApiUnauthorizedResponse } from '@nestjs/swagger';
 
 /**
  * This controller contains the routes to connect and retrieve your profile
@@ -28,6 +29,8 @@ export class AppController {
    * This method allows get account information from jwt token
    * @param req {Request}
    */
+  @ApiUnauthorizedResponse()
+  @ApiOkResponse()
   @UseGuards(AuthGuard('jwt'))
   @UseGuards(RoleGuard)
   @Get('profile')

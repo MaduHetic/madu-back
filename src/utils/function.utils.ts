@@ -5,6 +5,10 @@
  */
 import hexToRgba = require('hex-to-rgba');
 
+/**
+ *
+ * @param value
+ */
 export const filterInt = (value) => {
   if (/^(-|\+)?(\d+|Infinity)$/.test(value)) {
     return Number(value);
@@ -12,10 +16,18 @@ export const filterInt = (value) => {
   return NaN;
 };
 
+/**
+ *
+ */
 export const generateRandExaDecimalColor = () =>  {
   return '#' + Math.floor(Math.random() * 16777215 ).toString(16);
 };
 
+/**
+ *
+ * @param exaDecimalCode
+ * @param insertToObject
+ */
 export const exaToRgbaObject = (exaDecimalCode: string, insertToObject) => {
   const hexaToRgba = hexToRgba(exaDecimalCode);
   const getValueRba = hexaToRgba.split('(')[1].split(',').filter((elem) => typeof filterInt(elem) === 'number');
@@ -25,6 +37,10 @@ export const exaToRgbaObject = (exaDecimalCode: string, insertToObject) => {
   insertToObject.a = filterInt(getValueRba[3].replace(')', '').trim());
 };
 
+/**
+ *
+ * @param enumeration
+ */
 export const getEnumKey = async (enumeration) => {
   const keysEnum: string[] = [];
 

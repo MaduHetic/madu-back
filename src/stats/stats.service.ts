@@ -1,12 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { JoinTagPoiEntity } from '../join-tag-poi/joinTagPoiEntity';
 import { PoiService } from '../poi/poi.service';
 import { JoinTagPoiService } from '../join-tag-poi/join-tag-poi.service';
 import { CompanyService } from '../company/company.service';
 import { TypeService } from '../type/type.service';
 import { TagsService } from '../tags/tags.service';
 import { PercentTypeGreenScoreAndPoiService } from '../percent-type-green-score-and-poi/percent-type-green-score-and-poi.service';
-import { range } from 'rxjs';
 
 @Injectable()
 export class StatsService {

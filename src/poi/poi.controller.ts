@@ -8,6 +8,7 @@ import { RoleGuard } from '../guard/role.guard';
 import { Roles } from '../decorator/role.decorator';
 import { EntityTypeInterceptor } from '../interceptor/entity-type.interceptor';
 import { Poi } from './poiEntity';
+import { ApiCreatedResponse, ApiForbiddenResponse, ApiGoneResponse, ApiOkResponse } from '@nestjs/swagger';
 // import { PercentTypeGreenScoreAndPoiService } from '../percent-type-green-score-and-poi/percent-type-green-score-and-poi.service';
 
 /**
@@ -26,6 +27,8 @@ export class PoiController {
    *
    * @param poiDto
    */
+  @ApiCreatedResponse()
+  @ApiForbiddenResponse()
   @Post()
   @UsePipes(new ValidationPipe())
   @UsePipes(PoiTransformationPipe)
@@ -39,6 +42,8 @@ export class PoiController {
    *
    * @param idPoi
    */
+  @ApiOkResponse()
+  @ApiForbiddenResponse()
   @Get('one/:id')
   @UsePipes(new ValidationPipe({ transform: true }))
   @UseGuards(RoleGuard)
@@ -50,6 +55,8 @@ export class PoiController {
   /**
    * Return all poi in database
    */
+  @ApiOkResponse()
+  @ApiForbiddenResponse()
   @Get()
   @UseInterceptors(EntityTypeInterceptor)
   @UseGuards(RoleGuard)
@@ -62,6 +69,8 @@ export class PoiController {
    *
    * @param idPoi
    */
+  @ApiOkResponse()
+  @ApiForbiddenResponse()
   @Put(':id')
   @UseGuards(RoleGuard)
   @UsePipes(new ValidationPipe({ transform: true }))
@@ -70,6 +79,11 @@ export class PoiController {
     return 'updatePoi';
   }
 
+  /**
+   *
+   */
+  @ApiOkResponse()
+  @ApiForbiddenResponse()
   @UseGuards(RoleGuard)
   @Roles('admin')
   @Get('order/name')
@@ -77,6 +91,8 @@ export class PoiController {
     return await this.poiService.orderByName();
   }
 
+  @ApiOkResponse()
+  @ApiForbiddenResponse()
   @UseGuards(RoleGuard)
   @Roles('admin')
   @Get('order/date')
