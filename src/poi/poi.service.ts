@@ -143,7 +143,6 @@ export class PoiService {
 
   async deletePoi(idPoi: number) {
     const poi = await this.getPoi(idPoi);
-    await this.poiRepository.delete(poi);
-    return 'delete success';
+    return await this.poiRepository.delete(poi);
   }
 }
