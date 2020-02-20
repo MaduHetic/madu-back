@@ -29,7 +29,7 @@ services:
       PMA_PASSWORD: {{ application_db_password }}
 
   api:
-    image: "{{ application_server_image }}:{{ application_server_tag }}"
+    image: guillaudev/madu_back:2.0
     restart: always
     ports:
       - 3000:3000
@@ -43,7 +43,7 @@ services:
       - database
 
   front:
-    image: "{{ application_client_image }}:{{ application_client_tag }}"
+    image: guillaudev/madu_front:2.0
     ports:
       - 80:80
 
