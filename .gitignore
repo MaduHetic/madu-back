@@ -35,7 +35,6 @@ lerna-debug.log*
 
 data
 
-
 *.dll
 *.exe
 .DS_Store
@@ -65,3 +64,6 @@ website/node_modules
 !command/testdata/**/*.tfstate
 !command/testdata/**/.terraform/
 /infra/ansible/inventory/group_vars/application.yml
+
+documentation
+
