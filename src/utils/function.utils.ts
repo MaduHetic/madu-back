@@ -1,13 +1,10 @@
+
+import hexToRgba = require('hex-to-rgba');
+
 /**
  * Function who check if the value is an integer return null if not
  * @param value {number}
  * @returns Number || Nan
- */
-import hexToRgba = require('hex-to-rgba');
-
-/**
- *
- * @param value
  */
 export const filterInt = (value) => {
   if (/^(-|\+)?(\d+|Infinity)$/.test(value)) {
@@ -17,14 +14,14 @@ export const filterInt = (value) => {
 };
 
 /**
- *
+ * generate a random hexadecimal code
  */
 export const generateRandExaDecimalColor = () =>  {
   return '#' + Math.floor(Math.random() * 16777215 ).toString(16);
 };
 
 /**
- *
+ * set the rgba color
  * @param exaDecimalCode
  * @param insertToObject
  */
@@ -38,7 +35,7 @@ export const exaToRgbaObject = (exaDecimalCode: string, insertToObject) => {
 };
 
 /**
- *
+ * get the key of an enumeration
  * @param enumeration
  */
 export const getEnumKey = async (enumeration) => {

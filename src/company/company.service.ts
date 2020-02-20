@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Company } from './companyEntity';
 import { Repository } from 'typeorm';
@@ -17,6 +17,17 @@ export class CompanyService {
     private readonly companyRepository: Repository<Company>,
   ) {}
 
+  async searchByName(name: string) {
+    const company =  await this.companyRepository.find({
+      where: {
+        name,
+      },
+    });
+    if (company.length > 0) {
+      throw new ConflictException(`Client with ${name} already exist`);
+    }
+  }
+
   /**
    * This method use to add or update a company in database
    * if the id is not null is for update else is for add
@@ -24,6 +35,8 @@ export class CompanyService {
    * @param id {number} | null}
    */
   async addCompany(companyDto, id = null) {
+    await this.searchByName(companyDto.name);
+    console.log('fsfdsfdsf');
     const companyData = companyDto;
     if (id) {
       companyData.id = id;
