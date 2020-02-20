@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Type } from './typeEntity';
 import { Repository } from 'typeorm';
 import { TypeEnum } from '../company/enum/type.enum';
+import { getEnumKey } from '../utils/function.utils';
 
 @Injectable()
 export class TypeService {
@@ -58,13 +59,14 @@ export class TypeService {
   }
 
   async getType() {
-    const types = TypeEnum;
-    const stringType: string[] = [];
-    for (const n in types) {
-      if (typeof types[n] === 'string') {
-        stringType.push(types[n]);
-      }
-    }
-    return stringType;
+    return await getEnumKey(TypeEnum);
+    // const types = TypeEnum;
+    // const stringType: string[] = [];
+    // for (const n in types) {
+    //   if (typeof types[n] === 'string') {
+    //     stringType.push(types[n]);
+    //   }
+    // }
+    // return stringType;
   }
 }

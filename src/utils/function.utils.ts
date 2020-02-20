@@ -16,7 +16,6 @@ export const generateRandExaDecimalColor = () =>  {
   return '#' + Math.floor(Math.random() * 16777215 ).toString(16);
 };
 
-
 export const exaToRgbaObject = (exaDecimalCode: string, insertToObject) => {
   const hexaToRgba = hexToRgba(exaDecimalCode);
   const getValueRba = hexaToRgba.split('(')[1].split(',').filter((elem) => typeof filterInt(elem) === 'number');
@@ -25,3 +24,14 @@ export const exaToRgbaObject = (exaDecimalCode: string, insertToObject) => {
   insertToObject.b = filterInt(getValueRba[2].trim());
   insertToObject.a = filterInt(getValueRba[3].replace(')', '').trim());
 };
+
+export const getEnumKey = async (enumeration) => {
+  const keysEnum: string[] = [];
+
+  for (const n in enumeration) {
+    if (typeof enumeration[n] === 'string') {
+      keysEnum.push(enumeration[n]);
+    }
+  }
+  return keysEnum;
+}

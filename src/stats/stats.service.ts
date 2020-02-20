@@ -39,17 +39,17 @@ export class StatsService {
           nbType: await this.companyService.countNbType(type),
         };
     });
-    const tags = await this.tagsService.getAllTag();
-    const getTagsPromise = tags.map(async (tag) => {
+    const typesPoi = await this.poiService.getTypePoi();
+    const getTypePoiPromise = typesPoi.map(async (typePoi) => {
       return {
-        tagName: tag.tag,
-        nbTag: await this.joinTagPoiService.countTags(tag),
+        tagName: typePoi,
+        nbType: await this.poiService.countType(typePoi),
       };
     });
     return {
       poi: {
         nbPoi,
-        tags: await Promise.all(getTagsPromise),
+        tags: await Promise.all(getTypePoiPromise),
       },
       company: {
         nbCompany,
