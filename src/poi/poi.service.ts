@@ -9,6 +9,7 @@ import { PercentTypeGreenScoreAndPoiService } from '../percent-type-green-score-
 import { TypeGreenScoreService } from '../type-green-score/type-green-score.service';
 import { PercentAndIdTag } from './percentAndIdTag';
 import { PercentTypeGreenScoreAndPoi } from '../percent-type-green-score-and-poi/percentTypeGreenScoreAndPoiEntity';
+import { exaToRgbaObject } from '../utils/function.utils';
 
 @Injectable()
 export class PoiService {
@@ -75,9 +76,13 @@ export class PoiService {
     const poi = await this.getPoi(idPoi);
     const tags = await this.joinTagPoiService.getAllCompanyTag(poi);
     poi.greenScore = await this.percentTypeGreenScoreAndPoiService.getGreenScorePassMark(poi);
+    const serializeTags = await this.joinTagPoiService.serializeTagsData(tags);
+    serializeTags.forEach((tag) => {
+      exaToRgbaObject(tag.colorTag, tag);
+    });
     return {
       poi,
-      tags: await this.joinTagPoiService.serializeTagsData(tags),
+      tags:  serializeTags, // serializeTagsWithRgb,
     };
   }
 
