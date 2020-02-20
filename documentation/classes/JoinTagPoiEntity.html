@@ -202,7 +202,7 @@
                             <b>Decorators : </b>
                             <br />
                             <code>
-                                @ManyToOne(undefined, undefined, {onUpdate: &#x27;CASCADE&#x27;, onDelete: &#x27;SET NULL&#x27;, nullable: true})<br />@JoinColumn({name: &#x27;tagId&#x27;})<br />
+                                @ManyToOne(undefined, undefined, {onUpdate: &#x27;CASCADE&#x27;, onDelete: &#x27;CASCADE&#x27;, nullable: true})<br />@JoinColumn({name: &#x27;tagId&#x27;})<br />
                             </code>
                         </td>
                     </tr>
@@ -238,7 +238,7 @@ export class JoinTagPoiEntity {
 
   @ManyToOne(type &#x3D;&gt; Tag, (tag) &#x3D;&gt; tag.id, {
     onUpdate: &#x27;CASCADE&#x27;,
-    onDelete: &#x27;SET NULL&#x27;,
+    onDelete: &#x27;CASCADE&#x27;,
     nullable: true,
   })
   @JoinColumn({

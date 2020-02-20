@@ -14,8 +14,8 @@
 * TypeOrm
 
 ## Documentation
-* [Compodoc](http://localhost:8080)
-* [Swagger](http://35.180.228.155:3000/api/)
+* [Compodoc](http://35.180.228.155:8081)
+* [Swagger](http://35.180.228.155:3000/documentation/)
 
 ## UML Base de donnée
 ![Schema Base de donnée](./asset/madu.png)

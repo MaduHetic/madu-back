@@ -214,13 +214,13 @@
                             <b>Decorators : </b>
                             <br />
                             <code>
-                                @ManyToOne(undefined, undefined, {nullable: false})<br />@JoinColumn({name: &#x27;idPoi&#x27;})<br />
+                                @ManyToOne(undefined, undefined, {nullable: false, onDelete: &#x27;CASCADE&#x27;, onUpdate: &#x27;CASCADE&#x27;})<br />@JoinColumn({name: &#x27;idPoi&#x27;})<br />
                             </code>
                         </td>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/percent-type-green-score-and-poi/percentTypeGreenScoreAndPoiEntity.ts:31</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/percent-type-green-score-and-poi/percentTypeGreenScoreAndPoiEntity.ts:35</a></div>
                             </td>
                         </tr>
 
@@ -251,13 +251,13 @@
                             <b>Decorators : </b>
                             <br />
                             <code>
-                                @ApiProperty()<br />@ManyToOne(undefined, undefined, {nullable: false})<br />@JoinColumn({name: &#x27;idTypeGreenScore&#x27;})<br />
+                                @ApiProperty()<br />@ManyToOne(undefined, undefined, {nullable: false, onUpdate: &#x27;CASCADE&#x27;, onDelete: &#x27;CASCADE&#x27;})<br />@JoinColumn({name: &#x27;idTypeGreenScore&#x27;})<br />
                             </code>
                         </td>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/percent-type-green-score-and-poi/percentTypeGreenScoreAndPoiEntity.ts:23</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/percent-type-green-score-and-poi/percentTypeGreenScoreAndPoiEntity.ts:25</a></div>
                             </td>
                         </tr>
 
@@ -294,6 +294,8 @@ export class PercentTypeGreenScoreAndPoi {
   @ApiProperty()
   @ManyToOne(type &#x3D;&gt; TypeGreenScore, (typeGreenScore) &#x3D;&gt; typeGreenScore.id, {
     nullable: false,
+    onUpdate: &#x27;CASCADE&#x27;,
+    onDelete: &#x27;CASCADE&#x27;,
   })
   @JoinColumn({
     name: &#x27;idTypeGreenScore&#x27;,
@@ -302,6 +304,8 @@ export class PercentTypeGreenScoreAndPoi {
 
   @ManyToOne(type &#x3D;&gt; Poi, (poi) &#x3D;&gt; poi.id, {
     nullable: false,
+    onDelete: &#x27;CASCADE&#x27;,
+    onUpdate: &#x27;CASCADE&#x27;,
   })
   @JoinColumn({
     name: &#x27;idPoi&#x27;,
