@@ -71,4 +71,12 @@ export class CompanyService {
       },
     });
   }
+
+  async orderByDate(): Promise<Company[]> {
+    return await this.companyRepository.find({
+      order: {
+        createDate: 'ASC',
+      },
+    });
+  }
 }

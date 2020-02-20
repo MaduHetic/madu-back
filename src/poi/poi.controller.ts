@@ -70,11 +70,15 @@ export class PoiController {
     return 'updatePoi';
   }
 
-  @Get('oder/name')
+  @UseGuards(RoleGuard)
+  @Roles('admin')
+  @Get('order/name')
   async getPoiByName(): Promise<Poi[]> {
     return await this.poiService.orderByName();
   }
 
+  @UseGuards(RoleGuard)
+  @Roles('admin')
   @Get('order/date')
   async getPoiOrderByDate(): Promise<Poi[]> {
     return await this.poiService.orderByDate();

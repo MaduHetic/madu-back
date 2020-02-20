@@ -80,4 +80,14 @@ export class CompanyController {
     await this.companyService.deleteCompany(idCompany);
     return 'delete success';
   }
+
+  /**
+   *
+   */
+  @UseGuards(RoleGuard)
+  @Roles('admin')
+  @Get('order/date')
+  async getCompanyOrderByDate(): Promise<Company[]> {
+    return await this.companyService.orderByDate()
+  }
 }
