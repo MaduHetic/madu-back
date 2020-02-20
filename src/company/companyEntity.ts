@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 /**
  * Company entity from the database
@@ -106,4 +106,7 @@ export class Company {
     default: '2020-10-10',
   })
   endDeal: string;
+
+  @CreateDateColumn()
+  createDate: string;
 }

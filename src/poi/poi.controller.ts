@@ -69,4 +69,8 @@ export class PoiController {
     return 'updatePoi';
   }
 
+  @Get('order/name')
+  async getPoiOrderByName() {
+    return await this.poiService.orderByName();
+  }
 }

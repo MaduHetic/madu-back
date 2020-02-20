@@ -101,4 +101,12 @@ export class PoiService {
   async countPoi() {
     return await this.poiRepository.count();
   }
+
+  async orderByName() {
+    return await this.poiRepository.find({
+      order: {
+        name: 'ASC',
+      },
+    });
+  }
 }
