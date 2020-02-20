@@ -42,7 +42,7 @@ export class StatsService {
     const typesPoi = await this.poiService.getTypePoi();
     const getTypePoiPromise = typesPoi.map(async (typePoi) => {
       return {
-        tagName: typePoi,
+        typeName: typePoi,
         nbType: await this.poiService.countType(typePoi),
       };
     });
