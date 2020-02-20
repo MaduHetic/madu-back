@@ -6,6 +6,7 @@ import { Company } from './companyEntity';
 import { RoleGuard } from '../guard/role.guard';
 import { Roles } from '../decorator/role.decorator';
 import { EntityTypeInterceptor } from '../interceptor/entity-type.interceptor';
+import { ApiCreatedResponse, ApiUnauthorizedResponse, ApiNotFoundResponse, ApiOkResponse, ApiUnauthorizedResponse } from '@nestjs/swagger';
 
 /**
  * Controller to manage the companys data
@@ -20,6 +21,8 @@ export class CompanyController {
    * @param {CompanyDto} companyDto information to add a new company
    * @returns Data was added
    */
+  @ApiCreatedResponse()
+  @ApiUnauthorizedResponse()
   @UseGuards(RoleGuard)
   @Roles('admin')
   @Post()
@@ -33,6 +36,9 @@ export class CompanyController {
    * @param id {number}
    * @returns {Company}
    */
+  @ApiOkResponse()
+  @ApiUnauthorizedResponse()
+  @ApiNotFoundResponse()
   @UseGuards(RoleGuard)
   @Roles('admin')
   @Get('one/:id')
@@ -58,6 +64,9 @@ export class CompanyController {
    * @param id
    * @param companyDto
    */
+  @ApiOkResponse()
+  @ApiUnauthorizedResponse()
+  @ApiNotFoundResponse()
   @UseGuards(RoleGuard)
   @Roles('admin')
   @Put(':id')
@@ -71,6 +80,9 @@ export class CompanyController {
    * @param idCompany {number}
    * @returns string
    */
+  @ApiOkResponse()
+  @ApiUnauthorizedResponse()
+  @ApiNotFoundResponse()
   @UseGuards(RoleGuard)
   @Roles('admin')
   @Delete(':id')
@@ -84,10 +96,12 @@ export class CompanyController {
   /**
    *
    */
+  @ApiOkResponse()
+  @ApiUnauthorizedResponse()
   @UseGuards(RoleGuard)
   @Roles('admin')
   @Get('order/date')
   async getCompanyOrderByDate(): Promise<Company[]> {
-    return await this.companyService.orderByDate()
+    return await this.companyService.orderByDate();
   }
 }
