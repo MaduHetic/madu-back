@@ -29,9 +29,9 @@ services:
       PMA_PASSWORD: root
 
   documentation:
-    image: nginx:latest
+    image: httpd:latest
     volumes:
-    - ./documentation:/etc/nginx/conf.d/
+    - ./documentation:/usr/local/apache2/htdocs/
     ports:
     - 8081:80
 
