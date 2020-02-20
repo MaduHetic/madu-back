@@ -28,6 +28,13 @@ services:
       PMA_USER: user
       PMA_PASSWORD: root
 
+  documentation:
+    image: httpd:latest
+    volumes:
+    - ./documentation:/usr/local/apache2/htdocs/
+    ports:
+    - 8081:80
+
   api:
     image: node:12.14-buster
     depends_on:

@@ -5,7 +5,10 @@ import { TagsService } from './tags.service';
 import { Tag } from './tagEntity';
 import { RoleGuard } from '../guard/role.guard';
 import { Roles } from '../decorator/role.decorator';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('tags')
+@ApiBearerAuth()
 @Controller('tags')
 @UseGuards(AuthGuard('jwt'))
 export class TagsController {

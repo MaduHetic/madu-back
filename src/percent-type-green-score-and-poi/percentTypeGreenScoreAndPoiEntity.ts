@@ -16,6 +16,8 @@ export class PercentTypeGreenScoreAndPoi {
   @ApiProperty()
   @ManyToOne(type => TypeGreenScore, (typeGreenScore) => typeGreenScore.id, {
     nullable: false,
+    onUpdate: 'CASCADE',
+    onDelete: 'CASCADE',
   })
   @JoinColumn({
     name: 'idTypeGreenScore',
@@ -24,6 +26,8 @@ export class PercentTypeGreenScoreAndPoi {
 
   @ManyToOne(type => Poi, (poi) => poi.id, {
     nullable: false,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
   })
   @JoinColumn({
     name: 'idPoi',

@@ -6,12 +6,17 @@ import { TypeGreenScoreDto } from './typeGreenScoreDto';
 import { TypeGreenScore } from './typeGreenScoreEntity';
 import { Roles } from '../decorator/role.decorator';
 import { AuthGuard } from '@nestjs/passport';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 /**
  * Type green score controller
  */
 @UseGuards(AuthGuard('jwt'))
 @Controller('type-green-score')
+
+@ApiTags('type-green-score')
+@ApiBearerAuth()
+@Controller('type-green-score-controller')
 export class TypeGreenScoreController {
   /**
    *

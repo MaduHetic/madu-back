@@ -7,10 +7,13 @@ import { RoleGuard } from '../guard/role.guard';
 import { Roles } from '../decorator/role.decorator';
 import { TypeEnum } from '../company/enum/type.enum';
 import { type } from 'os';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 /**
  * type controller
  */
+@ApiBearerAuth()
+@ApiTags('type')
 @Controller('type')
 @UseGuards(AuthGuard('jwt'))
 export class TypeController {
