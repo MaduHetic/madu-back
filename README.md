@@ -12,6 +12,8 @@
 * NestJS
 * MySQL
 * TypeOrm
+* json web token
+
 
 ## Documentation
 * [Compodoc](http://35.180.228.155:8081)
