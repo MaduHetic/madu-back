@@ -140,4 +140,9 @@ export class PoiService {
   async getTypePoi() {
     return await getEnumKey(TypePoiEnum);
   }
+
+  async deletePoi(idPoi: number) {
+    const poi = await this.getPoi(idPoi);
+    return await this.poiRepository.delete(poi);
+  }
 }

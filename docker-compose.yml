@@ -28,6 +28,13 @@ services:
       PMA_USER: user
       PMA_PASSWORD: root
 
+  documentation:
+    image: nginx:latest
+    volumes:
+    - ./documentation:/etc/nginx/conf.d/
+    ports:
+    - 8081:80
+
   api:
     image: node:12.14-buster
     depends_on:
