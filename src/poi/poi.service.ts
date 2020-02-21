@@ -11,6 +11,7 @@ import { PercentAndIdTag } from './percentAndIdTag';
 import { PercentTypeGreenScoreAndPoi } from '../percent-type-green-score-and-poi/percentTypeGreenScoreAndPoiEntity';
 import { exaToRgbaObject, getEnumKey } from '../utils/function.utils';
 import { TypePoiEnum } from './enum/typePoiEnum';
+import { ancestorWhere } from 'tslint';
 
 @Injectable()
 export class PoiService {
@@ -94,6 +95,7 @@ export class PoiService {
     return {
       poi,
       tags:  serializeTags, // serializeTagsWithRgb,
+      typeGreenScore: await this.percentTypeGreenScoreAndPoiService.serialazeData(await this.percentTypeGreenScoreAndPoiService.getType(poi))
     };
   }
 
@@ -104,6 +106,7 @@ export class PoiService {
       const tags = await this.joinTagPoiService.getAllCompanyTag(poi);
       poiWithType.tags = await this.joinTagPoiService.serializeTagsData(tags);
       poiWithType.greenScore = await this.percentTypeGreenScoreAndPoiService.getGreenScorePassMark(poi);
+      poiWithType.typeGreenScore = await this.percentTypeGreenScoreAndPoiService.serialazeData(await this.percentTypeGreenScoreAndPoiService.getType(poi));
       return poiWithType;
     });
     return  await Promise.all(allPoiWithTagsAndTypesPromise);
@@ -135,6 +138,29 @@ export class PoiService {
         type,
       },
     });
+  }
+
+  async updatePoi(poiDto, idPoi) {
+    const poi = await this.getPoi(idPoi);
+    const tagAddPromise = poiDto.tags.map(async (tagId) => {
+      const tag =  await this.tagsService.getOneTag(tagId);
+      const checkIfTagJoin = await this.joinTagPoiService.checkTag(tag, poi);
+      if (!checkIfTagJoin) {
+        await this.joinTagPoiService.addJoinTagPoi(poi, tag);
+      }
+    });
+    poiDto.idPoi = idPoi;
+    await Promise.all(tagAddPromise);
+    poi.address = poiDto.address;
+    poi.city = poiDto.city;
+    poi.description = poiDto.description;
+    poi.name = poiDto.name;
+    poi.postalCode = poiDto.postalCode;
+    poi.price = poiDto.price;
+    poi.type = poiDto.type;
+    poi.lat = poiDto.lat;
+    poi.long = poiDto.long;
+    return await this.poiRepository.save(poi);
   }
 
   async getTypePoi() {

@@ -18,8 +18,6 @@ export class UserController {
    * method call to add new user
    * @param userDto
    */
-  @UseGuards(RoleGuard)
-  @Roles('admin')
   @Post()
   @UsePipes(new ValidationPipe({ transform: true }))
   async addUser(@Body() userDto: UserDto) {
@@ -31,8 +29,6 @@ export class UserController {
    * @param idUser
    */
   @Delete(':id')
-  @UseGuards(RoleGuard)
-  @Roles('admin')
   @UsePipes(new ValidationPipe({ transform: true }))
   async deleteUer(@Param('id', new ParseIntPipe()) idUser: number) {
     return 'deletUser';

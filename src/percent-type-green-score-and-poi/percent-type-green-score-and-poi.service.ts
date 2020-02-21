@@ -105,10 +105,29 @@ export class PercentTypeGreenScoreAndPoiService {
   }
 
   async countRangGreenScore(rangeMax: number, rangeMin: number) {
-    console.log(rangeMax, rangeMin);
     return await this.percentTypeGreenScoreAndPoiRepository.createQueryBuilder()
       .where('percent < :range', {range: rangeMax})
       .andWhere('percent >= :rangeM', {rangeM: rangeMin})
       .getCount();
+  }
+
+  async serialazeData(percentAndType) {
+    return percentAndType.map((percentType) => {
+      return {
+        idTypeGreenScore: percentType.typeGreenScore.id,
+        percent: percentType.percent,
+        typeName: percentType.typeGreenScore.typeGreenScore,
+      };
+    });
+  }
+
+  async getType(poi: Poi) {
+    return await this.percentTypeGreenScoreAndPoiRepository.find({
+      select: ['percent'],
+      where: {
+        poi,
+      },
+      relations: ['typeGreenScore'],
+    });
   }
 }

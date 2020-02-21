@@ -138,14 +138,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@UseGuards(RoleGuard)<br />@Roles(&#x27;admin&#x27;)<br />@Post()<br />@UsePipes(new ValidationPipe())<br /></code>
+                    <code>@Post()<br />@UsePipes(new ValidationPipe())<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="25"
-                            class="link-to-prism">src/user/user.controller.ts:25</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="23"
+                            class="link-to-prism">src/user/user.controller.ts:23</a></div>
                 </td>
             </tr>
 
@@ -219,14 +219,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Delete(&#x27;:id&#x27;)<br />@UseGuards(RoleGuard)<br />@Roles(&#x27;admin&#x27;)<br />@UsePipes(new ValidationPipe())<br /></code>
+                    <code>@Delete(&#x27;:id&#x27;)<br />@UsePipes(new ValidationPipe())<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="37"
-                            class="link-to-prism">src/user/user.controller.ts:37</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="33"
+                            class="link-to-prism">src/user/user.controller.ts:33</a></div>
                 </td>
             </tr>
 
@@ -299,8 +299,6 @@ export class UserController {
    * method call to add new user
    * @param userDto
    */
-  @UseGuards(RoleGuard)
-  @Roles(&#x27;admin&#x27;)
   @Post()
   @UsePipes(new ValidationPipe({ transform: true }))
   async addUser(@Body() userDto: UserDto) {
@@ -312,8 +310,6 @@ export class UserController {
    * @param idUser
    */
   @Delete(&#x27;:id&#x27;)
-  @UseGuards(RoleGuard)
-  @Roles(&#x27;admin&#x27;)
   @UsePipes(new ValidationPipe({ transform: true }))
   async deleteUer(@Param(&#x27;id&#x27;, new ParseIntPipe()) idUser: number) {
     return &#x27;deletUser&#x27;;
