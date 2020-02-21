@@ -16,8 +16,8 @@
 
 
 ## Documentation
-* Compodoc(http://${ULR}:8081)
-* Swagger (http://${ULR}:3000/documentation/)
+* Compodoc(http://${URL}:8081)
+* Swagger (http://${URL}:3000/documentation/)
 
 ## UML Base de donnée
 ![Schema Base de donnée](./asset/madu.png)
