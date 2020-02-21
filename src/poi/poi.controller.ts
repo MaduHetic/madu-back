@@ -41,12 +41,11 @@ export class PoiController {
   @ApiCreatedResponse()
   @ApiForbiddenResponse()
   @Post()
-  // @UsePipes(new ValidationPipe())
+  @UsePipes(new ValidationPipe())
   @UsePipes(PoiTransformationPipe)
   @UseGuards(RoleGuard)
   @Roles('admin')
   async addPoi(@Body() poiDto: PoiDto) {
-    return poiDto;
     return await this.poiService.addPoi(poiDto);
   }
 

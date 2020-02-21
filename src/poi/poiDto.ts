@@ -43,7 +43,7 @@ export class PoiDto implements PoiInterface {
   @ApiPropertyOptional()
   @IsNumber()
   @IsOptional()
-  readonly greenScore: string;
+  readonly greenScore: number = 10;
 
   /**
    * Latitude of poi
