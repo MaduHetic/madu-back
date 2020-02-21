@@ -17,6 +17,7 @@ import {
   ApiOkResponse,
   ApiTags,
 } from '@nestjs/swagger';
+import { filterInt } from '../utils/function.utils';
 // import { PercentTypeGreenScoreAndPoiService } from '../percent-type-green-score-and-poi/percent-type-green-score-and-poi.service';
 
 /**
@@ -78,6 +79,7 @@ export class PoiController {
   /**
    *
    * @param idPoi
+   * @param poiDto
    */
   @ApiOkResponse()
   @ApiForbiddenResponse()
@@ -85,8 +87,9 @@ export class PoiController {
   @UseGuards(RoleGuard)
   @UsePipes(new ValidationPipe({ transform: true }))
   @Roles('admin')
-  async updatePoi(@Param('id', new ParseIntPipe()) idPoi: number) {
-    return 'updatePoi';
+  async updatePoi(@Param('id') idPoi: number, @Body() poiDto: PoiDto) {
+    idPoi = filterInt(idPoi);
+    return await this.poiService.updatePoi(poiDto, idPoi);
   }
 
   /**

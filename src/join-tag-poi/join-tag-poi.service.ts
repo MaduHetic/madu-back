@@ -85,4 +85,13 @@ export class JoinTagPoiService {
     });
   }
 
+  async checkTag(tag: Tag, poi: Poi) {
+    return await this.joinTagPoiRepository.findOne({
+      where: {
+        poi,
+        tag,
+      },
+    });
+  }
+
 }
