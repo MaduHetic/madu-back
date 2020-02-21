@@ -12,7 +12,7 @@
 * NestJS
 * MySQL
 * TypeOrm
-* json web token
+* json web token pour l'authentification a l'api
 
 
 ## Documentation
