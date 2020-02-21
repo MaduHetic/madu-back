@@ -18,8 +18,6 @@ export class UserController {
    * method call to add new user
    * @param userDto
    */
-  @UseGuards(RoleGuard)
-  @Roles('admin')
   @Post()
   @UsePipes(new ValidationPipe({ transform: true }))
   async addUser(@Body() userDto: UserDto) {
