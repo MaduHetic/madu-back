@@ -149,7 +149,6 @@ export class PoiService {
     });
     poiDto.idPoi = idPoi;
     await Promise.all(tagAddPromise);
-    console.log(poiDto);
     poi.address = poiDto.address;
     poi.city = poiDto.city;
     poi.description = poiDto.description;
@@ -159,7 +158,6 @@ export class PoiService {
     poi.type = poiDto.type;
     poi.lat = poiDto.lat;
     poi.long = poiDto.long;
-    console.log(poi, typeof poi);
     return await this.poiRepository.save(poi);
   }
 

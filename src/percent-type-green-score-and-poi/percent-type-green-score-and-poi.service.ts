@@ -105,7 +105,6 @@ export class PercentTypeGreenScoreAndPoiService {
   }
 
   async countRangGreenScore(rangeMax: number, rangeMin: number) {
-    console.log(rangeMax, rangeMin);
     return await this.percentTypeGreenScoreAndPoiRepository.createQueryBuilder()
       .where('percent < :range', {range: rangeMax})
       .andWhere('percent >= :rangeM', {rangeM: rangeMin})

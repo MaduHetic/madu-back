@@ -36,7 +36,6 @@ export class CompanyService {
    */
   async addCompany(companyDto, id = null) {
     await this.searchByName(companyDto.name);
-    console.log('fsfdsfdsf');
     const companyData = companyDto;
     if (id) {
       companyData.id = id;
