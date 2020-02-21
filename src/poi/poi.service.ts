@@ -95,6 +95,7 @@ export class PoiService {
     return {
       poi,
       tags:  serializeTags, // serializeTagsWithRgb,
+      typeGreenScore: await this.percentTypeGreenScoreAndPoiService.serialazeData(await this.percentTypeGreenScoreAndPoiService.getType(poi))
     };
   }
 
@@ -105,6 +106,7 @@ export class PoiService {
       const tags = await this.joinTagPoiService.getAllCompanyTag(poi);
       poiWithType.tags = await this.joinTagPoiService.serializeTagsData(tags);
       poiWithType.greenScore = await this.percentTypeGreenScoreAndPoiService.getGreenScorePassMark(poi);
+      poiWithType.typeGreenScore = await this.percentTypeGreenScoreAndPoiService.serialazeData(await this.percentTypeGreenScoreAndPoiService.getType(poi));
       return poiWithType;
     });
     return  await Promise.all(allPoiWithTagsAndTypesPromise);

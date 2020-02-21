@@ -110,4 +110,24 @@ export class PercentTypeGreenScoreAndPoiService {
       .andWhere('percent >= :rangeM', {rangeM: rangeMin})
       .getCount();
   }
+
+  async serialazeData(percentAndType) {
+    return percentAndType.map((percentType) => {
+      return {
+        idTypeGreenScore: percentType.typeGreenScore.id,
+        percent: percentType.percent,
+        typeName: percentType.typeGreenScore.typeGreenScore,
+      };
+    });
+  }
+
+  async getType(poi: Poi) {
+    return await this.percentTypeGreenScoreAndPoiRepository.find({
+      select: ['percent'],
+      where: {
+        poi,
+      },
+      relations: ['typeGreenScore'],
+    });
+  }
 }
