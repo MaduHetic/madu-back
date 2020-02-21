@@ -95,7 +95,7 @@ export class PoiService {
     return {
       poi,
       tags:  serializeTags, // serializeTagsWithRgb,
-      typeGreenScore: await this.percentTypeGreenScoreAndPoiService.serialazeData(await this.percentTypeGreenScoreAndPoiService.getType(poi))
+      typeGreenScore: await this.percentTypeGreenScoreAndPoiService.serialazeData(await this.percentTypeGreenScoreAndPoiService.getType(poi)),
     };
   }
 
