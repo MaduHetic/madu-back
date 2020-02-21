@@ -81,6 +81,10 @@
                             </li>
                             <li>
                                     <span class="modifier">Async</span>
+                                <a href="#checkTag">checkTag</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
                                 <a href="#countTags">countTags</a>
                             </li>
                             <li>
@@ -225,6 +229,90 @@
                                     <td>tagToAdd</td>
                                     <td>
                                                 <code><a href="../classes/Tag.html" target="_self" >Tag</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>{}</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="checkTag"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Async</span>
+                            checkTag
+                        </b>
+                        <a href="#checkTag"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>checkTag(tag: <a href="../classes/Tag.html">Tag</a>, poi: <a href="../classes/Poi.html">Poi</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="88"
+                            class="link-to-prism">src/join-tag-poi/join-tag-poi.service.ts:88</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>tag</td>
+                                    <td>
+                                                <code><a href="../classes/Tag.html" target="_self" >Tag</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>poi</td>
+                                    <td>
+                                                <code><a href="../classes/Poi.html" target="_self" >Poi</a></code>
                                     </td>
 
                                     <td>
@@ -666,6 +754,15 @@ export class JoinTagPoiService {
   async countTags(tag: Tag): Promise&lt;number&gt; {
     return await this.joinTagPoiRepository.count({
       where: {
+        tag,
+      },
+    });
+  }
+
+  async checkTag(tag: Tag, poi: Poi) {
+    return await this.joinTagPoiRepository.findOne({
+      where: {
+        poi,
         tag,
       },
     });

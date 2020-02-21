@@ -164,8 +164,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="47"
-                            class="link-to-prism">src/poi/poi.controller.ts:47</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="48"
+                            class="link-to-prism">src/poi/poi.controller.ts:48</a></div>
                 </td>
             </tr>
 
@@ -243,8 +243,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="127"
-                            class="link-to-prism">src/poi/poi.controller.ts:127</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="130"
+                            class="link-to-prism">src/poi/poi.controller.ts:130</a></div>
                 </td>
             </tr>
 
@@ -322,8 +322,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="74"
-                            class="link-to-prism">src/poi/poi.controller.ts:74</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="75"
+                            class="link-to-prism">src/poi/poi.controller.ts:75</a></div>
                 </td>
             </tr>
 
@@ -372,8 +372,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="61"
-                            class="link-to-prism">src/poi/poi.controller.ts:61</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="62"
+                            class="link-to-prism">src/poi/poi.controller.ts:62</a></div>
                 </td>
             </tr>
 
@@ -451,8 +451,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="100"
-                            class="link-to-prism">src/poi/poi.controller.ts:100</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="103"
+                            class="link-to-prism">src/poi/poi.controller.ts:103</a></div>
                 </td>
             </tr>
 
@@ -499,8 +499,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="112"
-                            class="link-to-prism">src/poi/poi.controller.ts:112</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="115"
+                            class="link-to-prism">src/poi/poi.controller.ts:115</a></div>
                 </td>
             </tr>
 
@@ -533,7 +533,7 @@
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>updatePoi(idPoi: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                    <code>updatePoi(idPoi: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, poiDto: <a href="../injectables/PoiDto.html">PoiDto</a>)</code>
                 </td>
             </tr>
 
@@ -547,8 +547,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="88"
-                            class="link-to-prism">src/poi/poi.controller.ts:88</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="90"
+                            class="link-to-prism">src/poi/poi.controller.ts:90</a></div>
                 </td>
             </tr>
 
@@ -571,6 +571,18 @@
                                     <td>idPoi</td>
                                     <td>
                                                 <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>poiDto</td>
+                                    <td>
+                                                <code><a href="../injectables/PoiDto.html" target="_self" >PoiDto</a></code>
                                     </td>
 
                                     <td>
@@ -618,6 +630,7 @@ import {
   ApiOkResponse,
   ApiTags,
 } from &#x27;@nestjs/swagger&#x27;;
+import { filterInt } from &#x27;../utils/function.utils&#x27;;
 // import { PercentTypeGreenScoreAndPoiService } from &#x27;../percent-type-green-score-and-poi/percent-type-green-score-and-poi.service&#x27;;
 
 /**
@@ -679,6 +692,7 @@ export class PoiController {
   /**
    *
    * @param idPoi
+   * @param poiDto
    */
   @ApiOkResponse()
   @ApiForbiddenResponse()
@@ -686,8 +700,9 @@ export class PoiController {
   @UseGuards(RoleGuard)
   @UsePipes(new ValidationPipe({ transform: true }))
   @Roles(&#x27;admin&#x27;)
-  async updatePoi(@Param(&#x27;id&#x27;, new ParseIntPipe()) idPoi: number) {
-    return &#x27;updatePoi&#x27;;
+  async updatePoi(@Param(&#x27;id&#x27;) idPoi: number, @Body() poiDto: PoiDto) {
+    idPoi &#x3D; filterInt(idPoi);
+    return await this.poiService.updatePoi(poiDto, idPoi);
   }
 
   /**
