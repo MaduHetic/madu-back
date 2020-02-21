@@ -6,6 +6,7 @@ import { Tag } from './tagEntity';
 import { RoleGuard } from '../guard/role.guard';
 import { Roles } from '../decorator/role.decorator';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { exaToRgbaObject } from '../utils/function.utils';
 
 @ApiTags('tags')
 @ApiBearerAuth()
@@ -17,7 +18,9 @@ export class TagsController {
   @Post()
   @UsePipes(new ValidationPipe())
   async addTag(@Body() tagDto: TagsDto) {
-    return await this.tagsService.addTag(tagDto);
+    const tag =  await this.tagsService.addTag(tagDto);
+    exaToRgbaObject(tag.colorTag, tag);
+    return tag;
   }
 
   @UseGuards(RoleGuard)
