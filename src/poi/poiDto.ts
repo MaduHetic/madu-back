@@ -113,5 +113,4 @@ export class PoiDto implements PoiInterface {
   })
   @IsEnum(PriceEnum)
   readonly price: string;
-
 }
