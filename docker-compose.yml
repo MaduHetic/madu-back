@@ -1,8 +1,8 @@
-version: "3.1"
+version: "3.0"
 
 services:
   database:
-    image: mysql:5.7
+    image: mariadb:10.4
     environment:
       MYSQL_ROOT_PASSWORD: admin
       MYSQL_DATABASE: madu
@@ -16,7 +16,7 @@ services:
       - database
 
   phpmyadmin:
-    image: phpmyadmin/phpmyadmin:4.9
+    image: phpmyadmin/phpmyadmin:latest
     depends_on:
       - database
     ports:

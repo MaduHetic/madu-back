@@ -58,7 +58,7 @@ export class PoiController {
   @Get('one/:id')
   @UsePipes(new ValidationPipe({ transform: true }))
   @UseGuards(RoleGuard)
-  @Roles('admin')
+  @Roles('user')
   async getCompanyAndTags(@Param('id', new ParseIntPipe()) idPoi: number) {
     return await this.poiService.getPoiAndTags(idPoi);
   }
@@ -71,7 +71,7 @@ export class PoiController {
   @Get()
   @UseInterceptors(EntityTypeInterceptor)
   @UseGuards(RoleGuard)
-  @Roles('admin')
+  @Roles('user')
   async getAllPoi() {
     return await this.poiService.getAllPoi();
   }

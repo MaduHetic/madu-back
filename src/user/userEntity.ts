@@ -1,5 +1,6 @@
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Role } from '../role/roleEntity';
+import { Company } from '../company/companyEntity';
 
 @Entity()
 export class User {
@@ -35,4 +36,14 @@ export class User {
     name: 'roleId',
   })
   role: Role;
+
+  @ManyToOne(type => Company, (company) => company.id, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+    nullable: true,
+  })
+  @JoinColumn({
+    name: 'companyId',
+  })
+  company: Company;
 }

@@ -4,6 +4,7 @@ import { UserDto } from './userDto';
 import { RoleGuard } from '../guard/role.guard';
 import { Roles } from '../decorator/role.decorator';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { AppUserDto } from './appUserDto';
 
 /**
  * User controller
@@ -32,5 +33,11 @@ export class UserController {
   @UsePipes(new ValidationPipe({ transform: true }))
   async deleteUer(@Param('id', new ParseIntPipe()) idUser: number) {
     return 'deletUser';
+  }
+
+  @Post('app/register')
+  @UsePipes(new ValidationPipe({transform: true}))
+  async addAppUser(@Body() appUserDto: AppUserDto) {
+    return await this.userService.addUserApp(appUserDto);
   }
 }
