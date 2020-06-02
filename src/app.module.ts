@@ -24,6 +24,11 @@ import { PercentTypeGreenScoreAndPoiModule } from './percent-type-green-score-an
 import { TypeGreenScore } from './type-green-score/typeGreenScoreEntity';
 import { PercentTypeGreenScoreAndPoi } from './percent-type-green-score-and-poi/percentTypeGreenScoreAndPoiEntity';
 import { StatsModule } from './stats/stats.module';
+import { QuizzModule } from './quizz/quizz.module';
+import { QuestionQuizzModule } from './question-quizz/question-quizz.module';
+import { KnowItModule } from './know-it/know-it.module';
+import { ChallengeModule } from './challenge/challenge.module';
+import { KnowIt } from './know-it/knowItEntity';
 
 @Module({
   imports: [
@@ -44,6 +49,7 @@ import { StatsModule } from './stats/stats.module';
         JoinTagPoiEntity,
         TypeGreenScore,
         PercentTypeGreenScoreAndPoi,
+        KnowIt,
       ],
       synchronize: true,
     }),
@@ -60,6 +66,10 @@ import { StatsModule } from './stats/stats.module';
     TypeGreenScoreModule,
     PercentTypeGreenScoreAndPoiModule,
     StatsModule,
+    QuizzModule,
+    QuestionQuizzModule,
+    KnowItModule,
+    ChallengeModule,
   ],
   controllers: [AppController],
   providers: [AppService],

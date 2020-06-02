@@ -43,4 +43,10 @@ export class AppController {
   async getProfile(@Request() req) {
     return req.user;
   }
+
+  @UseGuards(AuthGuard('test'))
+  @Get('toto')
+  async toto(@Request() req) {
+    return req.user;
+  }
 }
