@@ -29,6 +29,13 @@ import { QuestionQuizzModule } from './question-quizz/question-quizz.module';
 import { KnowItModule } from './know-it/know-it.module';
 import { ChallengeModule } from './challenge/challenge.module';
 import { KnowIt } from './know-it/knowItEntity';
+import { Quizz } from './quizz/quizzEntity';
+import { QuestionQuizz } from './question-quizz/questionQuizzEntity';
+import { JoinUserQuizzModule } from './join-user-quizz/join-user-quizz.module';
+import { JoinUserQuzz } from './join-user-quizz/joinUserQuizzEntity';
+import { JoinUserChallengeModule } from './join-user-challenge/join-user-challenge.module';
+import { Challenge } from './challenge/challengeEntity';
+import { JoinUserChallenge } from './join-user-challenge/joinUserChallengeEntity';
 
 @Module({
   imports: [
@@ -50,6 +57,11 @@ import { KnowIt } from './know-it/knowItEntity';
         TypeGreenScore,
         PercentTypeGreenScoreAndPoi,
         KnowIt,
+        Quizz,
+        QuestionQuizz,
+        JoinUserQuzz,
+        Challenge,
+        JoinUserChallenge,
       ],
       synchronize: true,
     }),
@@ -70,6 +82,8 @@ import { KnowIt } from './know-it/knowItEntity';
     QuestionQuizzModule,
     KnowItModule,
     ChallengeModule,
+    JoinUserQuizzModule,
+    JoinUserChallengeModule,
   ],
   controllers: [AppController],
   providers: [AppService],

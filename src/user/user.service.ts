@@ -82,4 +82,31 @@ export class UserService {
     const {password, ...addData} = await this.userRepository.save(userAppDto);
     return addData;
   }
+
+  async getEmerald(user) {
+    return await this.userRepository.findOneOrFail({
+      select: ['crystal'],
+      where: {
+        id: user.id,
+      },
+    }).catch(() => {
+      throw new NotFoundException('No User Found');
+    });
+  }
+
+  async addCrystal(crystal: number, user) {
+    const currentCrystal = await this.getEmerald(user.user.user);
+    const totalCrystal: number = currentCrystal.crystal + crystal;
+    const toto = await this.userRepository.createQueryBuilder()
+      .update(User)
+      .set({crystal: totalCrystal})
+      .where('id = :id', {id: user.user.user.id})
+      .execute();
+    console.log(toto);
+    return totalCrystal;
+  }
+
+  async addSaphir(saphir: number, user: User) {
+
+  }
 }

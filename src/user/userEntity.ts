@@ -46,4 +46,9 @@ export class User {
     name: 'companyId',
   })
   company: Company;
+
+  @Column({
+    default: 0,
+  })
+  crystal: number;
 }
