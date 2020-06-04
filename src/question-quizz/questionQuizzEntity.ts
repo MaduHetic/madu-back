@@ -1,7 +1,7 @@
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Quizz } from '../quizz/quizzEntity';
 
-@Entity('questionQuizz')
+@Entity('question_quizz')
 export class QuestionQuizz {
   @PrimaryGeneratedColumn()
   id: number;

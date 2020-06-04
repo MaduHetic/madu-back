@@ -1,4 +1,4 @@
-import { Body, Controller, Post, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 import { KnowItService } from './know-it.service';
@@ -23,4 +23,10 @@ export class KnowItController {
     return await this.knowItService.addKnowIt(knowItDto);
   }
 
+  @Get()
+  @UseGuards(RoleGuard)
+  @Roles('user')
+  async getKnowIt() {
+    return await this.knowItService.getKnowIt();
+  }
 }

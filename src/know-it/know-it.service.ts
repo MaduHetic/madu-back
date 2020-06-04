@@ -13,4 +13,10 @@ export class KnowItService {
   async addKnowIt(knowIt) {
     return await this.knowItRepository.save(knowIt);
   }
+
+  async getKnowIt() {
+    return await this.knowItRepository.find({
+      select: ['id', 'knowIt'],
+    });
+  }
 }

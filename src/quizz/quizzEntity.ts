@@ -26,4 +26,11 @@ export class Quizz {
     nullable: true,
   })
   publicationDate: string;
+
+  @Column({
+    length: 200,
+    nullable: true,
+    default: null,
+  })
+  imgBackground: string;
 }
