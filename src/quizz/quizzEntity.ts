@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { ThemeQuizz } from '../theme-quizz/themeQuizzEntity';
 
 @Entity('quizz')
 export class Quizz {
@@ -33,4 +34,13 @@ export class Quizz {
     default: null,
   })
   imgBackground: string;
+
+  @ManyToOne(type => ThemeQuizz, (themeQuizz) => themeQuizz.id, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
+  @JoinColumn({
+    name: 'idThemeQuizz',
+  })
+  themeQuizz: ThemeQuizz;
 }

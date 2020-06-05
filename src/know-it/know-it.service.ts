@@ -16,7 +16,7 @@ export class KnowItService {
 
   async getKnowIt() {
     return await this.knowItRepository.find({
-      select: ['id', 'knowIt'],
+      select: ['id', 'title', 'description'],
     });
   }
 }

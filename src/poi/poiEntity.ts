@@ -71,4 +71,11 @@ export class Poi {
 
   @CreateDateColumn()
   dateCreate: string;
+
+  @Column({
+    nullable: true,
+    default: null,
+    length: 300,
+  })
+  mainImg: string;
 }

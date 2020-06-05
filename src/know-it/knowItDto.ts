@@ -5,7 +5,7 @@ export class KnowItDto {
   title: string;
 
   @IsString()
-  knowIt: string;
+  description: string;
 
   @IsString()
   publicationDate: string;

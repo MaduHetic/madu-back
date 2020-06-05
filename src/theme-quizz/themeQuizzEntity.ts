@@ -1,28 +1,31 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity('knowIt')
-export class KnowIt {
+@Entity('theme_quizz')
+export class ThemeQuizz {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column({
-    length: 75,
+    length: 100,
   })
-  title: string;
+  theme: string;
 
   @Column({
-    length: 750,
+    nullable: true,
+    default: null,
+    length: 300,
   })
-  description: string;
+  imgBackground: string;
 
   @Column({
-    type: 'datetime',
-    default: () => 'CURRENT_TIMESTAMP',
+    type: 'timestamp',
   })
   dateCreate: string;
 
   @Column({
     type: 'timestamp',
+    nullable: true,
+    default: null,
   })
   publicationDate: string;
 }
