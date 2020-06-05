@@ -63,7 +63,7 @@ export class UserService {
    */
   async getUser(userId: number) {
     return await this.userRepository.findOneOrFail(userId, {
-      relations: ['role'],
+      relations: ['role', 'company'],
     })
       .catch(() => {
         throw new NotFoundException(`user with ${userId} not found`);

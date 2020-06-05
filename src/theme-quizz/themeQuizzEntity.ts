@@ -28,4 +28,14 @@ export class ThemeQuizz {
     default: null,
   })
   publicationDate: string;
+
+  @Column({
+    default: 100,
+  })
+  readonly reward: number;
+
+  @Column({
+    default: 2,
+  })
+  readonly duration: number;
 }
