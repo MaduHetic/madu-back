@@ -3,6 +3,7 @@ import { Repository } from 'typeorm';
 import { Quizz } from './quizzEntity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { QuestionQuizzService } from '../question-quizz/question-quizz.service';
+import { ThemeQuizz } from '../theme-quizz/themeQuizzEntity';
 
 @Injectable()
 export class QuizzService {
@@ -32,4 +33,19 @@ export class QuizzService {
       return quizAndAnswer;
     }));
   }
+
+  async getQuizzByTheme(theme: ThemeQuizz) {
+    const quizzs = await this.quizzRepository.find({
+      select: ['id', 'question'],
+      where: {
+        themeQuizz: theme,
+      },
+    });
+    return Promise.all(quizzs.map(async (quizz) => {
+      const quizAndAnswer: any = quizz;
+      quizAndAnswer.answer = await this.questionQuizzService.getAnswerByQuizz(quizz);
+      return quizAndAnswer;
+    }));
+  }
+
 }

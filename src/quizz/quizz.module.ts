@@ -13,5 +13,6 @@ import { QuestionQuizzModule } from '../question-quizz/question-quizz.module';
   ],
   providers: [QuizzService],
   controllers: [QuizzController],
+  exports: [QuizzService],
 })
 export class QuizzModule {}

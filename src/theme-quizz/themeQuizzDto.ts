@@ -15,10 +15,4 @@ export class ThemeQuizzDto {
   @IsString()
   @ApiProperty()
   readonly publicationDate?: string;
-
-  @ApiProperty()
-  @IsDefined()
-  @ValidateNested()
-  @Type(() => QuizzAndQuestionDto)
-  readonly infoQuizz: [QuizzAndQuestionDto];
 }

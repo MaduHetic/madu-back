@@ -28,16 +28,10 @@ export class Quizz {
   })
   publicationDate: string;
 
-  @Column({
-    length: 200,
-    nullable: true,
-    default: null,
-  })
-  imgBackground: string;
-
   @ManyToOne(type => ThemeQuizz, (themeQuizz) => themeQuizz.id, {
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
+    nullable: false,
   })
   @JoinColumn({
     name: 'idThemeQuizz',
