@@ -24,6 +24,22 @@ import { PercentTypeGreenScoreAndPoiModule } from './percent-type-green-score-an
 import { TypeGreenScore } from './type-green-score/typeGreenScoreEntity';
 import { PercentTypeGreenScoreAndPoi } from './percent-type-green-score-and-poi/percentTypeGreenScoreAndPoiEntity';
 import { StatsModule } from './stats/stats.module';
+import { QuizzModule } from './quizz/quizz.module';
+import { QuestionQuizzModule } from './question-quizz/question-quizz.module';
+import { KnowItModule } from './know-it/know-it.module';
+import { ChallengeModule } from './challenge/challenge.module';
+import { KnowIt } from './know-it/knowItEntity';
+import { Quizz } from './quizz/quizzEntity';
+import { QuestionQuizz } from './question-quizz/questionQuizzEntity';
+import { JoinUserQuizzModule } from './join-user-quizz/join-user-quizz.module';
+import { JoinUserQuzz } from './join-user-quizz/joinUserQuizzEntity';
+import { JoinUserChallengeModule } from './join-user-challenge/join-user-challenge.module';
+import { Challenge } from './challenge/challengeEntity';
+import { JoinUserChallenge } from './join-user-challenge/joinUserChallengeEntity';
+import { ImgPoiModule } from './img-poi/img-poi.module';
+import { ImgPoi } from './img-poi/imgPoiEntity';
+import { ThemeQuizzModule } from './theme-quizz/theme-quizz.module';
+import { ThemeQuizz } from './theme-quizz/themeQuizzEntity';
 
 @Module({
   imports: [
@@ -44,6 +60,14 @@ import { StatsModule } from './stats/stats.module';
         JoinTagPoiEntity,
         TypeGreenScore,
         PercentTypeGreenScoreAndPoi,
+        KnowIt,
+        Quizz,
+        QuestionQuizz,
+        JoinUserQuzz,
+        Challenge,
+        JoinUserChallenge,
+        ImgPoi,
+        ThemeQuizz,
       ],
       synchronize: true,
     }),
@@ -60,6 +84,14 @@ import { StatsModule } from './stats/stats.module';
     TypeGreenScoreModule,
     PercentTypeGreenScoreAndPoiModule,
     StatsModule,
+    QuizzModule,
+    QuestionQuizzModule,
+    KnowItModule,
+    ChallengeModule,
+    JoinUserQuizzModule,
+    JoinUserChallengeModule,
+    ImgPoiModule,
+    ThemeQuizzModule,
   ],
   controllers: [AppController],
   providers: [AppService],

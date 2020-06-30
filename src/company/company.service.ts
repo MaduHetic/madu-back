@@ -1,4 +1,4 @@
-import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
+import { ConflictException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Company } from './companyEntity';
 import { Repository } from 'typeorm';
@@ -89,6 +89,14 @@ export class CompanyService {
       order: {
         createDate: 'ASC',
       },
+    });
+  }
+
+  async getCompanyByDomainMail(domainMail: string) {
+    return await this.companyRepository.findOneOrFail({
+      domainMail,
+    }).catch(() => {
+      throw new UnauthorizedException('unable to create a new user contact your company');
     });
   }
 }

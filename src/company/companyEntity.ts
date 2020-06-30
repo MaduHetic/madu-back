@@ -90,6 +90,11 @@ export class Company {
   })
   nbWorker: number;
 
+  @Column({
+    default: 1000,
+  })
+  range: number;
+
   /**
    * Date when the contract begin
    */

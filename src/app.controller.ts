@@ -38,7 +38,8 @@ export class AppController {
   @ApiUnauthorizedResponse()
   @ApiOkResponse()
   @UseGuards(AuthGuard('jwt'))
-  @UseGuards(RoleGuard)
+  // @UseGuards(RoleGuard)
+  // @Roles('user')
   @Get('profile')
   async getProfile(@Request() req) {
     return req.user;
