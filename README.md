@@ -12,12 +12,12 @@
 * NestJS
 * MySQL
 * TypeOrm
-* json web token
+* json web token pour l'authentification a l'api
 
 
 ## Documentation
-* [Compodoc](http://35.180.228.155:8081)
-* [Swagger](http://35.180.228.155:3000/documentation/)
+* Compodoc(http://${URL}:8081)
+* Swagger (http://${URL}:3000/documentation/)
 
 ## UML Base de donnée
 ![Schema Base de donnée](./asset/madu.png)
