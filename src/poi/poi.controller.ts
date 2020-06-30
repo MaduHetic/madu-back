@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, UseGuards, UseInterceptors, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, UseGuards, UseInterceptors, UsePipes, ValidationPipe, Request } from '@nestjs/common';
 import { PoiService } from './poi.service';
 import { AuthGuard } from '@nestjs/passport';
 import { PoiDto } from './poiDto';
@@ -18,6 +18,7 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { filterInt } from '../utils/function.utils';
+import { PoiGeoCalcService } from './poi.geo.calc.service';
 // import { PercentTypeGreenScoreAndPoiService } from '../percent-type-green-score-and-poi/percent-type-green-score-and-poi.service';
 
 /**
@@ -31,6 +32,7 @@ export class PoiController {
   constructor(
     private readonly poiService: PoiService,
     private readonly joinTagPoiService: JoinTagPoiService,
+    private readonly poiGeoCalcService: PoiGeoCalcService,
     // private readonly percentTypeGreenScoreAndPoiService: PercentTypeGreenScoreAndPoiService,
   ) {}
 
@@ -129,5 +131,13 @@ export class PoiController {
   @UsePipes(new ValidationPipe({ transform: true }))
   async deletePoi(@Param('id', new ParseIntPipe()) idPoi: number) {
     return await this.poiService.deletePoi(idPoi);
+  }
+
+  @Get('nearby')
+  @ApiForbiddenResponse()
+  @UseGuards(RoleGuard)
+  @Roles('user')
+  async getNearbyPoi(@Request() req) {
+    return await this.poiGeoCalcService.getNearbyPoi(req.user)
   }
 }

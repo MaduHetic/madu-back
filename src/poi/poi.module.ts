@@ -1,4 +1,4 @@
-import { forwardRef, Module } from '@nestjs/common';
+import {  Module } from '@nestjs/common';
 import { PoiService } from './poi.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Poi } from './poiEntity';
@@ -7,8 +7,9 @@ import { TagsModule } from '../tags/tags.module';
 import { JoinTagPoiModule } from '../join-tag-poi/join-tag-poi.module';
 import { TypeModule } from '../type/type.module';
 import { PercentTypeGreenScoreAndPoiModule } from '../percent-type-green-score-and-poi/percent-type-green-score-and-poi.module';
-import { TypeGreenScoreService } from '../type-green-score/type-green-score.service';
 import { TypeGreenScoreModule } from '../type-green-score/type-green-score.module';
+import { CompanyModule } from '../company/company.module';
+import { PoiGeoCalcService } from './poi.geo.calc.service';
 
 @Module({
   imports: [
@@ -18,8 +19,9 @@ import { TypeGreenScoreModule } from '../type-green-score/type-green-score.modul
     TypeModule,
     TypeGreenScoreModule,
     PercentTypeGreenScoreAndPoiModule,
+    CompanyModule,
   ],
-  providers: [PoiService],
+  providers: [PoiService, PoiGeoCalcService],
   controllers: [PoiController],
   exports: [PoiService],
 })

@@ -99,7 +99,7 @@ export class PoiService {
     };
   }
 
-  async getAllPoi() {
+  async getAllPoi(): Promise<Poi[]> {
     const allPoi = await this.poiRepository.find();
     const allPoiWithTagsAndTypesPromise = allPoi.map(async (poi) =>  {
       const poiWithType: any = poi;

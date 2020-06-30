@@ -25,8 +25,8 @@ services:
       - database
     environment:
       PMA_HOST: database
-      PMA_USER: user
-      PMA_PASSWORD: root
+      PMA_USER: root
+      PMA_PASSWORD: admin
 
   documentation:
     image: httpd:latest
