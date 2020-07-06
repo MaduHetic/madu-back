@@ -5,6 +5,8 @@ import { PriceEnum } from './enum/price.enum';
 import { ApiProperty, ApiPropertyOptional, getSchemaPath } from '@nestjs/swagger';
 import { PercentAndIdTag } from './percentAndIdTag';
 import { TypePoiEnum } from './enum/typePoiEnum';
+import { ImgPoiDto } from '../img-poi/imgPoiDto';
+import { Type } from 'class-transformer';
 
 /**
  * Data attempt to add new poi
@@ -113,4 +115,12 @@ export class PoiDto implements PoiInterface {
   })
   @IsEnum(PriceEnum)
   readonly price: string;
+
+  @IsOptional()
+  @IsString()
+  readonly mainImg: string;
+
+  @IsArray()
+  @IsOptional()
+  readonly imgsPois: string[];
 }
