@@ -18,4 +18,20 @@ export class ImgPoiService {
     };
     return await this.imgPoiRepository.save(poiAndImg);
   }
+
+  async getImgs(poi: Poi): Promise<ImgPoi[]> {
+    return await this.imgPoiRepository.find({
+      select: ['img'],
+      where: {
+        poi,
+      },
+    });
+  }
+
+  async serializeImgUrl(imgs) {
+    return imgs.map((img) => {
+      return img.img;
+    });
+  }
+
 }

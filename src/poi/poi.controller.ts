@@ -138,4 +138,12 @@ export class PoiController {
   async getNearbyPoi(@Request() req) {
     return await this.poiGeoCalcService.getNearbyPoi(req.user);
   }
+
+  @Get('nearby/:id')
+  @ApiForbiddenResponse()
+  @UseGuards(RoleGuard)
+  @Roles('user')
+  async getOneNearbyPoi(@Param('id', new ParseIntPipe()) idPoi: number, @Request() req) {
+    return await this.poiGeoCalcService.getDistancePoi(idPoi, req.user.user);
+  }
 }

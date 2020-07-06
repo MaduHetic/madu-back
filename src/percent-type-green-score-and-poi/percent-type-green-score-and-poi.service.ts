@@ -87,7 +87,7 @@ export class PercentTypeGreenScoreAndPoiService {
     allPercent.forEach((percent) => {
       total +=  percent.percent;
     });
-    return total / allPercent.length;
+    return (total / allPercent.length) / 10;
   }
 
   /**
