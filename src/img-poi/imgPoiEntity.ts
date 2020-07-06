@@ -19,4 +19,9 @@ export class ImgPoi {
     name: 'idPoi',
   })
   poi: Poi;
+
+  @Column({
+    default: false,
+  })
+  mainImage: boolean;
 }

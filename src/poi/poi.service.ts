@@ -107,6 +107,7 @@ export class PoiService {
       poiWithType.tags = await this.joinTagPoiService.serializeTagsData(tags);
       poiWithType.greenScore = await this.percentTypeGreenScoreAndPoiService.getGreenScorePassMark(poi);
       poiWithType.typeGreenScore = await this.percentTypeGreenScoreAndPoiService.serialazeData(await this.percentTypeGreenScoreAndPoiService.getType(poi));
+      // poiWithType.imgs = await this.
       return poiWithType;
     });
     return  await Promise.all(allPoiWithTagsAndTypesPromise);
