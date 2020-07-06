@@ -19,4 +19,5 @@ export class ImgPoi {
     name: 'idPoi',
   })
   poi: Poi;
+
 }

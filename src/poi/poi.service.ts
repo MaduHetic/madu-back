@@ -12,6 +12,8 @@ import { PercentTypeGreenScoreAndPoi } from '../percent-type-green-score-and-poi
 import { exaToRgbaObject, getEnumKey } from '../utils/function.utils';
 import { TypePoiEnum } from './enum/typePoiEnum';
 import { ancestorWhere } from 'tslint';
+import { ImgPoiService } from '../img-poi/img-poi.service';
+import { PoiGeoCalcService } from './poi.geo.calc.service';
 
 @Injectable()
 export class PoiService {
@@ -24,6 +26,7 @@ export class PoiService {
    * @param typeGreenScoreService
    * @param joinTagPoiService
    * @param percentTypeGreenScoreAndPoiService
+   * @param imgPoiService
    */
   constructor(
     @InjectRepository(Poi)
@@ -34,6 +37,7 @@ export class PoiService {
     private typeGreenScoreService: TypeGreenScoreService,
     private joinTagPoiService: JoinTagPoiService,
     private percentTypeGreenScoreAndPoiService: PercentTypeGreenScoreAndPoiService,
+    private imgPoiService: ImgPoiService,
   ) {}
 
   async formatToPercentTGCAndPoi(poi: Poi, typeAndPercent: PercentAndIdTag[]): Promise<PercentTypeGreenScoreAndPoi[]> {
@@ -74,14 +78,26 @@ export class PoiService {
       await Promise.all(percentTypeGcAndPoiAddedPromise);
     }
     await Promise.all(tagAddedPromise);
+    if (poiDto.imgsPoi) {
+      await Promise.all(poiDto.imgsPoi.map( async (img) => {
+        return await this.imgPoiService.addImgPoi(img, poiAdded);
+      }));
+    }
     return poiAdded;
   }
 
   async getPoi(idPoi: number): Promise<Poi> {
-    return await this.poiRepository.findOneOrFail(idPoi)
+    const poi =  await this.poiRepository.findOneOrFail(idPoi)
       .catch(() => {
         throw new NotFoundException(`Poi with id ${idPoi} Not Found`);
       });
+    poi.greenScore = await this.percentTypeGreenScoreAndPoiService.getGreenScorePassMark(poi);
+    return  poi;
+  }
+
+  async getUserPoi(idPoi: number, user) {
+    const poi: any = await this.getPoi(idPoi);
+    // poi.distance =  this.poiGeoCalcService.calcDist(poi)
   }
 
   async getPoiAndTags(idPoi: number) {
@@ -111,7 +127,25 @@ export class PoiService {
     });
     return  await Promise.all(allPoiWithTagsAndTypesPromise);
   }
-
+/*
+  async getPoiForUserr(user) {
+    const allPoi = await this.poiRepository.find();
+    const allPoiWithTagsAndTypesPromise = allPoi.map(async (poi) =>  {
+      const poiWithType: any = poi;
+      const tags = await this.joinTagPoiService.getAllCompanyTag(poi);
+      poiWithType.tags = await this.joinTagPoiService.serializeTagsData(tags);
+      poiWithType.greenScore = await this.percentTypeGreenScoreAndPoiService.getGreenScorePassMark(poi);
+      poiWithType.typeGreenScore = await this.percentTypeGreenScoreAndPoiService.serialazeData(await this.percentTypeGreenScoreAndPoiService.getType(poi));
+      const imgs = await this.imgPoiService.getImgs(poi);
+      poiWithType.imgs = imgs.map((img) => {
+        return img.img;
+      });
+      poiWithType.distance = await this.poiGeoCalcService.getDitancePoi(user, poi);
+      return poiWithType;
+    });
+    return  await Promise.all(allPoiWithTagsAndTypesPromise);
+  }
+*/
   async countPoi() {
     return await this.poiRepository.count();
   }

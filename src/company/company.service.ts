@@ -96,7 +96,7 @@ export class CompanyService {
     return await this.companyRepository.findOneOrFail({
       domainMail,
     }).catch(() => {
-      throw new UnauthorizedException('unable to create a new user contact your company');
+      throw new UnauthorizedException(`Cannot find company domain mail ${domainMail}`);
     });
   }
 }

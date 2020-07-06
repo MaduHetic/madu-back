@@ -90,23 +90,18 @@ export class UserService {
         id: user.id,
       },
     }).catch(() => {
-      throw new NotFoundException('No User Found');
+      throw new NotFoundException(`No User Found ${user.id}`);
     });
   }
 
   async addCrystal(crystal: number, user) {
-    const currentCrystal = await this.getEmerald(user.user.user);
+    const currentCrystal = await this.getEmerald(user);
     const totalCrystal: number = currentCrystal.crystal + crystal;
     const toto = await this.userRepository.createQueryBuilder()
       .update(User)
       .set({crystal: totalCrystal})
-      .where('id = :id', {id: user.user.user.id})
+      .where('id = :id', {id: user.id})
       .execute();
-    console.log(toto);
     return totalCrystal;
-  }
-
-  async addSaphir(saphir: number, user: User) {
-
   }
 }

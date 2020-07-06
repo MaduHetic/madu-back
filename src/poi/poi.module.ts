@@ -10,6 +10,7 @@ import { PercentTypeGreenScoreAndPoiModule } from '../percent-type-green-score-a
 import { TypeGreenScoreModule } from '../type-green-score/type-green-score.module';
 import { CompanyModule } from '../company/company.module';
 import { PoiGeoCalcService } from './poi.geo.calc.service';
+import { ImgPoiModule } from '../img-poi/img-poi.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { PoiGeoCalcService } from './poi.geo.calc.service';
     TypeGreenScoreModule,
     PercentTypeGreenScoreAndPoiModule,
     CompanyModule,
+    ImgPoiModule,
   ],
   providers: [PoiService, PoiGeoCalcService],
   controllers: [PoiController],
