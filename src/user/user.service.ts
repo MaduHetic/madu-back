@@ -75,6 +75,7 @@ export class UserService {
   }
 
   async addUserApp(userAppDto) {
+    console.log('GAAAAAAAAAAAAAAAAAAAAAAAA');
     userAppDto.role = await this.roleService.getOneOrFailByRole(this.USER_ROLE);
     userAppDto.company = await this.companyService
       .getCompanyByDomainMail(await this.getDomainMail(userAppDto.mail));
