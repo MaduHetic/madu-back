@@ -2,9 +2,7 @@ import { Controller, Post, UseGuards, Request, Get, Body } from '@nestjs/common'
 import {AuthService} from './auth/auth.service';
 import {AuthGuard} from '@nestjs/passport';
 import { AccessToken } from './auth/access-token';
-import { RoleGuard } from './guard/role.guard';
-import { Roles } from './decorator/role.decorator';
-import { ApiBasicAuth, ApiBearerAuth, ApiOkResponse, ApiTags, ApiUnauthorizedResponse } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOkResponse, ApiTags, ApiUnauthorizedResponse } from '@nestjs/swagger';
 import { LoginDto } from './loginDto';
 
 /**

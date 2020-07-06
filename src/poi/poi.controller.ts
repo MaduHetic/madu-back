@@ -12,14 +12,12 @@ import {
   ApiBearerAuth,
   ApiCreatedResponse,
   ApiForbiddenResponse,
-  ApiGoneResponse,
   ApiNotFoundResponse,
   ApiOkResponse,
   ApiTags,
 } from '@nestjs/swagger';
 import { filterInt } from '../utils/function.utils';
 import { PoiGeoCalcService } from './poi.geo.calc.service';
-// import { PercentTypeGreenScoreAndPoiService } from '../percent-type-green-score-and-poi/percent-type-green-score-and-poi.service';
 
 /**
  * point of interest controller
@@ -138,6 +136,6 @@ export class PoiController {
   @UseGuards(RoleGuard)
   @Roles('user')
   async getNearbyPoi(@Request() req) {
-    return await this.poiGeoCalcService.getNearbyPoi(req.user)
+    return await this.poiGeoCalcService.getNearbyPoi(req.user);
   }
 }
