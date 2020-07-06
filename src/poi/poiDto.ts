@@ -122,5 +122,5 @@ export class PoiDto implements PoiInterface {
 
   @IsArray()
   @IsOptional()
-  readonly imgsPois: string[];
+  readonly imgsPoi: string[];
 }

@@ -12,6 +12,7 @@ import { PercentTypeGreenScoreAndPoi } from '../percent-type-green-score-and-poi
 import { exaToRgbaObject, getEnumKey } from '../utils/function.utils';
 import { TypePoiEnum } from './enum/typePoiEnum';
 import { ancestorWhere } from 'tslint';
+import { ImgPoiService } from '../img-poi/img-poi.service';
 
 @Injectable()
 export class PoiService {
@@ -34,6 +35,7 @@ export class PoiService {
     private typeGreenScoreService: TypeGreenScoreService,
     private joinTagPoiService: JoinTagPoiService,
     private percentTypeGreenScoreAndPoiService: PercentTypeGreenScoreAndPoiService,
+    private imgPoiService: ImgPoiService,
   ) {}
 
   async formatToPercentTGCAndPoi(poi: Poi, typeAndPercent: PercentAndIdTag[]): Promise<PercentTypeGreenScoreAndPoi[]> {
@@ -74,6 +76,11 @@ export class PoiService {
       await Promise.all(percentTypeGcAndPoiAddedPromise);
     }
     await Promise.all(tagAddedPromise);
+    if (poiDto.imgsPoi) {
+      await Promise.all(poiDto.imgsPoi.map( async (img) => {
+        return await this.imgPoiService.addImgPoi(img, poiAdded);
+      }));
+    }
     return poiAdded;
   }
 

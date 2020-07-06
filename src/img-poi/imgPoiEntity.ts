@@ -20,8 +20,4 @@ export class ImgPoi {
   })
   poi: Poi;
 
-  @Column({
-    default: false,
-  })
-  mainImage: boolean;
 }
