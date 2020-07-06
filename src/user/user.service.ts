@@ -75,7 +75,6 @@ export class UserService {
   }
 
   async addUserApp(userAppDto) {
-    console.log('GAAAAAAAAAAAAAAAAAAAAAAAA');
     userAppDto.role = await this.roleService.getOneOrFailByRole(this.USER_ROLE);
     userAppDto.company = await this.companyService
       .getCompanyByDomainMail(await this.getDomainMail(userAppDto.mail));
@@ -103,11 +102,6 @@ export class UserService {
       .set({crystal: totalCrystal})
       .where('id = :id', {id: user.user.user.id})
       .execute();
-    console.log(toto);
     return totalCrystal;
-  }
-
-  async addSaphir(saphir: number, user: User) {
-
   }
 }

@@ -1,10 +1,13 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, UseGuards, Request, UsePipes, ValidationPipe } from '@nestjs/common';
 import { ChallengeService } from './challenge.service';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 import { ChallengeDto } from './challengeDto';
 import { RoleGuard } from '../guard/role.guard';
 import { Roles } from '../decorator/role.decorator';
+import { JoinUserChallengeService } from '../join-user-challenge/join-user-challenge.service';
+import { Challenge } from './challengeEntity';
+import { JoinUserChallengeDto } from '../join-user-challenge/joinUserChallengeDto';
 
 @ApiTags('Challenge')
 @ApiBearerAuth()
@@ -13,6 +16,7 @@ import { Roles } from '../decorator/role.decorator';
 export class ChallengeController {
   constructor(
     private readonly challengeService: ChallengeService,
+    private readonly joinUserChallengeService: JoinUserChallengeService,
   ) {}
 
   @UseGuards(RoleGuard)
@@ -43,4 +47,14 @@ export class ChallengeController {
     return await this.challengeService.deleteChallenge(idChallenge);
   }
 
+  @UsePipes(ValidationPipe)
+  @UseGuards(RoleGuard)
+  @Roles('user')
+  @Post('validate')
+  async validateChallenge(@Body() joinUserChallengeDto: JoinUserChallengeDto, @Request() req) {
+    const {challenge, doChallenge } = joinUserChallengeDto;
+    const challengeEntity = await this.challengeService.findOne(challenge);
+    const user = req.user.user;
+    return await this.joinUserChallengeService.addJoinUserChallenge(challengeEntity, user, doChallenge);
+  }
 }
