@@ -15,16 +15,16 @@ export class JoinUserChallengeService {
     private readonly userService: UserService,
   ) {}
 
-  async addJoinUserChallenge(challenge: Challenge, user: User, doChallenge: boolean) {
+  async addJoinUserChallenge(challenge: Challenge, user, doChallenge: boolean) {
       const userChallenge = {
         challenge,
-        user,
+        user: user.user,
         do: doChallenge,
       };
       await this.joinUserChallengeRepository.save(userChallenge);
       if (doChallenge) {
-        await this.userService.addCrystal(challenge.crystalGain, user);
+        await this.userService.addCrystal(challenge.crystalGain, userChallenge.user);
       }
-      return await this.userService.getEmerald(user);
+      return await this.userService.getEmerald(userChallenge.user);
   }
 }

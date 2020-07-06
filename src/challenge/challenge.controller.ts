@@ -54,7 +54,7 @@ export class ChallengeController {
   async validateChallenge(@Body() joinUserChallengeDto: JoinUserChallengeDto, @Request() req) {
     const {challenge, doChallenge } = joinUserChallengeDto;
     const challengeEntity = await this.challengeService.findOne(challenge);
-    const user = req.user.user;
+    const user = req.user;
     return await this.joinUserChallengeService.addJoinUserChallenge(challengeEntity, user, doChallenge);
   }
 }

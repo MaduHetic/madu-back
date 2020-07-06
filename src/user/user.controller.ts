@@ -44,6 +44,6 @@ export class UserController {
   @UseGuards(AuthGuard('jwt'))
   @UsePipes(new ValidationPipe({transform: true}))
   async addEm(@Param('em', new ParseIntPipe()) em: number, @Request() user) {
-    return await this.userService.addCrystal(em, user);
+    return await this.userService.addCrystal(em, user.user);
   }
 }
