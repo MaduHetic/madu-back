@@ -77,8 +77,9 @@ export class UserService {
   async addUserApp(userAppDto) {
     userAppDto.role = await this.roleService.getOneOrFailByRole(this.USER_ROLE);
     userAppDto.company = await this.companyService
-      .getCompanyByDomainMail(await this.getDomainMail(userAppDto.mail));
+      .getCompanyByDomainMail(await this.getDomainMail(userAppDto.username));
     userAppDto.password = await this.hashPassword(userAppDto.password);
+    userAppDto.mail = userAppDto.username;
     const {password, ...addData} = await this.userRepository.save(userAppDto);
     return addData;
   }

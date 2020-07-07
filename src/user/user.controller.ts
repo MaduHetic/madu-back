@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, UseGuards, UsePipes, ValidationPipe, Request } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, UseGuards, UsePipes, ValidationPipe, Request, Redirect } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserDto } from './userDto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
@@ -35,6 +35,7 @@ export class UserController {
   }
 
   @Post('app/register')
+  @Redirect('/auth/login', 308)
   @UsePipes(new ValidationPipe({transform: true}))
   async addAppUser(@Body() appUserDto: AppUserDto) {
     return await this.userService.addUserApp(appUserDto);
