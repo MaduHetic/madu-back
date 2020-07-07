@@ -78,4 +78,9 @@ export class Poi {
     length: 300,
   })
   mainImg: string;
+
+  @Column({
+    default: 100,
+  })
+  reward: number;
 }
