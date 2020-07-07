@@ -57,6 +57,14 @@ export class UserService {
     });
   }
 
+  async findEmail(mail: string) {
+    return await this.userRepository.findOne({
+      where: {
+        mail,
+      },
+    });
+  }
+
   /**
    *
    * @param userId
@@ -79,7 +87,10 @@ export class UserService {
     userAppDto.company = await this.companyService
       .getCompanyByDomainMail(await this.getDomainMail(userAppDto.username));
     userAppDto.password = await this.hashPassword(userAppDto.password);
-    userAppDto.mail = userAppDto.username;
+    userAppDto.mail = userAppDto.username.trim().toLowerCase();
+    if (await this.findEmail(userAppDto.mail)) {
+      throw new ConflictException('Cette adresse mail existe déjà');
+    }
     const {password, ...addData} = await this.userRepository.save(userAppDto);
     return addData;
   }
