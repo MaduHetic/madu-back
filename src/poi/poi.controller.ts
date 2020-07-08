@@ -18,6 +18,8 @@ import {
 } from '@nestjs/swagger';
 import { filterInt } from '../utils/function.utils';
 import { PoiGeoCalcService } from './poi.geo.calc.service';
+import { JoinUserPoiInterface } from '../join-user-poi/join-user-poi.interface';
+import { JoinUserPoiService } from '../join-user-poi/join-user-poi.service';
 
 /**
  * point of interest controller
@@ -31,6 +33,7 @@ export class PoiController {
     private readonly poiService: PoiService,
     private readonly joinTagPoiService: JoinTagPoiService,
     private readonly poiGeoCalcService: PoiGeoCalcService,
+    private readonly joinUserPoiService: JoinUserPoiService,
     // private readonly percentTypeGreenScoreAndPoiService: PercentTypeGreenScoreAndPoiService,
   ) {}
 
@@ -145,5 +148,23 @@ export class PoiController {
   @Roles('user')
   async getOneNearbyPoi(@Param('id', new ParseIntPipe()) idPoi: number, @Request() req) {
     return await this.poiGeoCalcService.getDistancePoi(idPoi, req.user.user);
+  }
+
+  @Get('validate/:id')
+  @UseGuards(RoleGuard)
+  @Roles('user')
+  async validateGoInPoi(@Param('id', new ParseIntPipe()) id: number, @Request() req) {
+    const joinUserPoi: JoinUserPoiInterface = {
+      poi: await this.poiService.getPoi(id),
+      user: req.user.user,
+    };
+    return await this.joinUserPoiService.addJoinUserPoi(joinUserPoi);
+  }
+
+  @Get('historic')
+  @UseGuards(RoleGuard)
+  @Roles('user')
+  async getHistoric(@Request() req) {
+    return await this.joinUserPoiService.getHistoric(req.user.user);
   }
 }

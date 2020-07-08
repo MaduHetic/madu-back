@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { ConflictException, Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { QuestionQuizz } from './questionQuizzEntity';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -21,6 +21,17 @@ export class QuestionQuizzService {
       where: {
         quizz,
       },
+    });
+  }
+
+  async checkAnswer(idQuizz: number, idAnswer: number) {
+    return await this.questionQuizzRepository.findOneOrFail({
+      where: {
+        quizz: idQuizz,
+        id: idAnswer,
+      },
+    }).catch(() => {
+      throw new ConflictException('une erreur est survenue petit tricheur (:');
     });
   }
 }
