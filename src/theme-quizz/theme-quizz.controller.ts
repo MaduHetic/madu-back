@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Post, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParseIntPipe, Post, Request, Put, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { ThemeQuizzService } from './theme-quizz.service';
 import { AuthGuard } from '@nestjs/passport';
 import { RoleGuard } from '../guard/role.guard';
@@ -7,6 +7,7 @@ import { Roles } from '../decorator/role.decorator';
 import { ThemeQuizzDto } from './themeQuizzDto';
 import { ThemeAndQuizzDto } from './themeAndQuizzDto';
 import { ThemeQuizz } from './themeQuizzEntity';
+import { ValidationDto } from './validationDto';
 
 @ApiTags('theme-quizz')
 @ApiBearerAuth()
@@ -39,10 +40,12 @@ export class ThemeQuizzController {
     return await this.themeQuizzService.getQuestionTheme(idTheme);
   }
 
-  @Post('submit')
+  @Put('submit')
   @UseGuards(RoleGuard)
+  @UsePipes(ValidationPipe)
   @Roles('user')
-  async submitAnswer() {
-    return 'Hello';
+  async submitAnswer(@Body() validationDto: ValidationDto, @Request() req) {
+    return await this.themeQuizzService.checkAnswers(validationDto.answers,
+      validationDto.idThemeQuizz, req.user.user);
   }
 }

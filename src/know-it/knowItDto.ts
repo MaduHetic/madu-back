@@ -1,12 +1,17 @@
-import { IsDateString, IsString } from 'class-validator';
+import { IsString } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
+import { KnowItInterface } from './know-it.interface';
 
-export class KnowItDto {
+export class KnowItDto implements KnowItInterface {
   @IsString()
-  title: string;
+  @ApiProperty()
+  readonly title: string;
 
   @IsString()
-  description: string;
+  @ApiProperty({})
+  readonly description: string;
 
   @IsString()
-  publicationDate: string;
+  @ApiProperty()
+  readonly publicationDate: string;
 }
