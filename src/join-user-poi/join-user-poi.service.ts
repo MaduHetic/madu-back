@@ -14,4 +14,13 @@ export class JoinUserPoiService {
   async addJoinUserPoi(joinUserPoi: JoinUserPoiInterface) {
     return await this.joinUserPoiRepository.save(joinUserPoi);
   }
+
+  async getHistoric(user) {
+    return await this.joinUserPoiRepository.find({
+      where: {
+        user,
+      },
+      relations: ['poi'],
+    });
+  }
 }

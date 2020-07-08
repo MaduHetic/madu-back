@@ -160,4 +160,11 @@ export class PoiController {
     };
     return await this.joinUserPoiService.addJoinUserPoi(joinUserPoi);
   }
+
+  @Get('historic')
+  @UseGuards(RoleGuard)
+  @Roles('user')
+  async getHistoric(@Request() req) {
+    return await this.joinUserPoiService.getHistoric(req.user.user);
+  }
 }
