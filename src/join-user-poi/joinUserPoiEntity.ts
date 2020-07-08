@@ -7,7 +7,10 @@ export class JoinUserPoi {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({
+    default: null,
+    nullable: true,
+  })
   recommend: boolean;
 
   @ManyToOne(type => Poi, (poi) => poi.id, {
