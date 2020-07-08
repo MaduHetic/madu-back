@@ -15,6 +15,7 @@ export class UserService {
    *
    * @param userRepository
    * @param roleService
+   * @param companyService
    */
   constructor(
     @InjectRepository(User)
@@ -57,6 +58,14 @@ export class UserService {
     });
   }
 
+  async findEmail(mail: string) {
+    return await this.userRepository.findOne({
+      where: {
+        mail,
+      },
+    });
+  }
+
   /**
    *
    * @param userId
@@ -66,7 +75,7 @@ export class UserService {
       relations: ['role', 'company'],
     })
       .catch(() => {
-        throw new NotFoundException(`user with ${userId} not found`);
+        throw new NotFoundException(`Utilisateur ${userId}  inconnu`);
       });
   }
 
@@ -77,8 +86,12 @@ export class UserService {
   async addUserApp(userAppDto) {
     userAppDto.role = await this.roleService.getOneOrFailByRole(this.USER_ROLE);
     userAppDto.company = await this.companyService
-      .getCompanyByDomainMail(await this.getDomainMail(userAppDto.mail));
+      .getCompanyByDomainMail(await this.getDomainMail(userAppDto.username));
     userAppDto.password = await this.hashPassword(userAppDto.password);
+    userAppDto.mail = userAppDto.username.trim().toLowerCase();
+    if (await this.findEmail(userAppDto.mail)) {
+      throw new ConflictException('Cette adresse mail existe déjà');
+    }
     const {password, ...addData} = await this.userRepository.save(userAppDto);
     return addData;
   }
@@ -90,7 +103,7 @@ export class UserService {
         id: user.id,
       },
     }).catch(() => {
-      throw new NotFoundException(`No User Found ${user.id}`);
+      throw new NotFoundException(`Utilisateur ${user.id} non trouvé`);
     });
   }
 

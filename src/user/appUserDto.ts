@@ -1,5 +1,5 @@
 import { UserInterface } from './interfaces/user.interface';
-import { IsEmail, IsEnum, IsString } from 'class-validator';
+import { IsEmail, IsEnum, IsOptional, IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class AppUserDto {
@@ -15,15 +15,22 @@ export class AppUserDto {
   @IsString()
   readonly lastName: string;
 
+  @IsOptional()
   @ApiProperty({
     description: 'email of user',
   })
   @IsEmail()
-  readonly mail: string;
+  readonly mail?: string;
 
   @ApiProperty({
     description: 'password of user',
   })
   @IsString()
   readonly password: string;
+
+  @ApiProperty({
+    description: 'email of user',
+  })
+  @IsEmail()
+  username?: string;
 }

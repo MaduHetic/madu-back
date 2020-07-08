@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Role } from '../role/roleEntity';
 import { Company } from '../company/companyEntity';
 
@@ -51,4 +51,7 @@ export class User {
     default: 0,
   })
   crystal: number;
+
+  @CreateDateColumn()
+  dateSignup: string;
 }

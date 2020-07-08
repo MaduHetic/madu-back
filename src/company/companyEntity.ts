@@ -115,4 +115,10 @@ export class Company {
 
   @CreateDateColumn()
   createDate: string;
+
+  @Column({
+    length: 500,
+    default: null,
+  })
+  logo: string;
 }
