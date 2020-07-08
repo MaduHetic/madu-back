@@ -22,3 +22,18 @@
 ## UML Base de donnée
 ![Schema Base de donnée](./asset/maduBdd2.png)
 
+## Commande
+### lancer l'app en dev:
+    - yarn install
+    - docker-compose up
+### Test
+    - yarn test
+    - yarn test:watch
+    - yarn test:cov
+    - yarn test:debug
+    
+## Lint
+    - yarn lint
+### Prod
+    - yarn build
+    - yarn start:prod
