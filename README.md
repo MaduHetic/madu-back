@@ -20,5 +20,5 @@
 * Swagger (http://${URL}:3000/documentation/)
 
 ## UML Base de donnée
-![Schema Base de donnée](./asset/maduBdd.png)
+![Schema Base de donnée](./asset/maduBdd2.png)
 
