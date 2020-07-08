@@ -15,6 +15,7 @@ export class UserService {
    *
    * @param userRepository
    * @param roleService
+   * @param companyService
    */
   constructor(
     @InjectRepository(User)
@@ -74,7 +75,7 @@ export class UserService {
       relations: ['role', 'company'],
     })
       .catch(() => {
-        throw new NotFoundException(`user with ${userId} not found`);
+        throw new NotFoundException(`Utilisateur ${userId}  inconnu`);
       });
   }
 
@@ -102,7 +103,7 @@ export class UserService {
         id: user.id,
       },
     }).catch(() => {
-      throw new NotFoundException(`No User Found ${user.id}`);
+      throw new NotFoundException(`Utilisateur ${user.id} non trouvé`);
     });
   }
 
