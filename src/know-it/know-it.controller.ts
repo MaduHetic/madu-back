@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 import { KnowItService } from './know-it.service';
@@ -28,5 +28,12 @@ export class KnowItController {
   @Roles('user')
   async getKnowIt() {
     return await this.knowItService.getKnowIt();
+  }
+
+  @Delete(':id')
+  @UseGuards(RoleGuard)
+  @Roles('admin')
+  async deleteKnowIt(@Param('id', new ParseIntPipe()) idKnowIt: number) {
+    return await this.knowItService.deleteKnowIt(idKnowIt);
   }
 }

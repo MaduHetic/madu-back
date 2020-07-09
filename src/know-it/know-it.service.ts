@@ -19,4 +19,8 @@ export class KnowItService {
       select: ['id', 'title', 'description'],
     });
   }
+
+  async deleteKnowIt(idKnowIt: number) {
+    return await this.knowItRepository.delete(idKnowIt);
+  }
 }
