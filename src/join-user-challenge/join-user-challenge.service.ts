@@ -4,6 +4,7 @@ import { JoinUserChallenge } from './joinUserChallengeEntity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserService } from '../user/user.service';
 import { Challenge } from '../challenge/challengeEntity';
+import { User } from '../user/userEntity';
 
 @Injectable()
 export class JoinUserChallengeService {
@@ -25,7 +26,7 @@ export class JoinUserChallengeService {
   async addJoinUserChallenge(challenge: Challenge, user, doChallenge: boolean) {
       const userChallenge = {
         challenge,
-        user: user.user,
+        user,
         do: doChallenge,
       };
       if (await this.getOne(userChallenge)) {
@@ -36,5 +37,18 @@ export class JoinUserChallengeService {
         await this.userService.addCrystal(challenge.crystalGain, userChallenge.user);
       }
       return await this.userService.getEmerald(userChallenge.user);
+  }
+
+  async checkValidation(user: User, challenge: Challenge) {
+    try {
+      return await this.joinUserChallengeRepository.findOneOrFail({
+        where: {
+          user,
+          challenge,
+        },
+      });
+    } catch (e) {
+      return null;
+    }
   }
 }
