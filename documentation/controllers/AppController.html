@@ -132,14 +132,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@ApiBearerAuth()<br />@ApiUnauthorizedResponse()<br />@ApiOkResponse()<br />@UseGuards(undefined)<br />@UseGuards(RoleGuard)<br />@Get(&#x27;profile&#x27;)<br /></code>
+                    <code>@ApiBearerAuth()<br />@ApiUnauthorizedResponse()<br />@ApiOkResponse()<br />@UseGuards(undefined)<br />@Get(&#x27;profile&#x27;)<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="43"
-                            class="link-to-prism">src/app.controller.ts:43</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="42"
+                            class="link-to-prism">src/app.controller.ts:42</a></div>
                 </td>
             </tr>
 
@@ -215,8 +215,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="28"
-                            class="link-to-prism">src/app.controller.ts:28</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="26"
+                            class="link-to-prism">src/app.controller.ts:26</a></div>
                 </td>
             </tr>
 
@@ -284,9 +284,7 @@
 import {AuthService} from &#x27;./auth/auth.service&#x27;;
 import {AuthGuard} from &#x27;@nestjs/passport&#x27;;
 import { AccessToken } from &#x27;./auth/access-token&#x27;;
-import { RoleGuard } from &#x27;./guard/role.guard&#x27;;
-import { Roles } from &#x27;./decorator/role.decorator&#x27;;
-import { ApiBasicAuth, ApiBearerAuth, ApiOkResponse, ApiTags, ApiUnauthorizedResponse } from &#x27;@nestjs/swagger&#x27;;
+import { ApiBearerAuth, ApiOkResponse, ApiTags, ApiUnauthorizedResponse } from &#x27;@nestjs/swagger&#x27;;
 import { LoginDto } from &#x27;./loginDto&#x27;;
 
 /**
@@ -320,7 +318,8 @@ export class AppController {
   @ApiUnauthorizedResponse()
   @ApiOkResponse()
   @UseGuards(AuthGuard(&#x27;jwt&#x27;))
-  @UseGuards(RoleGuard)
+  // @UseGuards(RoleGuard)
+  // @Roles(&#x27;user&#x27;)
   @Get(&#x27;profile&#x27;)
   async getProfile(@Request() req) {
     return req.user;

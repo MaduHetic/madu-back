@@ -278,9 +278,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       throw new UnauthorizedException();
     }
     const {password, ...result} &#x3D;  await this.userService.getUser(payload.userId);
-    // tslint:disable-next-line:no-console
     const roles &#x3D; await this.roleService.getInfRole(result.role.id);
-   // return result;
     return {
       user: result,
       roles: await this.roleService.getOnlyRole(roles),

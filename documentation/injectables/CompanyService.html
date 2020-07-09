@@ -104,6 +104,10 @@
                             </li>
                             <li>
                                     <span class="modifier">Async</span>
+                                <a href="#getCompanyByDomainMail">getCompanyByDomainMail</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
                                 <a href="#getOne">getOne</a>
                             </li>
                             <li>
@@ -522,6 +526,78 @@ if the id is not null is for update else is for add</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="getCompanyByDomainMail"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Async</span>
+                            getCompanyByDomainMail
+                        </b>
+                        <a href="#getCompanyByDomainMail"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getCompanyByDomainMail(domainMail: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="95"
+                            class="link-to-prism">src/company/company.service.ts:95</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>domainMail</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>{}</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="getOne"></a>
                     <span class="name">
                         <b>
@@ -712,7 +788,7 @@ if the id is not null is for update else is for add</p>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ConflictException, Injectable, NotFoundException } from &#x27;@nestjs/common&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ConflictException, Injectable, NotFoundException, UnauthorizedException } from &#x27;@nestjs/common&#x27;;
 import { InjectRepository } from &#x27;@nestjs/typeorm&#x27;;
 import { Company } from &#x27;./companyEntity&#x27;;
 import { Repository } from &#x27;typeorm&#x27;;
@@ -803,6 +879,14 @@ export class CompanyService {
       order: {
         createDate: &#x27;ASC&#x27;,
       },
+    });
+  }
+
+  async getCompanyByDomainMail(domainMail: string) {
+    return await this.companyRepository.findOneOrFail({
+      domainMail,
+    }).catch(() &#x3D;&gt; {
+      throw new UnauthorizedException(&#x60;Cannot find company domain mail ${domainMail}&#x60;);
     });
   }
 }

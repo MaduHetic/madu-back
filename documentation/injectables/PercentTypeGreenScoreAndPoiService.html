@@ -91,6 +91,14 @@
                                     <span class="modifier">Async</span>
                                 <a href="#getGreenScorePassMark">getGreenScorePassMark</a>
                             </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#getType">getType</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#serialazeData">serialazeData</a>
+                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -469,6 +477,146 @@
             </tr>
         </tbody>
     </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getType"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Async</span>
+                            getType
+                        </b>
+                        <a href="#getType"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getType(poi: <a href="../classes/Poi.html">Poi</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="124"
+                            class="link-to-prism">src/percent-type-green-score-and-poi/percent-type-green-score-and-poi.service.ts:124</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>poi</td>
+                                    <td>
+                                                <code><a href="../classes/Poi.html" target="_self" >Poi</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>{}</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="serialazeData"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Async</span>
+                            serialazeData
+                        </b>
+                        <a href="#serialazeData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>serialazeData(percentAndType)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="114"
+                            class="link-to-prism">src/percent-type-green-score-and-poi/percent-type-green-score-and-poi.service.ts:114</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>percentAndType</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>{}</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </section>
 
     </div>
@@ -564,7 +712,7 @@ export class PercentTypeGreenScoreAndPoiService {
     allPercent.forEach((percent) &#x3D;&gt; {
       total +&#x3D;  percent.percent;
     });
-    return total / allPercent.length;
+    return (total / allPercent.length) / 10;
   }
 
   /**
@@ -586,6 +734,30 @@ export class PercentTypeGreenScoreAndPoiService {
       .where(&#x27;percent &lt; :range&#x27;, {range: rangeMax})
       .andWhere(&#x27;percent &gt;&#x3D; :rangeM&#x27;, {rangeM: rangeMin})
       .getCount();
+  }
+
+  async serialazeData(percentAndType) {
+    return percentAndType.map((percentType) &#x3D;&gt; {
+      return {
+        idTypeGreenScore: percentType.typeGreenScore.id,
+        percent: percentType.percent,
+        typeName: percentType.typeGreenScore.typeGreenScore,
+      };
+    });
+  }
+
+  async getType(poi: Poi) {
+    const types &#x3D; await this.percentTypeGreenScoreAndPoiRepository.find({
+      select: [&#x27;percent&#x27;],
+      where: {
+        poi,
+      },
+      relations: [&#x27;typeGreenScore&#x27;],
+    });
+    return types.map((type: any) &#x3D;&gt; {
+      type.mark &#x3D; type.percent / 10;
+      return type;
+    });
   }
 }
 </code></pre>
