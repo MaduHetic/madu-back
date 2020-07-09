@@ -16,11 +16,14 @@ export class JoinUserPoiService {
   }
 
   async getHistoric(user) {
-    return await this.joinUserPoiRepository.find({
+    const lists = await this.joinUserPoiRepository.find({
       where: {
         user,
       },
       relations: ['poi'],
     });
+    return await Promise.all(lists.map(async (list) => {
+      return list.poi;
+    }));
   }
 }

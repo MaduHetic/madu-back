@@ -13,6 +13,7 @@ export class TagsService {
 
   async addTag(tagDto) {
     tagDto.colorTag = generateRandExaDecimalColor();
+    tagDto.colorTag = tagDto.colorTag.replace('#', '');
     return await this.tagRepository.save(tagDto);
   }
 

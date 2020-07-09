@@ -32,7 +32,7 @@ export class PoiGeoCalcService {
   }
 
   async getNearbyPoi(user) {
-    const company = await this.companyService.getOne(user.idCompany);
+    const company = await this.companyService.getOne(user.user.company.id);
     const pois = await this.poiService.getAllPoi();
     const x1 =  parseFloat(user.user.company.lat);
     const y1 =  parseFloat(user.user.company.long);
@@ -51,6 +51,7 @@ export class PoiGeoCalcService {
     const company = await this.companyService.getOne(user.company.idCompany);
     const x1 = parseFloat(company.lat);
     const y1 = parseFloat(company.long);
+    console.log(company);
     poi.distance = this.calcDist(poi, company, x1, y1);
     poi.tags = await this.joinTagPoiService.serializeTagsData(
       await this.joinTagPoiService.getAllCompanyTag(poi));

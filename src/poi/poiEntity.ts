@@ -66,6 +66,7 @@ export class Poi {
   @Column({
     nullable: true,
     default: null,
+    length: 500,
   })
   logo: string;
 
