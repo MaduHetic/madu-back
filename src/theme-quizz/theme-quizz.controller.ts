@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Post, Request, Put, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParseIntPipe, Post, Request, Put, UseGuards, UsePipes, ValidationPipe, Delete } from '@nestjs/common';
 import { ThemeQuizzService } from './theme-quizz.service';
 import { AuthGuard } from '@nestjs/passport';
 import { RoleGuard } from '../guard/role.guard';
@@ -47,5 +47,12 @@ export class ThemeQuizzController {
   async submitAnswer(@Body() validationDto: ValidationDto, @Request() req) {
     return await this.themeQuizzService.checkAnswers(validationDto.answers,
       validationDto.idThemeQuizz, req.user.user);
+  }
+
+  @Delete(':id')
+  @UseGuards(RoleGuard)
+  @Roles('admin')
+  async deleteThemeQuizz(@Param('id', new ParseIntPipe()) idThemeQuizz: number) {
+    return await this.themeQuizzService.deleteThemeQuizz(idThemeQuizz);
   }
 }

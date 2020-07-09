@@ -83,4 +83,8 @@ export class ThemeQuizzService {
       reward: gain,
     };
   }
+
+  async deleteThemeQuizz(idThemeQuizz: number) {
+    return await this.themeQuizzRepository.delete(idThemeQuizz);
+  }
 }
