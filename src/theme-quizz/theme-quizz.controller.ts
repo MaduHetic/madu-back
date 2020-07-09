@@ -29,8 +29,8 @@ export class ThemeQuizzController {
   @Get()
   @UseGuards(RoleGuard)
   @Roles('user')
-  async getTheme(): Promise<ThemeQuizz[]> {
-    return await this.themeQuizzService.getTheme();
+  async getTheme(@Request() req): Promise<ThemeQuizz[]> {
+    return await this.themeQuizzService.getTheme(req.user.user);
   }
 
   @Get('question/:idTheme')
