@@ -211,6 +211,7 @@ export class PoiTransformationPipe implements PipeTransform {
          return percentAndTypeGc;
       });
     }
+    newValue.tags &#x3D; newValue.tags.filter((tag) &#x3D;&gt; tag &gt; 0);
     return newValue;
   }
 

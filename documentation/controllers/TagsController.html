@@ -145,8 +145,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="19"
-                            class="link-to-prism">src/tags/tags.controller.ts:19</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="20"
+                            class="link-to-prism">src/tags/tags.controller.ts:20</a></div>
                 </td>
             </tr>
 
@@ -224,8 +224,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="27"
-                            class="link-to-prism">src/tags/tags.controller.ts:27</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="30"
+                            class="link-to-prism">src/tags/tags.controller.ts:30</a></div>
                 </td>
             </tr>
 
@@ -303,8 +303,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="43"
-                            class="link-to-prism">src/tags/tags.controller.ts:43</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="46"
+                            class="link-to-prism">src/tags/tags.controller.ts:46</a></div>
                 </td>
             </tr>
 
@@ -351,8 +351,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="36"
-                            class="link-to-prism">src/tags/tags.controller.ts:36</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="39"
+                            class="link-to-prism">src/tags/tags.controller.ts:39</a></div>
                 </td>
             </tr>
 
@@ -411,6 +411,7 @@ import { Tag } from &#x27;./tagEntity&#x27;;
 import { RoleGuard } from &#x27;../guard/role.guard&#x27;;
 import { Roles } from &#x27;../decorator/role.decorator&#x27;;
 import { ApiBearerAuth, ApiTags } from &#x27;@nestjs/swagger&#x27;;
+import { exaToRgbaObject } from &#x27;../utils/function.utils&#x27;;
 
 @ApiTags(&#x27;tags&#x27;)
 @ApiBearerAuth()
@@ -422,7 +423,9 @@ export class TagsController {
   @Post()
   @UsePipes(new ValidationPipe())
   async addTag(@Body() tagDto: TagsDto) {
-    return await this.tagsService.addTag(tagDto);
+    const tag &#x3D;  await this.tagsService.addTag(tagDto);
+    exaToRgbaObject(tag.colorTag, tag);
+    return tag;
   }
 
   @UseGuards(RoleGuard)

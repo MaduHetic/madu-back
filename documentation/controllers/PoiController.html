@@ -106,6 +106,18 @@
                             </li>
                             <li>
                                     <span class="modifier">Async</span>
+                                <a href="#getHistoric">getHistoric</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#getNearbyPoi">getNearbyPoi</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#getOneNearbyPoi">getOneNearbyPoi</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
                                 <a href="#getPoiByName">getPoiByName</a>
                             </li>
                             <li>
@@ -115,6 +127,10 @@
                             <li>
                                     <span class="modifier">Async</span>
                                 <a href="#updatePoi">updatePoi</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#validateGoInPoi">validateGoInPoi</a>
                             </li>
                         </ul>
                     </td>
@@ -164,8 +180,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="48"
-                            class="link-to-prism">src/poi/poi.controller.ts:48</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="51"
+                            class="link-to-prism">src/poi/poi.controller.ts:51</a></div>
                 </td>
             </tr>
 
@@ -243,8 +259,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="130"
-                            class="link-to-prism">src/poi/poi.controller.ts:130</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="133"
+                            class="link-to-prism">src/poi/poi.controller.ts:133</a></div>
                 </td>
             </tr>
 
@@ -316,14 +332,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@ApiOkResponse()<br />@ApiForbiddenResponse()<br />@Get()<br />@UseInterceptors(EntityTypeInterceptor)<br />@UseGuards(RoleGuard)<br />@Roles(&#x27;admin&#x27;)<br /></code>
+                    <code>@ApiOkResponse()<br />@ApiForbiddenResponse()<br />@Get()<br />@UseInterceptors(EntityTypeInterceptor)<br />@UseGuards(RoleGuard)<br />@Roles(&#x27;user&#x27;)<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="75"
-                            class="link-to-prism">src/poi/poi.controller.ts:75</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="78"
+                            class="link-to-prism">src/poi/poi.controller.ts:78</a></div>
                 </td>
             </tr>
 
@@ -366,14 +382,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@ApiOkResponse()<br />@ApiForbiddenResponse()<br />@Get(&#x27;one/:id&#x27;)<br />@UsePipes(new ValidationPipe())<br />@UseGuards(RoleGuard)<br />@Roles(&#x27;admin&#x27;)<br /></code>
+                    <code>@ApiOkResponse()<br />@ApiForbiddenResponse()<br />@Get(&#x27;one/:id&#x27;)<br />@UsePipes(new ValidationPipe())<br />@UseGuards(RoleGuard)<br />@Roles(&#x27;user&#x27;)<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="62"
-                            class="link-to-prism">src/poi/poi.controller.ts:62</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="65"
+                            class="link-to-prism">src/poi/poi.controller.ts:65</a></div>
                 </td>
             </tr>
 
@@ -396,6 +412,246 @@
                                     <td>idPoi</td>
                                     <td>
                                                 <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>{}</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getHistoric"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Async</span>
+                            getHistoric
+                        </b>
+                        <a href="#getHistoric"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getHistoric(req)</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@Get(&#x27;historic&#x27;)<br />@UseGuards(RoleGuard)<br />@Roles(&#x27;user&#x27;)<br /></code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="167"
+                            class="link-to-prism">src/poi/poi.controller.ts:167</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>req</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>{}</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getNearbyPoi"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Async</span>
+                            getNearbyPoi
+                        </b>
+                        <a href="#getNearbyPoi"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getNearbyPoi(req)</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@Get(&#x27;nearby&#x27;)<br />@ApiForbiddenResponse()<br />@UseGuards(RoleGuard)<br />@Roles(&#x27;user&#x27;)<br /></code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="141"
+                            class="link-to-prism">src/poi/poi.controller.ts:141</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>req</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>{}</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getOneNearbyPoi"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Async</span>
+                            getOneNearbyPoi
+                        </b>
+                        <a href="#getOneNearbyPoi"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getOneNearbyPoi(idPoi: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, req)</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@Get(&#x27;nearby/:id&#x27;)<br />@ApiForbiddenResponse()<br />@UseGuards(RoleGuard)<br />@Roles(&#x27;user&#x27;)<br /></code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="149"
+                            class="link-to-prism">src/poi/poi.controller.ts:149</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>idPoi</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>req</td>
+                                    <td>
                                     </td>
 
                                     <td>
@@ -451,8 +707,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="103"
-                            class="link-to-prism">src/poi/poi.controller.ts:103</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="106"
+                            class="link-to-prism">src/poi/poi.controller.ts:106</a></div>
                 </td>
             </tr>
 
@@ -499,8 +755,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="115"
-                            class="link-to-prism">src/poi/poi.controller.ts:115</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="118"
+                            class="link-to-prism">src/poi/poi.controller.ts:118</a></div>
                 </td>
             </tr>
 
@@ -547,8 +803,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="90"
-                            class="link-to-prism">src/poi/poi.controller.ts:90</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="93"
+                            class="link-to-prism">src/poi/poi.controller.ts:93</a></div>
                 </td>
             </tr>
 
@@ -607,11 +863,101 @@
             </tr>
         </tbody>
     </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="validateGoInPoi"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Async</span>
+                            validateGoInPoi
+                        </b>
+                        <a href="#validateGoInPoi"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>validateGoInPoi(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, req)</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@Get(&#x27;validate/:id&#x27;)<br />@UseGuards(RoleGuard)<br />@Roles(&#x27;user&#x27;)<br /></code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="156"
+                            class="link-to-prism">src/poi/poi.controller.ts:156</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>req</td>
+                                    <td>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>{}</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </section>    </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, UseGuards, UseInterceptors, UsePipes, ValidationPipe } from &#x27;@nestjs/common&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, UseGuards, UseInterceptors, UsePipes, ValidationPipe, Request } from &#x27;@nestjs/common&#x27;;
 import { PoiService } from &#x27;./poi.service&#x27;;
 import { AuthGuard } from &#x27;@nestjs/passport&#x27;;
 import { PoiDto } from &#x27;./poiDto&#x27;;
@@ -625,13 +971,14 @@ import {
   ApiBearerAuth,
   ApiCreatedResponse,
   ApiForbiddenResponse,
-  ApiGoneResponse,
   ApiNotFoundResponse,
   ApiOkResponse,
   ApiTags,
 } from &#x27;@nestjs/swagger&#x27;;
 import { filterInt } from &#x27;../utils/function.utils&#x27;;
-// import { PercentTypeGreenScoreAndPoiService } from &#x27;../percent-type-green-score-and-poi/percent-type-green-score-and-poi.service&#x27;;
+import { PoiGeoCalcService } from &#x27;./poi.geo.calc.service&#x27;;
+import { JoinUserPoiInterface } from &#x27;../join-user-poi/join-user-poi.interface&#x27;;
+import { JoinUserPoiService } from &#x27;../join-user-poi/join-user-poi.service&#x27;;
 
 /**
  * point of interest controller
@@ -644,6 +991,8 @@ export class PoiController {
   constructor(
     private readonly poiService: PoiService,
     private readonly joinTagPoiService: JoinTagPoiService,
+    private readonly poiGeoCalcService: PoiGeoCalcService,
+    private readonly joinUserPoiService: JoinUserPoiService,
     // private readonly percentTypeGreenScoreAndPoiService: PercentTypeGreenScoreAndPoiService,
   ) {}
 
@@ -671,7 +1020,7 @@ export class PoiController {
   @Get(&#x27;one/:id&#x27;)
   @UsePipes(new ValidationPipe({ transform: true }))
   @UseGuards(RoleGuard)
-  @Roles(&#x27;admin&#x27;)
+  @Roles(&#x27;user&#x27;)
   async getCompanyAndTags(@Param(&#x27;id&#x27;, new ParseIntPipe()) idPoi: number) {
     return await this.poiService.getPoiAndTags(idPoi);
   }
@@ -684,7 +1033,7 @@ export class PoiController {
   @Get()
   @UseInterceptors(EntityTypeInterceptor)
   @UseGuards(RoleGuard)
-  @Roles(&#x27;admin&#x27;)
+  @Roles(&#x27;user&#x27;)
   async getAllPoi() {
     return await this.poiService.getAllPoi();
   }
@@ -742,6 +1091,40 @@ export class PoiController {
   @UsePipes(new ValidationPipe({ transform: true }))
   async deletePoi(@Param(&#x27;id&#x27;, new ParseIntPipe()) idPoi: number) {
     return await this.poiService.deletePoi(idPoi);
+  }
+
+  @Get(&#x27;nearby&#x27;)
+  @ApiForbiddenResponse()
+  @UseGuards(RoleGuard)
+  @Roles(&#x27;user&#x27;)
+  async getNearbyPoi(@Request() req) {
+    return await this.poiGeoCalcService.getNearbyPoi(req.user);
+  }
+
+  @Get(&#x27;nearby/:id&#x27;)
+  @ApiForbiddenResponse()
+  @UseGuards(RoleGuard)
+  @Roles(&#x27;user&#x27;)
+  async getOneNearbyPoi(@Param(&#x27;id&#x27;, new ParseIntPipe()) idPoi: number, @Request() req) {
+    return await this.poiGeoCalcService.getDistancePoi(idPoi, req.user.user);
+  }
+
+  @Get(&#x27;validate/:id&#x27;)
+  @UseGuards(RoleGuard)
+  @Roles(&#x27;user&#x27;)
+  async validateGoInPoi(@Param(&#x27;id&#x27;, new ParseIntPipe()) id: number, @Request() req) {
+    const joinUserPoi: JoinUserPoiInterface &#x3D; {
+      poi: await this.poiService.getPoi(id),
+      user: req.user.user,
+    };
+    return await this.joinUserPoiService.addJoinUserPoi(joinUserPoi);
+  }
+
+  @Get(&#x27;historic&#x27;)
+  @UseGuards(RoleGuard)
+  @Roles(&#x27;user&#x27;)
+  async getHistoric(@Request() req) {
+    return await this.joinUserPoiService.getHistoric(req.user.user);
   }
 }
 </code></pre>

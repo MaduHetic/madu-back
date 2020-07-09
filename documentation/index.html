@@ -42,15 +42,78 @@
 <li>NestJS</li>
 <li>MySQL</li>
 <li>TypeOrm</li>
-<li>json web token</li>
+<li>json web token pour l&#39;authentification a l&#39;api</li>
 </ul>
 <h2 id="documentation">Documentation</h2>
 <ul>
-<li><a href="http://35.180.228.155:8081">Compodoc</a></li>
-<li><a href="http://35.180.228.155:3000/documentation/">Swagger</a></li>
+<li>Compodoc(http://${URL}:8081)</li>
+<li>Swagger (http://${URL}:3000/documentation/)</li>
 </ul>
 <h2 id="uml-base-de-donnée">UML Base de donnée</h2>
-<p><img src="./asset/madu.png" alt="Schema Base de donnée" class="img-responsive"></p>
+<p><img src="./asset/maduBdd2.png" alt="Schema Base de donnée" class="img-responsive"></p>
+<h2 id="commande">Commande</h2>
+<h3 id="lancer-lapp-en-dev">lancer l&#39;app en dev:</h3>
+<div><pre class="line-numbers"><code class="language-none">- yarn install
+- docker-compose up</code></pre></div><h3 id="test">Test</h3>
+<div><pre class="line-numbers"><code class="language-none">- yarn test
+- yarn test:watch
+- yarn test:cov
+- yarn test:debug</code></pre></div><h2 id="lint">Lint</h2>
+<div><pre class="line-numbers"><code class="language-none">- yarn lint</code></pre></div><h3 id="prod">Prod</h3>
+<div><pre class="line-numbers"><code class="language-none">- yarn build
+- yarn start:prod</code></pre></div><h2 id="dependencies">Dependencies</h2>
+<ul>
+<li>@nestjs/common</li>
+<li>@nestjs/core</li>
+<li>@nestjs/jwt</li>
+<li>@nestjs/passport</li>
+<li>@nestjs/platform-express</li>
+<li>@nestjs/swagger</li>
+<li>@nestjs/typeorm</li>
+<li>@types/bcrypt</li>
+<li>@types/compression</li>
+<li>@types/cookie-parser</li>
+<li>bcrypt</li>
+<li>class-transformer</li>
+<li>class-validator</li>
+<li>compression</li>
+<li>cookie-parser</li>
+<li>express-rate-limit</li>
+<li>helmet</li>
+<li>hex-to-rgba</li>
+<li>moment</li>
+<li>mysql</li>
+<li>passport</li>
+<li>passport-jwt</li>
+<li>passport-local</li>
+<li>reflect-metadata</li>
+<li>rimraf</li>
+<li>rxjs</li>
+<li>swagger-ui-express</li>
+<li>typeorm</li>
+</ul>
+<h3 id="devdependencies">DevDependencies</h3>
+<ul>
+<li>@compodoc/compodoc</li>
+<li>@nestjs/cli</li>
+<li>@nestjs/schematics</li>
+<li>@nestjs/testing</li>
+<li>@types/express</li>
+<li>@types/jest:</li>
+<li>@types/node</li>
+<li>@types/passport-jwt</li>
+<li>@types/passport-local</li>
+<li>@types/supertest</li>
+<li>jest</li>
+<li>prettier</li>
+<li>supertest</li>
+<li>ts-jest</li>
+<li>ts-loader</li>
+<li>ts-node</li>
+<li>tsconfig-paths</li>
+<li>tslint</li>
+<li>typescrip</li>
+</ul>
 
 
 
