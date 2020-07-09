@@ -1,4 +1,4 @@
-import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { ThemeQuizz } from './themeQuizzEntity';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -6,6 +6,7 @@ import { ThemeAndQuizzDto } from './themeAndQuizzDto';
 import { QuizzService } from '../quizz/quizz.service';
 import { QuestionQuizzService } from '../question-quizz/question-quizz.service';
 import { UserService } from '../user/user.service';
+import { JoinUserThemeQuizzService } from '../join-user-theme-quizz/join-user-theme-quizz.service';
 
 @Injectable()
 export class ThemeQuizzService {
@@ -15,6 +16,7 @@ export class ThemeQuizzService {
     private readonly quizzService: QuizzService,
     private readonly questionQuizzService: QuestionQuizzService,
     private readonly userService: UserService,
+    private readonly joinUserThemeQuizzService: JoinUserThemeQuizzService,
   ) {}
 
   async addThemeAndQuizz(themeAndQuizzDto: ThemeAndQuizzDto) {
@@ -28,8 +30,12 @@ export class ThemeQuizzService {
     return themeEntity;
   }
 
-  async getTheme(): Promise<ThemeQuizz[]> {
-    return await this.themeQuizzRepository.find();
+  async getTheme(user): Promise<ThemeQuizz[]> {
+    const quizzs = await this.themeQuizzRepository.find();
+    return await Promise.all(quizzs.map(async (quizz: any) => {
+      quizz.answered = !!(await this.joinUserThemeQuizzService.getByUserAndThemeQuizz(user, quizz));
+      return quizz;
+    }));
   }
 
   async getOneTheme(idTheme: number): Promise<ThemeQuizz> {
@@ -49,6 +55,9 @@ export class ThemeQuizzService {
 
   async checkAnswers(answers, idThemeQuizz: number, user) {
     const themeQuizz = await this.getOneTheme(idThemeQuizz);
+    if (await this.joinUserThemeQuizzService.getByUserAndThemeQuizz(user, themeQuizz)) {
+      throw new BadRequestException('Vous avez déjà répondu a ce quizz');
+    }
     const quizzs = await this.quizzService.getQuizzByTheme(themeQuizz);
     let goodAnswer = 0;
     let checkNbAnswer = 0;
@@ -66,7 +75,8 @@ export class ThemeQuizzService {
     if (goodAnswer > quizzs.length || checkNbAnswer !== quizzs.length) {
       throw new ConflictException('Bien essayé petit tricheur :)');
     }
-    await this.userService.addCrystal(gain, user)
+    await this.userService.addCrystal(gain, user);
+    await this.joinUserThemeQuizzService.addJoinUserThemeQuizz(user, themeQuizz);
     return {
       totalAnswer: quizzs.length,
       goodAnswer,
