@@ -14,6 +14,7 @@ export class ChallengeService {
   ) {}
 
   async addChallenge(challengeDto) {
+    challengeDto.crystalGain = challengeDto.gain;
     return await this.challengeRepository.save(challengeDto);
   }
 

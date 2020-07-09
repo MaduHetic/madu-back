@@ -47,7 +47,7 @@ export class PoiController {
   @UsePipes(new ValidationPipe())
   @UsePipes(PoiTransformationPipe)
   @UseGuards(RoleGuard)
-  @Roles('admin')
+  @Roles('user')
   async addPoi(@Body() poiDto: PoiDto) {
     return await this.poiService.addPoi(poiDto);
   }
