@@ -12,6 +12,7 @@ import { CompanyModule } from '../company/company.module';
 import { PoiGeoCalcService } from './poi.geo.calc.service';
 import { ImgPoiModule } from '../img-poi/img-poi.module';
 import { JoinUserPoiModule } from '../join-user-poi/join-user-poi.module';
+import { UserModule } from '../user/user.module';
 
 @Module({
   imports: [
